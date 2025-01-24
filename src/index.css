@@ -1,3 +1,13 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+.blog-card {
+    perspective: 1000px;
+    transition: transform 0.3s ease, z-index 0.3s ease;
+  }
+  
+  .blog-card:hover {
+    transform: scale(1.1);
+    z-index: 20;
+  }
+  

@@ -1,0 +1,106 @@
+"use client"
+import { Client, Databases } from 'appwrite';
+import { useState , useEffect } from 'react';
+import { motion, AnimatePresence } from "framer-motion"
+import { ChevronLeft, ChevronRight } from "lucide-react"
+
+export default function CardSelector({ selectedCard, setSelectedCard }) {
+  const [cards, setCards] = useState([]);
+  const [loading, setLoading] = useState(true);
+  const handlePrevious = () => {
+    setSelectedCard(selectedCard === 0 ? cards.length - 1 : selectedCard - 1)
+  }
+
+  const handleNext = () => {
+    setSelectedCard(selectedCard === cards.length - 1 ? 0 : selectedCard + 1)
+  }
+  const client = new Client();
+  client.setEndpoint('https://centralapps.hivefinty.com/v1') // Replace with your Appwrite endpoint
+        .setProject('67912e8e000459a70dab'); // Replace with your Project ID
+
+  const databases = new Databases(client);
+  const databaseId = '67913805000e2b223d80'; // Replace with your Database ID
+  const collectionId = '679231250003dc649145'; // Replace with your Collection ID
+
+  useEffect(() => {
+    const fetchCards = async () => {
+      try {
+        const response = await databases.listDocuments(databaseId, collectionId);
+        setCards(response.documents);
+        console.log(response.documents)
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCards();
+  }, []);
+
+  if (loading) {
+    return <div>Loading...</div>; 
+  }
+
+
+  return (
+    <div className="relative flex items-center justify-center mt-8">
+      <button onClick={handlePrevious} className="absolute left-0 z-10 p-2 rounded-full bg-zinc-800 hover:bg-zinc-700">
+        <ChevronLeft size={24} />
+      </button>
+
+      <div className="relative w-[900px] h-[240px]">
+        <AnimatePresence initial={false}>
+          {cards.map((card, index) => (
+            <motion.div
+              key={card.$id}
+              className={`absolute w-[620px] h-[600px] rounded-xl p-6 
+                ${index === selectedCard ? "z-30" : "z-0"}
+                ${index === selectedCard - 1 || (selectedCard === 0 && index === cards.length - 1) ? "-translate-x-[360px]" : ""}
+                ${index === selectedCard + 1 || (selectedCard === cards.length - 1 && index === 0) ? "translate-x-[360px]" : ""}
+              `}
+              initial={{ scale: 0.8, opacity: 0 }}
+              animate={{
+                scale: index === selectedCard ? 1 : 0.8,
+                opacity: index === selectedCard ? 1 : 0.6,
+                x: index === selectedCard ? "-50%" : index === selectedCard - 1 ? "-90%" : "0%",
+              }}
+              exit={{ scale: 0.8, opacity: 0 }}
+              transition={{ duration: 0.3 }}
+              style={{
+                left: "50%",
+                transform: `translateX(-50%) ${
+                  index === selectedCard - 1 || (selectedCard === 0 && index === cards.length - 1)
+                    ? "translateX(-180px)"
+                    : index === selectedCard + 1 || (selectedCard === cards.length - 1 && index === 0)
+                      ? "translateX(180px)"
+                      : ""
+                }`,
+              }}
+            >
+              <div
+                className={`w-full h-full from-purple-700 to-purple-900 rounded-xl bg-gradient-to-br ${card.color} p-6 flex flex-col`}
+              >
+                <div className="flex justify-between items-start ">
+                  <div className="w-12 h-12 rounded-full bg-white/10" />
+                  <div className="w-8 h-8 rounded-full bg-white/10" />
+                </div>
+                <div className="flex flex-col h-[100%]">
+                  <div className="text-lg mb-2">•••• •••• {card.number}</div>
+                  <div className="h-[30%] "><img src={card.image} alt="" className='h-[100%] mx-auto' /></div>
+                  <div>{card.Capability}</div>
+                  <div>{card.CapabilityContent}</div>
+                </div>
+              </div>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
+
+      <button onClick={handleNext} className="absolute right-0 z-10 p-2 rounded-full bg-zinc-800 hover:bg-zinc-700">
+        <ChevronRight size={24} />
+      </button>
+    </div>
+  )
+}
+

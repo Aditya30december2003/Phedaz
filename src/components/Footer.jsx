@@ -1,5 +1,4 @@
-import React from "react";
-
+import Terms from "./Terms";
 const Footer = () => {
   return (
     <footer className="bg-[#0D112B] text-white py-10">
@@ -68,6 +67,9 @@ const Footer = () => {
             ©2024 - Designed by Techitslab & Partners
           </p>
         </div>
+      </div>
+      <div>
+        <Terms/>
       </div>
     </footer>
   );

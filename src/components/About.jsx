@@ -1,5 +1,6 @@
 import React from "react"
 import Image from '../assets/about-image.webp'
+import NewTestComponent from '../components/NewTestComponent'
 function About() {
   return (
     <section className="py-12 bg-green-600">
@@ -38,6 +39,7 @@ function About() {
             className="rounded-lg shadow-lg max-w-full h-auto"
           />
         </div>
+        <NewTestComponent/>
       </div>
     </section>
   )

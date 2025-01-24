@@ -5,6 +5,8 @@ import Blogs from '../src/pages/Blogs'
 import Terms from '../src/pages/Terms'
 import Navbar from './components/Navbar'
 import Footer from './components/Footer'
+import BlogDetails from '../src/pages/BlogDetails'
+import TermsPage from './pages/TermsPage'
 function App() {
 
   return (
@@ -13,7 +15,9 @@ function App() {
       <Routes>
         <Route path='/' element={<Home/>} />
         <Route path='/blogs' element={<Blogs/>} />
+        <Route path="/blogs/:blogId" element={<BlogDetails />} />
         <Route path='/terms' element={<Terms/>} />
+        <Route path='/terms/:termId' element={<TermsPage/>} />
       </Routes>
     <Footer />
     </>
