@@ -1,6 +1,7 @@
 import { Client, Databases } from 'appwrite';
 import { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
+import BufferAnimation from '../components/BufferAnimation';
 const Insights = () => {
   const [blogs, setBlogs] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -31,7 +32,9 @@ const Insights = () => {
   }, []);
 
   if (loading) {
-    return <div>Loading...</div>; 
+    return <div>
+      <BufferAnimation size={90} color="white" />
+    </div>; 
   }
 
   return (

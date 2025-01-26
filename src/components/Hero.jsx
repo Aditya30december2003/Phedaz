@@ -2,6 +2,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 import { Client, Databases } from "appwrite"
+import BufferAnimation from "./BufferAnimation"
 
 const sentences = ["Streamline Your Operations", "Boost Your Sales", "Grow Your Business"]
 
@@ -47,7 +48,7 @@ function Hero() {
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 text-gray-800">
-        <p className="text-xl font-semibold">Loading...</p>
+        <BufferAnimation size={90} color="white" />
       </div>
     )
   }

@@ -3,6 +3,7 @@ import { motion } from "framer-motion";
 import { useState, useEffect } from "react";
 import { Client, Databases } from "appwrite";
 import NewTestComponent from "./NewTestComponent"
+import BufferAnimation from "./BufferAnimation";
 
 function About() {
   const [aboutData, setAboutData] = useState(null); // Store the single document
@@ -38,7 +39,7 @@ function About() {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 text-gray-800">
         <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
-        <p className="text-xl font-semibold mt-4">Loading...</p>
+        <BufferAnimation size={90} color="white" />
       </div>
     );
   }
@@ -67,7 +68,7 @@ function About() {
 >
   {aboutData.Content.map((content)=>(
     <>
-    <p className="text-lg md:text-lg font-medium">
+    <p className="text-lg md:text-lg font-small lg:font-normal italic border-1 border-blue-500 text-blue-500 font-semibold">
       {content}
     </p>
     </>

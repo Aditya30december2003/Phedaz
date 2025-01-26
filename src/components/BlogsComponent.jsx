@@ -49,7 +49,7 @@ const BlogsComponent = () => {
           {blogs[0]?.HomePageSubHeading}
         </h3>
         <Link to="/blogs">
-          <button className="px-4 sm:px-6 py-2 bg-blue-600 text-white text-sm sm:text-base rounded hover:bg-purple-800 transition-colors duration-300">
+          <button className="px-4 sm:px-6 py-2 bg-blue-600 text-white text-sm sm:text-base rounded hover:bg-blue-800 transition-colors duration-300">
             See all blogs
           </button>
         </Link>
