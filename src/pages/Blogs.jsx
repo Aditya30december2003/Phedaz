@@ -35,20 +35,26 @@ const Insights = () => {
   }
 
   return (
-    <section className="py-12 bg-white">
+    <section className="py-[6rem] bg-white">
       <div className="container mx-auto px-4 text-center">
+        <div className='relative'>
         {/* Header */}
-        <h2 className="text-3xl font-bold mb-4 text-[#0D112B]">{blogs[0].BlogPageHeading}</h2>
-        <p className="text-gray-600 max-w-3xl mx-auto mb-12">
-          {/* Dive into the insights that drive success! Our blog is your go-to
-          resource for tips, strategies, and industry updates designed to
-          enhance your business operations. Whether youre looking to optimize
-          your processes, explore new trends, or solve common challenges, our
-          expertly curated articles provide valuable knowledge to help you grow
-          and succeed in todays fast-paced market. Join us on this journey of
-          continuous learning and innovation! */}
+        <div className='absolute text-white w-full h-full'>
+        <div className='bg-black/60 w-[90%] lg:w-[60%] mx-auto my-auto mt-10 p-3'>
+        <h2 className="text-3xl font-bold mb-4 text-white">{blogs[0].BlogPageHeading}</h2>
+        <p className="text-gray-100 max-w-3xl mx-auto mb-12">
           {blogs[0].BlogPageSubHeading}
         </p>
+        </div>
+        </div>
+
+        <img
+          className="object-cover w-full h-[30rem] lg:h-[20rem]"
+          src={blogs[0].bgImg}
+          alt="Header"
+        />
+
+        </div>
 
         {/* Blog Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">

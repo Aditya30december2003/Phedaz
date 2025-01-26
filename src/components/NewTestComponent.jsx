@@ -23,7 +23,7 @@ const SetGoalsComponent = () => {
     if (activeOption) {
       gsap.from(contentRef.current, {
         opacity: 0,
-        y: 50,
+        y: 50, 
         duration: 0.5,
         ease: "power3.out",
       })
@@ -57,23 +57,23 @@ const SetGoalsComponent = () => {
 
   if (loading) {
     return (
-      <div className="flex items-center justify-center h-screen">
+      <div className="flex items-center justify-center h-[2rem] lg:h-screen">
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
       </div>
     )
   }
 
   return (
-    <div className="relative text-blue-900 min-h-screen p-10 rounded-md bg-white">
-      <div className="flex flex-row h-screen rounded-md overflow-hidden shadow-2xl">
+    <div className="relative text-blue-900  p-4 bg-white">
+      <div className="flex flex-col lg:flex-row h-full rounded-md overflow-hidden shadow-2xl">
         {/* Sidebar */}
         <motion.div
           initial={{ x: -300 }}
           animate={{ x: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="w-64 shadow-lg p-5 rounded-l-3xl flex flex-col space-y-20 bg-blue-100"
+          className="w-full lg:w-64 shadow-lg p-4 lg:p-5 flex flex-col space-y-10 bg-blue-100"
         >
-          <div className="my-auto flex flex-col justify-between h-[80%]">
+          <div className="my-auto flex flex-row lg:flex-col justify-between h-[80%]">
             {options.map(({ id, icon }) => (
               <motion.button
                 key={id}
@@ -84,32 +84,32 @@ const SetGoalsComponent = () => {
                 }`}
                 onClick={() => handleOptionClick(id)}
               >
-                <img src={icon || "/placeholder.svg"} alt="" className="rounded-[100%] w-[4rem] mx-auto" />
+                <img src={icon || "/placeholder.svg"} alt="" className="rounded-[100%] w-[3rem] lg:w-[4rem] mx-auto" />
               </motion.button>
             ))}
           </div>
         </motion.div>
 
         {/* Main Content */}
-        <div className="flex-grow bg-white rounded-r-3xl px-8 py-12 overflow-y-auto">
+        <div className="flex-grow bg-white rounded-lg lg:rounded-r-3xl p-4 lg:p-8 lg:py-12 overflow-y-auto">
           <motion.div
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="flex flex-col items-center text-center space-y-8"
+            className="flex flex-col items-center text-center space-y-4 lg:space-y-8"
           >
-            <h1 className="text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text">
+            <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text">
               Set Your Goals
             </h1>
-            <p className="text-blue-600 max-w-xl">Click on the icons to explore various options and set your goals!</p>
+            {/* <p className="text-blue-600 max-w-xl">Click on the icons to explore various options and set your goals!</p> */}
           </motion.div>
 
           <AnimatePresence>
             {options.map(
               ({ id, title, description, image }) =>
                 activeOption === id && (
-                  <animated.div key={id} style={springProps} ref={contentRef} className="mt-12">
-                    <div className="flex flex-col lg:flex-row items-center space-y-8 lg:space-y-0 lg:space-x-8">
+                  <animated.div key={id} style={springProps} ref={contentRef} className="mt-8 lg:mt-12">
+                    <div className="flex flex-col lg:flex-row items-center space-y-6 lg:space-y-0 lg:space-x-8">
                       <motion.img
                         src={image}
                         alt={id}
@@ -139,4 +139,3 @@ const SetGoalsComponent = () => {
 }
 
 export default SetGoalsComponent
-

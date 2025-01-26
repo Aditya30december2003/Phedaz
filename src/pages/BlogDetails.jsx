@@ -33,25 +33,25 @@ const BlogPage = () => {
 
   if (loading) {
     return <div>Loading...</div>;
-  }
+  } 
 
   if (!blog) {
     return <div>Blog not found!</div>;
   }
 
   return (
-    <div className="p-4">
+    <div className="p-4 pt-20 mb-10">
       <img
         src={blog.image}
         alt={blog.title}
         className="w-full h-80 object-cover rounded mb-4"
       />
-      <h1 className="text-3xl font-bold mb-2">{blog.title}</h1>
-      <p className="text-gray-600 mb-4">By {blog.author}</p>
+      <h1 className="text-3xl font-bold mb-2 text-center">{blog.title}</h1>
+      <p className="text-gray-600 mb-4 text-center">By {blog.author}</p>
       <p className="text-sm text-gray-500 mb-4">
         Published on {new Date(blog.Date).toDateString()}
       </p>
-      <div className="text-lg text-gray-800">{blog.Content}</div>
+      <div className="text-md text-gray-800">{blog.Content}</div>
     </div>
   );
 };

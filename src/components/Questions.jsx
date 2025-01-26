@@ -35,7 +35,7 @@ import { IoIosArrowDown } from "react-icons/io";
 
 function Faqs() {
   const [activeIndex, setActiveIndex] = useState(null)
-  const [faqs , setFaqs] = useState([])
+  const [faq , setFaqs] = useState([])
   const [loading , setLoading] = useState(false)
 
   const toggleFaq = (index) => {
@@ -55,6 +55,7 @@ function Faqs() {
         const response = await databases.listDocuments(databaseId, collectionId);
         setFaqs(response.documents);
         console.log(response.documents)
+        console.log(faq)
       } catch (error) {
         console.error("Failed to fetch blogs:", error);
       } finally {
@@ -71,17 +72,24 @@ function Faqs() {
   
 
   return (
-    <section className="py-16 bg-gradient-to-br from-pink-100 to-purple-100">
+    <section className="py-16 bg-gradient-to-br from-blue-100 to-blue-100">
       <div className="container mx-auto px-4 md:px-8">
-        <h2 className="text-4xl font-bold mb-12 text-center text-gray-800">Frequently Asked Questions</h2>
+      {faq?.[0]?.Heading ? (
+  <h2 className="text-4xl font-bold mb-12 text-center text-gray-800">
+    {faq[0].Heading}
+  </h2>
+) : (
+  <p>No FAQs available</p>
+)}
+
         <div className="max-w-3xl mx-auto space-y-4">
-          {faqs.map((faq, index) => (
+          {faq.map((faq, index) => (
             <div key={index} className="bg-white rounded-xl shadow-lg overflow-hidden">
               <button className="w-full text-left p-6 focus:outline-none" onClick={() => toggleFaq(index)}>
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-semibold text-gray-800">{faq.question}</h3>
                   <motion.div animate={{ rotate: activeIndex === index ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                    <IoIosArrowDown className="w-6 h-6 text-pink-500" />
+                    <IoIosArrowDown className="w-6 h-6 text-blue-500" />
                   </motion.div>
                 </div>
               </button>

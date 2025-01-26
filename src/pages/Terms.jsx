@@ -2,7 +2,7 @@ import { Client, Databases } from 'appwrite';
 import { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
 const Terms = () => {
-  const [terms, setTerms] = useState([]);
+  const [terms, setTerms] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // Initialize Appwrite client
@@ -53,7 +53,7 @@ const Terms = () => {
         {/* Blog Cards */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
        {terms.map((term) => (
-        <Link to={`/terms/${term.$id}`} key={term.$id} className="bg-white shadow-md rounded p-4">
+        <Link to={term.id ? `/legals/${term.$id}` : `/legals`} key={term.$id} className="bg-white shadow-md rounded p-4">
           <img
             src={term.image}
             alt={term.LegalTitle}
