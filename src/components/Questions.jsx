@@ -72,7 +72,7 @@ function Faqs() {
   
 
   return (
-    <section className="py-16 bg-gradient-to-br from-blue-100 to-blue-100">
+    <section className="py-16 bg-gradient-to-br from-blue-100 to-blue-100" id='faq'>
       <div className="container mx-auto px-4 md:px-8">
       {faq?.[0]?.Heading ? (
   <h2 className="text-4xl font-bold mb-12 text-center text-gray-800">

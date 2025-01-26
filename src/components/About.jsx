@@ -37,7 +37,7 @@ function About() {
   // Show loading state
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 text-gray-800">
+      <div id="about" className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 text-gray-800">
         <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
         <BufferAnimation size={90} color="white" />
       </div>
@@ -48,7 +48,7 @@ function About() {
     return <p className="text-center text-xl">No data available</p>;
   }
   return (
-    <div className="">
+    <div className="" id="about">
     <section className="pt-5 bg-white ">
       <div className="container mx-auto px-4">
         <motion.div

@@ -1,10 +1,10 @@
 "use client"
 
-import { useState, useEffect } from "react"
+import { useState, useEffect } from "react" 
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, X, Menu } from "lucide-react"
-
+ 
 function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [isScrolled, setIsScrolled] = useState(false)
@@ -14,15 +14,13 @@ function Navbar() {
   const Home = [
     { name: "About", path: "#about" },
     { name: "Advantages", path: "#advantages" },
-    { name: "Blogs", path: "#blogs" },
+    { name: "Blogs", path: "#blog"},
     { name: "Capabilities", path: "#cap" },
-    { name: "FAQS", path: "#faq" },
+    { name: "FAQS", path: "#faq" }, 
     { name: "Form", path: "#form" },
   ]
 
   const terms = [
-    { name: "Terms & Conditions", path: "/developer" },
-    { name: "Privacy Policy", path: "/developer/api" },
     { name: "Cookie Policy", path: "legals" },
     { name: "Terms of Use", path: "/developer/sdks" },
   ]
@@ -92,13 +90,13 @@ function Navbar() {
                     className="absolute left-0 w-48 mt-2 rounded-lg shadow-lg bg-white"
                   >
                     {Home.map((item) => (
-                      <Link
+                      <a
                         key={item.path}
-                        to={item.path}
+                        href={`${item.path}`}
                         className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
                       >
                         {item.name}
-                      </Link>
+                      </a>
                     ))}
                   </motion.div>
                 )}
@@ -127,9 +125,9 @@ function Navbar() {
                 }`}
               >
                 Legals
-                <ChevronDown className="ml-1 h-4 w-4" />
+                {/* <ChevronDown className="ml-1 h-4 w-4" /> */}
               </Link>
-              <AnimatePresence>
+              {/* <AnimatePresence>
                 {activeDropdown === "legals" && (
                   <motion.div
                     initial={{ opacity: 0, y: 10 }}
@@ -148,28 +146,28 @@ function Navbar() {
                     ))}
                   </motion.div>
                 )}
-              </AnimatePresence>
+              </AnimatePresence> */}
             </div>
           </div>
 
           {/* Right Section */}
           <div className="hidden md:flex items-center space-x-4">
-            <Link
-              to="/signin"
+            <a
+              href="#form"
               className={`transition-colors duration-300 ${
                 isScrolled ? "text-gray-600 hover:text-gray-900" : "text-black font-extrabold hover:text-gray-900"
               }`}
             >
               Join Now
-            </Link>
-            <Link
-              to="/get-started"
+            </a>
+            <a
+              href="#cap"
               className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md transition-colors duration-300 ${
                 isScrolled ? "text-white font-extrabold bg-gray-900 hover:bg-gray-800" : "text-gray-900 font-semibold bg-white hover:bg-gray-100"
               }`}
             >
               Get started
-            </Link>
+            </a>
           </div>
 
           {/* Mobile menu button */}
@@ -200,7 +198,7 @@ function Navbar() {
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {/* Home Section with Dropdown */}
                 <div>
-                  <button
+                  <Link to='/'
                     onClick={() => toggleMobileDropdown("home")}
                     className="flex w-full items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   >
@@ -208,7 +206,7 @@ function Navbar() {
                     <ChevronDown
                       className={`ml-1 h-4 w-4 transition-transform duration-200 ${mobileActiveDropdown === "home" ? "transform rotate-180" : ""}`}
                     />
-                  </button>
+                  </Link>
                   <AnimatePresence>
                     {mobileActiveDropdown === "home" && (
                       <motion.div
@@ -219,14 +217,14 @@ function Navbar() {
                         className="pl-4 space-y-1"
                       >
                         {Home.map((item) => (
-                          <Link
+                          <a
                             key={item.path}
-                            to={item.path}
+                            href={item.path}
                             className="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100"
                             onClick={() => setIsMobileMenuOpen(false)}
                           >
                             {item.name}
-                          </Link>
+                          </a>
                         ))}
                       </motion.div>
                     )}
@@ -249,11 +247,11 @@ function Navbar() {
                     className="flex w-full items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   >
                     Legals
-                    <ChevronDown
+                    {/* <ChevronDown
                       className={`ml-1 h-4 w-4 transition-transform duration-200 ${mobileActiveDropdown === "legals" ? "transform rotate-180" : ""}`}
-                    />
+                    /> */}
                   </Link>
-                  <AnimatePresence>
+                  {/* <AnimatePresence>
                     {mobileActiveDropdown === "legals" && (
                       <motion.div
                         initial={{ opacity: 0, height: 0 }}
@@ -274,25 +272,25 @@ function Navbar() {
                         ))}
                       </motion.div>
                     )}
-                  </AnimatePresence>
+                  </AnimatePresence> */}
                 </div>
 
                 {/* Join Now & Get Started */}
                 <div className="pt-4 pb-3 border-t border-gray-200">
-                  <Link
-                    to="/signin"
+                  <a
+                    href="#form"
                     className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Join Now
-                  </Link>
-                  <Link
-                    to="/get-started"
+                  </a>
+                  <a
+                    href="#cap"
                     className="block px-3 py-2 mt-1 rounded-md text-base font-medium text-white bg-gray-900 hover:bg-gray-800"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Get started
-                  </Link>
+                  </a>
                 </div>
               </div>
             </motion.div>

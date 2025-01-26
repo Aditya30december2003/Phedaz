@@ -44,9 +44,9 @@ const Advantages = () => {
   const handleTabClick = (index) => {
     setSelectedTab(selectedTab === index ? null : index)
   }
-
+ 
   return ( 
-    <section className="py-16">
+    <section className="py-16" id='advantages'> 
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
         <h1 className="text-[3rem] lg:text-[5rem] font-extrabold  text-gray-800 mb-4 text-center">{advantages[0]?.Title}</h1>
         <p className="text-gray-600 mb-12 text-[1.2rem] font-semibold text-center max-w-2xl mx-auto">{advantages[0]?.subTitle}</p>

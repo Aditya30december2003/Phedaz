@@ -42,9 +42,9 @@ const BlogsComponent = () => {
   }
 
   return (
-    <div className="bg-blue-100 p-4 sm:p-8">
+    <div className="bg-blue-100 py-16 p-4sm:p-8" id='blog'>
       <div className="text-center">
-        <h1 className="text-2xl sm:text-3xl lg:text-4xl font-extrabold mb-2 sm:mb-4">{blogs[0]?.HomePageHeading}</h1>
+        <h1 className="text-[3rem] lg:text-[5rem] font-extrabold mb-2 sm:mb-4">{blogs[0]?.HomePageHeading}</h1>
         <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-700 mb-4 sm:mb-6">
           {blogs[0]?.HomePageSubHeading}
         </h3>

@@ -2,7 +2,7 @@ import { useState} from "react";
 import { SlArrowRight } from "react-icons/sl";
 
 const Version = ({ terms }) => {
-    const [emailConfig, setEmailConfig] = useState(null);
+    const [emailConfig, setEmailConfig] = useState(null); 
     const [requestedVersions, setRequestedVersions] = useState(new Set());
     const [emailError, setEmailError] = useState(null);
 
@@ -84,7 +84,7 @@ const Version = ({ terms }) => {
                                             className={`px-4 py-2 text-sm font-medium rounded-md ${
                                                 requestedVersions.has(item.version)
                                                     ? "bg-gray-100 text-gray-500 cursor-not-allowed" // Disable if requested
-                                                    : "bg-purple-100 text-purple-700 hover:bg-purple-200"
+                                                    : "bg-blue-100 text-blue-700 hover:bg-blue-200"
                                             }`}
                                             disabled={requestedVersions.has(item.version)} // Disable the button
                                         >

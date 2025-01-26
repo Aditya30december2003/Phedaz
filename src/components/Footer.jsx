@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
-import { databases } from "../Appwrite/appwrite";
+import { databases} from "../Appwrite/appwrite";
+import { Client , Databases } from 'appwrite';
 import { useState, useEffect } from "react";
 import { FaGlobe, FaFacebookSquare, FaInstagramSquare } from "react-icons/fa";
 import Icon from '../assets/icon_full.png'
+import BufferAnimation from './BufferAnimation';
 
 const fetchFooterContent = async () => {
   try {
@@ -39,6 +41,8 @@ const Footer = () => {
     loadContent();
   }, []);
 
+
+
   // Default values in case of missing content
   const defaultContent = {
     legalTerms: ['Privacy Policy', 'Terms of Service'],
@@ -55,6 +59,39 @@ const Footer = () => {
 
   // Merge fetched content with default content
   const footerContent = content ? { ...defaultContent, ...content } : defaultContent;
+
+
+  const [terms, setTerms] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  // Initialize Appwrite client
+  const client = new Client();
+  client.setEndpoint('https://centralapps.hivefinty.com/v1') // Replace with your Appwrite endpoint
+        .setProject('67912e8e000459a70dab'); // Replace with your Project ID
+
+  const databases = new Databases(client);
+  const databaseId = '67913805000e2b223d80'; // Replace with your Database ID
+  const collectionId = '679159cb001bb4fa2882'; // Replace with your Collection ID
+
+  useEffect(() => {
+    const fetchTerms = async () => {
+      try {
+        const response = await databases.listDocuments(databaseId, collectionId);
+        setTerms(response.documents);
+        console.log(response.documents)
+      } catch (error) {
+        console.error("Failed to fetch blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchTerms();
+  }, []);
+
+  if (loading) {
+    return <div><BufferAnimation size={90} color="white" /></div>;
+  }
 
   if (error) {
     return <div className="text-red-500 p-4">Error: {error}</div>;
@@ -108,17 +145,18 @@ const Footer = () => {
             />
           </div>
         </div>
-
         <div className="flex flex-col gap-3 mt-5 md:mt-0 w-[30%] mx-auto">
-        {footerContent.legalTerms.map((term, index) => (
-          <Link 
-            key={index} 
-            to={footerContent.legalLinks ? `/${footerContent.legalLinks[index]}` : '/' }
-            className="font-bold text-[1.3rem]"
-          >
-            {term}
-          </Link>
-        ))}
+       {footerContent.legalTerms.map((term, index) => (
+        <Link 
+        key={index} 
+        to={terms.map((link)=>(
+            link.$id ? `/legals/${link.$id}` : `/legals`
+          ))}
+         className="font-bold text-[1.3rem]"
+        >
+        {term}
+       </Link>
+      ))}
       </div>
 
 

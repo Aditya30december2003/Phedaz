@@ -2,6 +2,10 @@
 @tailwind components;
 @tailwind utilities;
 
+html {
+  scroll-behavior: smooth;
+}
+
 .blog-card {
     perspective: 1000px;
     transition: transform 0.3s ease, z-index 0.3s ease;
@@ -14,5 +18,6 @@
   .writing-vertical-lr {
     writing-mode: vertical-lr;
   }
+
   
   

@@ -98,6 +98,7 @@ function Hero() {
 
           {/* CTA Buttons */}
           <div className="mt-8 flex flex-col md:flex-row gap-4 mx-auto w-[70%] lg:w-[48%] py-5">
+            <a href="#form">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -105,6 +106,8 @@ function Hero() {
             >
               Join Our Waitlist
             </motion.button>
+            </a>
+            <a href="#about">
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
@@ -112,6 +115,7 @@ function Hero() {
             >
               Learn More
             </motion.button>
+            </a>
           </div>
 
           {/* Secondary CTA */}

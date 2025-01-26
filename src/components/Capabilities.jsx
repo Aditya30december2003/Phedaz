@@ -9,7 +9,7 @@ import { useState, useEffect } from "react";
 export default function VirtualCardPage() {
   const [selectedCard, setSelectedCard] = useState(1)
 
-
+ 
   // Swipe handlers
   const swipeHandlers = useSwipeable({
     onSwipedLeft: () => setSelectedCard((prev) => (prev < 5 ? prev + 1 : prev)), // Swipe left to move to next card
@@ -50,7 +50,7 @@ export default function VirtualCardPage() {
   }
 
   return (
-    <div className="text-white p-4 sm:p-6 md:p-8">
+    <div className="text-white p-4 sm:p-6 md:p-8" id="cap">
       <div className="max-w-6xl mx-auto">
 
         {/* Main Card Interface */}

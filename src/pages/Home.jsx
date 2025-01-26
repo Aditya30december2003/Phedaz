@@ -13,10 +13,10 @@ const Home = () => {
   return (
     <PageLoadAnimation>
     <div className='flex flex-col gap-10'>
-      <Hero />
+      <Hero/>
       <About/>
       <Tab/>
-      <Video/>
+      <Video/> 
       <Advantages/>
       <BlogsComponent/>
       <Capabilities/>

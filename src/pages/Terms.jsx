@@ -1,7 +1,7 @@
 import { Client, Databases } from 'appwrite';
 import { useState , useEffect } from 'react';
 import { Link } from 'react-router-dom';
-import BufferAnimation from '../components/BufferAnimation';
+import BufferAnimation from '../components/BufferAnimation'; 
 const Terms = () => {
   const [terms, setTerms] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -36,23 +36,25 @@ const Terms = () => {
   }
 
   return (
-    <section className="py-12 bg-white">
-      <div className="container mx-auto px-4 text-center">
-        {/* Header */}
-        {/* <h2 className="text-3xl font-bold mb-4 text-[#0D112B]">{terms[0].Heading}</h2> */}
-        <p className="text-gray-600 max-w-3xl mx-auto mb-12">
-          {/* Dive into the insights that drive success! Our blog is your go-to
-          resource for tips, strategies, and industry updates designed to
-          enhance your business operations. Whether youre looking to optimize
-          your processes, explore new trends, or solve common challenges, our
-          expertly curated articles provide valuable knowledge to help you grow
-          and succeed in todays fast-paced market. Join us on this journey of
-          continuous learning and innovation! */}
-          {/* {terms[0].subHeading} */}
-        </p>
+    <section className=" bg-white">
+      {/* Header Section with Dynamic Heading and Subheading */}
+      <div className="h-[25rem] relative bg-cover bg-center"
+           style={{
+             backgroundImage: `url("https://sociallawstoday.com/wp-content/uploads/2021/02/4-Main-Types-of-Law-Which-One-Is-the-Best-For-You-1170x614-1-e1633610839631-1.jpg")` // Use the first policy's image or a default
+           }}
+      >
+        <div className="text-white bg-black/80 absolute mt-32 z-100 w-full p-10" data-aos="fade-up" data-aos-duration="2000">
+          <h1 className="text-center text-2xl lg:text-4xl heading">
+            {terms[0].Heading	}
+          </h1>
+          <p className="text-center text-[1.1rem] lg:text-[1.6rem] mt-10">
+            {terms[0].subHeading}
+          </p>
+        </div>
+      </div>
 
-        {/* Blog Cards */}
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 p-4">
+      <div className="container mx-auto px-4 text-center">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
        {terms.map((term) => (
         <Link to={term.id ? `/legals/${term.$id}` : `/legals`} key={term.$id} className="bg-white shadow-md rounded p-4">
           <img

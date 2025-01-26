@@ -6,6 +6,8 @@ import { Link } from 'react-router-dom';
 import { SlArrowRight } from "react-icons/sl";
 import TermsContent from '../components/TermsContent'
 import Versions from '../components/Version';
+import BufferAnimation from '../components/BufferAnimation';
+import PdfView from '../components/PdfView';
 
 
 const TermsPage = () => {
@@ -42,7 +44,9 @@ const TermsPage = () => {
   }, [legalId]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>
+      <BufferAnimation/>
+    </div>;
   }
 
   if (!terms) {
@@ -94,9 +98,9 @@ const TermsPage = () => {
         <Versions terms={terms}/>
       </div>
 
-      {/* <div>
-        <PdfView/>
-      </div> */}
+      <div>
+        <PdfView terms={terms}/>
+      </div>
 
       </div>
 
