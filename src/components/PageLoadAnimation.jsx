@@ -1,6 +1,5 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
-import BufferAnimation from "./BufferAnimation"
 
 const PageLoadAnimation = ({ children }) => {
   const [isAnimating, setIsAnimating] = useState(true)
@@ -26,7 +25,7 @@ const PageLoadAnimation = ({ children }) => {
     <AnimatePresence>
       {isAnimating ? (
         <motion.div
-          className="fixed inset-0 z-50 flex items-center justify-center bg-blue-500"
+          className="fixed inset-0 z-50 flex items-center justify-center bg-color"
           initial={{ opacity: 1 }}
           exit={{ opacity: 0 }}
           transition={{ duration: 0.5 }}

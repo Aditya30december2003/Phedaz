@@ -55,7 +55,7 @@ const Advantages = () => {
           {advantages.map((advantage, index) => (
             <div
               key={index}
-              className={`rounded-lg overflow-hidden bg-blue-500 text-white transition-all duration-300 shadow-xl border-blue-500 border-[0.1rem]`}
+              className={`rounded-lg overflow-hidden bg-color text-white transition-all duration-300 shadow-xl border-green-200 border-[0.1rem]`}
               onMouseEnter={() => setHoveredCard(index)} // Set hovered card index
               onMouseLeave={() => setHoveredCard(null)} // Reset hovered card index
             >
@@ -70,7 +70,7 @@ const Advantages = () => {
                 <h2 className="text-xl font-semibold text-white mb-4 text-center">{advantage.Advantage}</h2>
                 <button
                   onClick={() => handleTabClick(index)}
-                  className={`bg-blue-400 text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-blue-700 focus:outline-none focus:ring-2 focus:ring-blue-500 focus:ring-opacity-50 outline-none transition-all duration-500 mix-blend-hard-light`}
+                  className={`bg-green-400 text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-green-700 focus:outline-none focus:ring-2 focus:ring-green-500 focus:ring-opacity-50 outline-none transition-all duration-500 mix-blend-hard-light`}
                 >
                   Learn More
                 </button>

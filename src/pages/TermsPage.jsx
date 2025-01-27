@@ -22,7 +22,7 @@ const TermsPage = () => {
 
   const databases = new Databases(client);
   const databaseId = '67913805000e2b223d80'; // Replace with your Database ID
-  const collectionId = '679159cb001bb4fa2882'; // Replace with your Collection ID
+  const collectionId = '679159cb001bb4fa2882'; // Replace with your Collection ID 
 
   useEffect(() => {
     const fetchTerms = async () => {

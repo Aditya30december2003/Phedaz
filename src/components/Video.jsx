@@ -91,7 +91,7 @@ const Video = () => {
   return (
     <div
       ref={backgroundRef}
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-blue-600 via-blue-700 to-purple-800 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-green-600 via-green-700 to-green-800 overflow-hidden"
     >
       {/* Video Section */}
       <motion.div
@@ -112,7 +112,7 @@ const Video = () => {
           />
           <button
             onClick={togglePlay}
-            className="absolute bottom-4 right-4 bg-white/80 hover:bg-white text-blue-600 rounded-full p-3 transition-all duration-300 shadow-lg"
+            className="absolute bottom-4 right-4 bg-white/80 hover:bg-white text rounded-full p-3 transition-all duration-300 shadow-lg"
             aria-label={isPlaying ? "Pause video" : "Play video"}
           >
             {isPlaying ? <Pause size={24} /> : <Play size={24} />}
@@ -123,7 +123,7 @@ const Video = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={shareVideo}
-            className="px-8 py-3 bg-white text-blue-600 rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all hover:bg-blue-50 flex items-center space-x-2"
+            className="px-8 py-3 bg-white text rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all hover:bg-blue-50 flex items-center space-x-2"
           >
             <Share2 size={20} />
             <span>Share Video</span>

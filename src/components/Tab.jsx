@@ -93,7 +93,7 @@ const MarqueeTape = () => {
 
   return (
     <div className="bg-zinc-100 py-3 md:py-4 overflow-hidden">
-      <h2 className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text-blue-400">
+      <h2 className="text-2xl md:text-4xl font-bold text-center mb-8 md:mb-12 text">
         {tapeContent[0].Heading}
       </h2>
 
@@ -104,8 +104,8 @@ const MarqueeTape = () => {
           style={{
             background: `linear-gradient(135deg, 
               transparent 25%, 
-              #2563eb 25%, 
-              #2563eb 50%, 
+              #b8f26f 25%, 
+              #b8f26f 50%, 
               transparent 50%
             )`,
             backgroundSize: "200% 200%",
@@ -136,7 +136,7 @@ const MarqueeTape = () => {
             {tapeContent.map((content, index) => (
               <motion.div
                 key={index}
-                className={`relative p-4 md:p-6 bg-blue-400 shadow-lg transform ${
+                className={`relative p-4 md:p-6 bg-color shadow-lg transform ${
                   index % 2 === 0 ? "rotate-2" : "-rotate-2"
                 }`}
                 style={{
@@ -145,16 +145,16 @@ const MarqueeTape = () => {
                   clipPath: "polygon(0% 0%, 100% 0%, 97% 100%, 3% 100%)",
                 }}
               >
-                <div className="absolute inset-0 bg-blue-300 opacity-50 transform scale-95"></div>
+                <div className="absolute inset-0 bg-green-300 opacity-50 transform scale-95"></div>
                 <div className="relative z-10">
-                  <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-blue-900 line-clamp-1">
+                  <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-green-600 line-clamp-1">
                     {content.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-blue-800 line-clamp-3">
+                  <p className="text-xs md:text-sm text-green-800 line-clamp-3">
                     {content.description}
                   </p>
                 </div>
-                <div className="absolute top-0 left-0 w-full h-full border-4 border-blue-500 opacity-50 transform scale-105"></div>
+                <div className="absolute top-0 left-0 w-full h-full border-4 border-green-500 opacity-50 transform scale-105"></div>
               </motion.div>
             ))}
           </motion.div>

@@ -19,5 +19,13 @@ html {
     writing-mode: vertical-lr;
   }
 
-  
+  .bg-color{
+    background: #b8f26f;
+  }
+  .text{
+    color: #97e13d;
+  }
+  .text2{
+    color:#b8f26f;
+  }
   

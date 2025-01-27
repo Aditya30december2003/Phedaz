@@ -57,9 +57,10 @@ const WaitlistForm = () => {
         >
           {/* Left Section */}
           <div className="lg:w-1/2">
-            <h2 className="text-4xl font-bold mb-4 text-center lg:text-left text-blue-800">
+            <h2 className="text-4xl font-extrabold mb-4 text-center lg:text-left text-green-800">
               JOIN OUR WAITLIST
             </h2>
+
             <p className="text-xl mb-8 text-gray-600">
               Ready to revolutionize your business? Join our waitlist and be the
               first to gain exclusive access to Storekwil.
@@ -81,7 +82,7 @@ const WaitlistForm = () => {
                   placeholder="First Name*"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   required
                 />
                 <input
@@ -90,7 +91,7 @@ const WaitlistForm = () => {
                   placeholder="Last Name*"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   required
                 />
                 <input
@@ -99,7 +100,7 @@ const WaitlistForm = () => {
                   placeholder="Email Address*"
                   value={formData.email}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   required
                 />
                 <input
@@ -108,7 +109,7 @@ const WaitlistForm = () => {
                   placeholder="Business Name"
                   value={formData.businessName}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                 />
               </div>
               <div className="mt-4">
@@ -116,7 +117,7 @@ const WaitlistForm = () => {
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   required
                 >
                   <option value="">Select Country*</option>
@@ -132,7 +133,7 @@ const WaitlistForm = () => {
                   placeholder="Telephone*"
                   value={formData.telephone}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   required
                 />
               </div>
@@ -148,7 +149,7 @@ const WaitlistForm = () => {
                     onChange={handleChange}
                     className="sr-only peer"
                   />
-                  <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-blue-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-blue-600"></div>
+                  <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-green-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
                 </label>
               </div>
               {formData.hasReferralCode && (
@@ -164,13 +165,13 @@ const WaitlistForm = () => {
                     placeholder="Referral Code"
                     value={formData.referralCode}
                     onChange={handleChange}
-                    className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-blue-500 transition-all"
+                    className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
                   />
                 </motion.div>
               )}
               <motion.button
                 type="submit"
-                className="bg-blue-600 text-white rounded-md p-3 w-full mt-6 font-semibold text-lg hover:bg-blue-700 transition-colors duration-300"
+                className="bg-color text-white rounded-md p-3 w-full mt-6 font-semibold text-lg hover:bg-green-700 transition-colors duration-300"
                 whileHover={{ scale: 1.02 }}
                 whileTap={{ scale: 0.98 }}
               >

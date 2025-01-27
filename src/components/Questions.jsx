@@ -72,7 +72,7 @@ function Faqs() {
   
 
   return (
-    <section className="py-16 bg-gradient-to-br from-blue-100 to-blue-100" id='faq'>
+    <section className="py-16 bg-color" id='faq'>
       <div className="container mx-auto px-4 md:px-8">
       {faq?.[0]?.Heading ? (
   <h2 className="text-4xl font-bold mb-12 text-center text-gray-800">
@@ -89,7 +89,7 @@ function Faqs() {
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-semibold text-gray-800">{faq.question}</h3>
                   <motion.div animate={{ rotate: activeIndex === index ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                    <IoIosArrowDown className="w-6 h-6 text-blue-500" />
+                    <IoIosArrowDown className="w-6 h-6 text-green-500" />
                   </motion.div>
                 </div>
               </button>

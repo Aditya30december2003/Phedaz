@@ -98,7 +98,7 @@ const Footer = () => {
   }
 
   return (
-    <div className="w-full bg-blue-400 text-white p-4 lg:p-5">
+    <div className="w-full bg-color text-white p-4 lg:p-5">
       {/* Subscription Form */}
       <div className='mb-0'>
         <form
@@ -137,11 +137,11 @@ const Footer = () => {
       <div className="flex flex-col lg:flex-row gap-[0.5rem] lg:gap-[2rem] lg:items-center text-center">
         {/* Logo Section */}
         <div className="md:flex hidden justify-center items-center p-14">
-          <div className="hidden lg:block bg-blue-500 shadow-[inset_-12px_-8px_40px_#46464620] rounded-full w-[10rem] h-[10rem] lg:w-[12rem] lg:h-[12rem]">
+          <div className="hidden lg:block shadow-[inset_-12px_-8px_40px_#46464620] rounded-full w-[10rem] h-[10rem] lg:w-[12rem] lg:h-[12rem]">
             <img 
               src={Icon} 
               alt="Logo" 
-              className="w-32 h-32 lg:w-48 lg:h-48  object-contain mx-auto rounded-[100%]"
+              className="w-32 h-32 lg:w-48 lg:h-48  object-contain mx-auto rounded-[100%] shadow-[0px_0px_0px_1px_rgba(0,0,0,0.06),0px_1px_1px_-0.5px_rgba(0,0,0,0.06),0px_3px_3px_-1.5px_rgba(0,0,0,0.06),_0px_6px_6px_-3px_rgba(0,0,0,0.06),0px_12px_12px_-6px_rgba(0,0,0,0.06),0px_24px_24px_-12px_rgba(0,0,0,0.06)]"
             />
           </div>
         </div>

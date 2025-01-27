@@ -42,14 +42,14 @@ const BlogsComponent = () => {
   }
 
   return (
-    <div className="bg-blue-100 py-16 p-4sm:p-8" id='blog'>
+    <div className="bg-color py-16 p-4sm:p-8" id='blog'>
       <div className="text-center">
         <h1 className="text-[3rem] lg:text-[5rem] font-extrabold mb-2 sm:mb-4">{blogs[0]?.HomePageHeading}</h1>
         <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-gray-700 mb-4 sm:mb-6">
           {blogs[0]?.HomePageSubHeading}
         </h3>
         <Link to="/blogs">
-          <button className="px-4 sm:px-6 py-2 bg-blue-600 text-white text-sm sm:text-base rounded hover:bg-blue-800 transition-colors duration-300">
+          <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-sm sm:text-base rounded hover:bg-green-800 transition-colors duration-300">
             See all blogs
           </button>
         </Link>
@@ -85,7 +85,7 @@ const BlogsComponent = () => {
             <h2 className="text-xs sm:text-sm lg:text-base font-semibold mb-2 line-clamp-2">{blog.title}</h2>
             <p className="text-gray-600 text-xs sm:text-sm mb-1 sm:mb-2">By {blog.author}</p>
             <p className="text-xs text-gray-500 mb-2 sm:mb-4">{new Date(blog.Date).toDateString()}</p>
-            <Link to={`/blogs/${blog.$id}`} className="text-blue-600 text-xs sm:text-sm lg:text-base hover:underline">
+            <Link to={`/blogs/${blog.$id}`} className="text-green-600 text-xs sm:text-sm lg:text-base hover:underline">
               Read More
             </Link>
           </Link>

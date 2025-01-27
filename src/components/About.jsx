@@ -38,7 +38,7 @@ function About() {
   if (loading) {
     return (
       <div id="about" className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 text-gray-800">
-        <div className="w-10 h-10 border-4 border-blue-600 border-t-transparent rounded-full animate-spin"></div>
+        <div className="w-10 h-10 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
         <BufferAnimation size={90} color="white" />
       </div>
     );
@@ -57,18 +57,18 @@ function About() {
           transition={{ duration: 0.8 }}
           className="text-center mb-16"
         >
-          <h2 className="text-xl font-semibold text-blue-600 mb-4">{aboutData.subHeading}</h2>
-          <div className="bg-blue-500 w-[7rem] h-[0.4rem] mx-auto mb-5"></div>
+          <h2 className="text-xl font-semibold text2 mb-4">{aboutData.subHeading}</h2>
+          <div className="bg-color w-[7rem] h-[0.4rem] mx-auto mb-5"></div>
           <p className="text-4xl text-gray-600 font-bold mb-8">{aboutData.Heading}</p>
           <motion.div
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8, delay: 0.2 }}
-  className="max-w-4xl mx-auto space-y-6 text-gray-700 leading-relaxed px-4 py-8 lg:py-12 bg-white rounded-lg shadow-[0_20px_50px_rgba(8,_112,_184,_0.7)]"
+  className="max-w-4xl mx-auto space-y-6 text-gray-700 leading-relaxed px-4 py-8 lg:py-12 bg-white rounded-lg shadow-[0_20px_50px_#b8f26f]"
 >
   {aboutData.Content.map((content)=>(
     <>
-    <p className="text-lg md:text-lg font-small lg:font-normal italic border-1 border-blue-500 text-blue-500 font-semibold">
+    <p className="text-lg md:text-lg font-small lg:font-normal italic border-1 border-green-500 text font-semibold">
       {content}
     </p>
     </>
@@ -81,7 +81,7 @@ function About() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-10"
           >
-            <button className="px-8 py-3 bg-blue-600 text-white rounded-full font-semibold text-lg shadow-lg hover:bg-blue-700 transition duration-300">
+            <button className="px-8 py-3 bg-green-600 text-white rounded-full font-semibold text-lg shadow-lg hover:bg-green-700 transition duration-300">
               Join Waitlist
             </button>
           </motion.div>

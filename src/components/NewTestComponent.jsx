@@ -58,20 +58,20 @@ const SetGoalsComponent = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-[2rem] lg:h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-blue-500"></div>
+        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
       </div>
     )
   }
 
   return (
-    <div className="relative text-blue-900  p-4 bg-white">
+    <div className="relative text2  p-4 bg-white">
       <div className="flex flex-col lg:flex-row h-full rounded-md overflow-hidden shadow-2xl">
         {/* Sidebar */}
         <motion.div
           initial={{ x: -300 }}
           animate={{ x: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="w-full lg:w-64 shadow-lg p-4 lg:p-5 flex flex-col space-y-10 bg-blue-100"
+          className="w-full lg:w-64 shadow-lg p-4 lg:p-5 flex flex-col space-y-10 bg-green-100"
         >
           <div className="my-auto flex flex-row lg:flex-col justify-between h-[80%]">
             {options.map(({ id, icon }) => (
@@ -80,7 +80,7 @@ const SetGoalsComponent = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`flex items-center space-x-4 p-4 rounded-lg transition-colors duration-200 ${
-                  activeOption === id ? "bg-blue-200 text-blue-900" : "text-blue-700 hover:bg-blue-50"
+                  activeOption === id ? "bg-green-200 text" : "text hover:bg-green-50"
                 }`}
                 onClick={() => handleOptionClick(id)}
               >
@@ -98,7 +98,7 @@ const SetGoalsComponent = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col items-center text-center space-y-4 lg:space-y-8"
           >
-            <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-blue-600 to-blue-400 text-transparent bg-clip-text">
+            <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-green-600 to-green-400 text-transparent bg-clip-text">
               Set Your Goals
             </h1>
             {/* <p className="text-blue-600 max-w-xl">Click on the icons to explore various options and set your goals!</p> */}
@@ -124,8 +124,8 @@ const SetGoalsComponent = () => {
                         animate={{ opacity: 1, y: 0 }}
                         transition={{ duration: 0.5, delay: 0.2 }}
                       >
-                        <h2 className="text-2xl font-semibold mb-4 text-blue-700">{title}</h2>
-                        <p className="text-blue-600">{description}</p>
+                        <h2 className="text-2xl font-semibold mb-4 text">{title}</h2>
+                        <p className="text">{description}</p>
                       </motion.div>
                     </div>
                   </animated.div>

@@ -163,7 +163,7 @@ function Navbar() {
             <a
               href="#cap"
               className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md transition-colors duration-300 ${
-                isScrolled ? "text-white font-extrabold bg-gray-900 hover:bg-gray-800" : "text-gray-900 font-semibold bg-white hover:bg-gray-100"
+                isScrolled ? "text-white font-extrabold bg-green-900 hover:bg-green-800" : "text-gray-900 font-semibold bg-white hover:bg-gray-100"
               }`}
             >
               Get started
@@ -286,7 +286,7 @@ function Navbar() {
                   </a>
                   <a
                     href="#cap"
-                    className="block px-3 py-2 mt-1 rounded-md text-base font-medium text-white bg-gray-900 hover:bg-gray-800"
+                    className="block px-3 py-2 mt-1 rounded-md text-base font-medium text-white bg-color hover:bg-green-800"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >
                     Get started
