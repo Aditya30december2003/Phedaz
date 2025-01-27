@@ -10,7 +10,7 @@ import BufferAnimation from '../components/BufferAnimation';
 import PdfView from '../components/PdfView';
 
 
-const TermsPage = () => {
+const TermsPage = () => { 
   const { legalId } = useParams();
   const [terms, setTerms] = useState(null);
   const [loading, setLoading] = useState(true); 
@@ -28,11 +28,17 @@ const TermsPage = () => {
     const fetchTerms = async () => {
       try {
         // Fetch the document based on legalId
-        const response = await databases.getDocument(databaseId, collectionId, legalId);
-        
-        // Directly access the document properties
-        setTerms(response);  // response is already the document object
-        console.log(response);  // Log the response to verify its structure
+        const response = await databases.listDocuments(databaseId, collectionId);
+
+        const matchingPolicyIndex = response.documents.findIndex(
+          (doc) => doc.link === legalId
+        );
+
+        if (matchingPolicyIndex !== -1) {
+          setTerms(response.documents[matchingPolicyIndex]); // Save the matched document to state
+        } else {
+          console.log("No policy document found for link:", legalId);
+        }
       } catch (error) {
         console.error("Failed to fetch terms details:", error);
       } finally {

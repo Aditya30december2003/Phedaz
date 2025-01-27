@@ -1,5 +1,22 @@
-import React, { useState } from "react";
+import { useState , useEffect } from "react";
 import { motion } from "framer-motion";
+import { databases} from "../Appwrite/appwrite";
+import { Client , Databases } from 'appwrite';
+import BufferAnimation from "./BufferAnimation";
+
+const fetchFormContent = async () => {
+  try {
+    const response = await databases.listDocuments(
+      "67913805000e2b223d80", // Database ID
+      "67950ee20025e7fe40f5"  // Form collection ID
+    );
+
+    return response.documents[0] || null; // Return first document or null
+  } catch (error) {
+    console.error("Appwrite Fetch Error:", error);
+    return null;
+  }
+};
 
 const WaitlistForm = () => {
   const [formData, setFormData] = useState({
@@ -11,8 +28,29 @@ const WaitlistForm = () => {
     telephone: "",
     referralCode: "",
     vipAccess: false,
-    hasReferralCode: false,
-  });
+    hasReferralCode: false,});
+  const [content , setContent] = useState(null)
+  const [loading, setLoading] = useState(true);
+  const [error, setError] = useState(null);
+  
+    useEffect(() => {
+      const loadContent = async () => {
+        try {
+          const data = await fetchFormContent();
+          if (data) {
+            setContent(data);
+          } else {
+            setError("No footer content found");
+          }
+        } catch (err) {
+          setError(err.message);
+        }finally {
+          setLoading(false);
+        }
+      };
+  
+      loadContent();
+    }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -38,13 +76,17 @@ const WaitlistForm = () => {
     `;
 
     // Create the mailto link
-    const mailtoLink = `mailto:adityasmjain@gmail.com?subject=Waitlist Form Submission&body=${encodeURIComponent(
+    const mailtoLink = `mailto:${content.email}?subject=Waitlist Form Submission&body=${encodeURIComponent(
       emailBody
     )}`;
 
     // Open the mailto link
     window.location.href = mailtoLink;
   };
+
+  if (loading) {
+    return <div><BufferAnimation size={90} color="white" /></div>;
+  }
 
   return (
     <div className="bg-white py-12" id="form">
@@ -58,12 +100,11 @@ const WaitlistForm = () => {
           {/* Left Section */}
           <div className="lg:w-1/2">
             <h2 className="text-4xl font-extrabold mb-4 text-center lg:text-left text-green-800">
-              JOIN OUR WAITLIST
+              {content.Heading}
             </h2>
 
-            <p className="text-xl mb-8 text-gray-600">
-              Ready to revolutionize your business? Join our waitlist and be the
-              first to gain exclusive access to Storekwil.
+            <p className=" text-center lg:text-left text-xl mb-8 text-gray-600">
+              {content.SubHeading}
             </p>
           </div>
 
@@ -72,7 +113,7 @@ const WaitlistForm = () => {
             initial={{ opacity: 0, x: 20 }}
             animate={{ opacity: 1, x: 0 }}
             transition={{ duration: 0.5, delay: 0.2 }}
-            className="lg:w-1/2 bg-white shadow-lg rounded-lg p-8 border border-gray-100"
+            className="w-full lg:w-1/2 bg-white shadow-lg rounded-lg p-8 border border-gray-100"
           >
             <form onSubmit={handleSubmit}>
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">

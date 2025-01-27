@@ -146,17 +146,16 @@ const Footer = () => {
           </div>
         </div>
         <div className="flex flex-col gap-3 mt-5 md:mt-0 w-[30%] mx-auto">
-       {footerContent.legalTerms.map((term, index) => (
-        <Link 
-        key={index} 
-        to={terms.map((link)=>(
-            link.$id ? `/legals/${link.$id}` : `/legals`
-          ))}
-         className="font-bold text-[1.3rem]"
-        >
-        {term}
-       </Link>
-      ))}
+        {footerContent.legalTerms.map((term, index) => (
+  <Link 
+    key={index} 
+    to={footerContent.legalLinks[index] === 'legals' ? '/legals' : `/legals/${footerContent.legalLinks[index]}`}
+    className="font-bold text-[1.3rem]"
+  >
+    {term}
+  </Link>
+))}
+
       </div>
 
 

@@ -7,11 +7,13 @@ import Navbar from './components/Navbar'
 import Footer from './components/Footer'
 import BlogDetails from '../src/pages/BlogDetails'
 import TermsPage from './pages/TermsPage'
+import ScrollTop from './components/ScrollTop'
 function App() {
 
   return (
     <>
     <Navbar/>
+    <ScrollTop/>
       <Routes>
         <Route path='/' element={<Home />} />
         <Route path='/blogs' element={<Blogs/>} />

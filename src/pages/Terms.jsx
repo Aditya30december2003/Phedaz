@@ -56,7 +56,7 @@ const Terms = () => {
       <div className="container mx-auto px-4 text-center">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-2 gap-4 p-4">
        {terms.map((term) => (
-        <Link to={term.id ? `/legals/${term.$id}` : `/legals`} key={term.$id} className="bg-white shadow-md rounded p-4">
+        <Link to={term.id ? `/legals/${term.link}` : `/legals`} key={term.$id} className="bg-white shadow-md rounded p-4">
           <img
             src={term.image}
             alt={term.LegalTitle}
