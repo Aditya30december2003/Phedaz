@@ -1,3 +1,5 @@
+"use client"
+
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
@@ -7,7 +9,7 @@ const PageLoadAnimation = ({ children }) => {
   useEffect(() => {
     const timer = setTimeout(() => {
       setIsAnimating(false)
-    }, 4000) // Adjust this time to match the total duration of your animations
+    }, 4500) // Increased duration to accommodate the new tagline animation
 
     return () => clearTimeout(timer)
   }, [])
@@ -21,6 +23,8 @@ const PageLoadAnimation = ({ children }) => {
     { letter: "z", initial: { scale: 0, opacity: 0 }, animate: { scale: 1, opacity: 1 } },
   ]
 
+  const taglineWords = ["SOAR", "BEYOND", "LIMITS"]
+
   return (
     <AnimatePresence>
       {isAnimating ? (
@@ -31,7 +35,7 @@ const PageLoadAnimation = ({ children }) => {
           transition={{ duration: 0.5 }}
         >
           <div className="flex flex-col items-center">
-            <div className="flex">
+            <div className="flex mb-4">
               {letterAnimations.map(({ letter, initial, animate }, index) => (
                 <motion.span
                   key={letter}
@@ -50,14 +54,35 @@ const PageLoadAnimation = ({ children }) => {
               ))}
             </div>
             <motion.div
-              className="mt-4 text-white text-sm"
+              className="flex space-x-2"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ delay: 2, duration: 0.5 }}
+            >
+              {taglineWords.map((word, index) => (
+                <motion.span
+                  key={word}
+                  className="text-2xl font-semibold text-white"
+                  initial={{ y: 20, opacity: 0 }}
+                  animate={{ y: 0, opacity: 1 }}
+                  transition={{
+                    delay: 2.2 + index * 0.2,
+                    duration: 0.8,
+                    type: "spring",
+                    stiffness: 100,
+                  }}
+                >
+                  {word}
+                </motion.span>
+              ))}
+            </motion.div>
+            <motion.div
+              className="mt-8 text-white text-sm"
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
-              transition={{ delay: 1.5, duration: 0.5 }}
+              transition={{ delay: 3.5, duration: 0.5 }}
             >
-             <div className="space-y-8">
-        {/* <BufferAnimation size={90} color="white" /> */}
-      </div>
+              <div className="space-y-8">{/* <BufferAnimation size={90} color="white" /> */}</div>
             </motion.div>
           </div>
         </motion.div>
@@ -71,6 +96,4 @@ const PageLoadAnimation = ({ children }) => {
 }
 
 export default PageLoadAnimation
-
-
 

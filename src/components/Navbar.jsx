@@ -4,6 +4,7 @@ import { useState, useEffect } from "react"
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, X, Menu } from "lucide-react"
+import Logo from '../assets/logo.png'
  
 function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState(null)
@@ -55,11 +56,12 @@ function Navbar() {
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <span
-                className={`text-4xl font-bold transition-colors duration-300 ${
+                className={`text-4xl font-bold transition-colors duration-300 mt-5 ${
                   isScrolled ? "text-gray-900" : "text-gray-900"
                 }`}
               >
-                Phedaz
+                {/* Phedaz */}
+                <img src={Logo} alt="" className="w-[9rem] h-[9rem] md:w-[12rem] md:h-[12rem]"/>
               </span>
             </Link>
           </div>
