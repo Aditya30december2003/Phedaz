@@ -52,13 +52,13 @@ const TermsLayout = ({ terms }) => {
                 <li key={id} className="relative duration-100">
                   <div
                     className={`absolute -left-4 top-0 h-full w-1 transition-all duration-200 ${
-                      activeTerm === id ? "bg-blue-500" : "bg-transparent"
+                      activeTerm === id ? "bg-green-500" : "bg-transparent"
                     }`}
                   />
                   <button
                     onClick={() => handleClick(`section-${id}`)}
-                    className={`font-medium duration-200 text-left text-[0.9rem] w-full hover:text-blue-600 ${
-                      activeTerm === id ? "text-blue-700 scale-105" : ""
+                    className={`font-medium duration-200 text-left text-[0.9rem] w-full hover:text-green-600 ${
+                      activeTerm === id ? "text-green-700 scale-105" : ""
                     }`}
                   >
                     {item}

@@ -85,7 +85,7 @@ const TermsPage = () => {
                 <div><FaHome /></div>
                 <Link to='/' className='font-thin'>Home</Link>
                 <div><SlArrowRight/></div>
-                <Link to='/terms'>Terms</Link>
+                <Link to='/legals'>Legals</Link>
             </div>
           </div>
         </div>
