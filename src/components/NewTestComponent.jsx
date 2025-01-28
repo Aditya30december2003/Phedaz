@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { useSpring, animated } from "@react-spring/web"
 import { gsap } from "gsap"
 import { Client, Databases } from "appwrite"
+import BufferAnimation from "./BufferAnimation"
 
 const SetGoalsComponent = () => {
   const [options, setOptions] = useState([])
@@ -58,7 +59,7 @@ const SetGoalsComponent = () => {
   if (loading) {
     return (
       <div className="flex items-center justify-center h-[2rem] lg:h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-green-500"></div>
+        <BufferAnimation/>
       </div>
     )
   }

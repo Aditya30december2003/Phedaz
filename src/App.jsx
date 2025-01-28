@@ -1,29 +1,44 @@
-import './App.css'
-import { Route , Routes } from 'react-router-dom'
-import Home from '../src/pages/Home'
-import Blogs from '../src/pages/Blogs'
-import Terms from '../src/pages/Terms'
-import Navbar from './components/Navbar'
-import Footer from './components/Footer'
-import BlogDetails from '../src/pages/BlogDetails'
-import TermsPage from './pages/TermsPage'
-import ScrollTop from './components/ScrollTop'
-function App() {
+import { Suspense, lazy } from 'react';
+import { Route, Routes } from 'react-router-dom';
+import './App.css';
 
+// Components that should load immediately
+import Navbar from './components/Navbar';
+import Footer from './components/Footer';
+import ScrollTop from './components/ScrollTop';
+import BufferAnimation from './components/BufferAnimation';
+
+// Lazy load route components
+const Home = lazy(() => import('../src/pages/Home'));
+const Blogs = lazy(() => import('../src/pages/Blogs'));
+const BlogDetails = lazy(() => import('../src/pages/BlogDetails'));
+const Terms = lazy(() => import('../src/pages/Terms'));
+const TermsPage = lazy(() => import('./pages/TermsPage'));
+
+// Simple loading component
+const LoadingSpinner = () => (
+  <div className="min-h-screen flex items-center justify-center">
+    <BufferAnimation/>
+  </div>
+);
+
+function App() {
   return (
     <>
-    <Navbar/>
-    <ScrollTop/>
-      <Routes>
-        <Route path='/' element={<Home />} />
-        <Route path='/blogs' element={<Blogs/>} />
-        <Route path="/blogs/:blogId" element={<BlogDetails />} />
-        <Route path='/legals' element={<Terms/>} />
-        <Route path='/legals/:legalId' element={<TermsPage/>} />
-      </Routes>
-    <Footer /> 
+      <Navbar />
+      <ScrollTop />
+      <Suspense fallback={<LoadingSpinner />}>
+        <Routes>
+          <Route path="/" element={<Home />} />
+          <Route path="/blogs" element={<Blogs />} />
+          <Route path="/blogs/:blogId" element={<BlogDetails />} />
+          <Route path="/legals" element={<Terms />} />
+          <Route path="/legals/:legalId" element={<TermsPage />} />
+        </Routes>
+      </Suspense>
+      <Footer />
     </>
-  )
+  );
 }
 
-export default App
+export default App;
