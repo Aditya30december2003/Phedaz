@@ -37,8 +37,8 @@ function About() {
   // Show loading state
   if (loading) {
     return (
-      <div id="about" className="flex justify-center items-center min-h-screen bg-gradient-to-br from-blue-50 to-blue-100 text-gray-800">
-        <div className="w-10 h-10 border-4 border-green-600 border-t-transparent rounded-full animate-spin"></div>
+      <div id="about" className="flex justify-center items-center min-h-screen bg-gradient-to-br from-teal-50 to-teal-100 text-gray-800">
+        <div className="w-10 h-10 border-4 border-teal-600 border-t-transparent rounded-full animate-spin"></div>
         <BufferAnimation size={90} color="white" />
       </div>
     );
@@ -64,11 +64,11 @@ function About() {
   initial={{ opacity: 0, y: 20 }}
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.8, delay: 0.2 }}
-  className="max-w-4xl mx-auto space-y-6 text-gray-700 leading-relaxed px-4 py-8 lg:py-12 bg-white rounded-lg shadow-[0_20px_50px_#b8f26f]"
+  className="max-w-4xl mx-auto space-y-6 text-gray-700 leading-relaxed px-4 py-8 lg:py-12 bg-white rounded-lg shadow-[0_20px_50px_#008080]"
 >
   {aboutData.Content.map((content)=>(
     <>
-    <p className="text-lg md:text-lg font-small lg:font-normal italic border-1 border-green-500 text font-semibold">
+    <p className="text-lg md:text-lg font-small lg:font-bold italic border-1 border-teal-500 text">
       {content}
     </p>
     </>
@@ -81,7 +81,7 @@ function About() {
             transition={{ duration: 0.8, delay: 0.4 }}
             className="mt-10"
           >
-            <button className="px-8 py-3 bg-green-600 text-white rounded-full font-semibold text-lg shadow-lg hover:bg-green-700 transition duration-300">
+            <button className="px-8 py-3 bg-teal-600 text-white rounded-full font-semibold text-lg shadow-lg hover:bg-teal-700 transition duration-300">
               Join Waitlist
             </button>
           </motion.div>

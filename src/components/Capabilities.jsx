@@ -57,7 +57,7 @@ export default function VirtualCardPage() {
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
-          className="relative backdrop-blur-xl overflow-hidden border-green-500 border-[0.1rem] rounded-t-3xl"
+          className="relative backdrop-blur-xl overflow-hidden border-teal-500 border-[0.1rem] rounded-t-3xl"
           {...swipeHandlers} // Attach swipe handlers
         >
           {/* Folder-like top */}
@@ -70,7 +70,7 @@ export default function VirtualCardPage() {
             {/* Card Selection Area */}
             <div className="mt-12 sm:mt-16">
               <div className="text-center">
-                <h2 className="text-md sm:text-md text-green-500 font-bold mb-1 sm:mb-2">{cards[0].Title}</h2>
+                <h2 className="text-lg sm:text-md text-teal-500 font-extrabold mb-1 sm:mb-2">{cards[0].Title}</h2>
                 <p className="text-[2rem] sm:text-[3rem] lg:text-[4rem] font-extrabold text-zinc-400">
                   {cards[0].subTitle}
                 </p>

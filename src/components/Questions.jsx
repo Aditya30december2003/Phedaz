@@ -89,7 +89,7 @@ function Faqs() {
                 <div className="flex justify-between items-center">
                   <h3 className="text-xl font-semibold text-gray-800">{faq.question}</h3>
                   <motion.div animate={{ rotate: activeIndex === index ? 180 : 0 }} transition={{ duration: 0.3 }}>
-                    <IoIosArrowDown className="w-6 h-6 text-green-500" />
+                    <IoIosArrowDown className="w-6 h-6 text-teal-500" />
                   </motion.div>
                 </div>
               </button>

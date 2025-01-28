@@ -91,7 +91,7 @@ const Video = () => {
   return (
     <div
       ref={backgroundRef}
-      className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-green-600 via-green-700 to-green-800 overflow-hidden"
+      className="relative min-h-screen flex items-center justify-center bg-gradient-to-br from-teal-600 via-teal-700 to-teal-800 overflow-hidden"
     >
       {/* Video Section */}
       <motion.div
@@ -123,7 +123,7 @@ const Video = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={shareVideo}
-            className="px-8 py-3 bg-white text rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all hover:bg-blue-50 flex items-center space-x-2"
+            className="px-8 py-3 bg-white text rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all hover:bg-teal-50 flex items-center space-x-2"
           >
             <Share2 size={20} />
             <span>Share Video</span>

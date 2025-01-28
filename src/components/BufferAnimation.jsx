@@ -1,7 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 
-const BufferAnimation = ({ size = 40, borderColor = "#b8f26f", borderWidth = 2 }) => {
+const BufferAnimation = ({ size = 40, borderColor = "#006666", borderWidth = 2 }) => {
   const cubeVariants = {
     animate: {
       rotateX: [0, 360],

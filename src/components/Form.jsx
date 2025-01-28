@@ -99,7 +99,7 @@ const WaitlistForm = () => {
         >
           {/* Left Section */}
           <div className="lg:w-1/2">
-            <h2 className="text-4xl font-extrabold mb-4 text-center lg:text-left text-green-800">
+            <h2 className="text-4xl font-extrabold mb-4 text-center lg:text-left text-teal-800">
               {content.Heading}
             </h2>
 

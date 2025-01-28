@@ -72,7 +72,7 @@ const SetGoalsComponent = () => {
           initial={{ x: -300 }}
           animate={{ x: 0 }}
           transition={{ duration: 0.5, ease: "easeOut" }}
-          className="w-full lg:w-64 shadow-lg p-4 lg:p-5 flex flex-col space-y-10 bg-green-100"
+          className="w-full lg:w-64 shadow-lg p-4 lg:p-5 flex flex-col space-y-10 bg-teal-100"
         >
           <div className="my-auto flex flex-row lg:flex-col justify-between h-[80%]">
             {options.map(({ id, icon }) => (
@@ -81,7 +81,7 @@ const SetGoalsComponent = () => {
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
                 className={`flex items-center space-x-4 p-4 rounded-lg transition-colors duration-200 ${
-                  activeOption === id ? "bg-green-200 text" : "text hover:bg-green-50"
+                  activeOption === id ? "bg-teal-200 text" : "text hover:bg-teal-50"
                 }`}
                 onClick={() => handleOptionClick(id)}
               >
@@ -99,7 +99,7 @@ const SetGoalsComponent = () => {
             transition={{ duration: 0.5, delay: 0.2 }}
             className="flex flex-col items-center text-center space-y-4 lg:space-y-8"
           >
-            <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-green-600 to-green-400 text-transparent bg-clip-text">
+            <h1 className="text-3xl lg:text-4xl font-bold bg-gradient-to-r from-teal-600 to-teal-400 text-transparent bg-clip-text">
               Set Your Goals
             </h1>
             {/* <p className="text-blue-600 max-w-xl">Click on the icons to explore various options and set your goals!</p> */}

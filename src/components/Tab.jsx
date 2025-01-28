@@ -104,8 +104,8 @@ const MarqueeTape = () => {
           style={{
             background: `linear-gradient(135deg, 
               transparent 25%, 
-              #b8f26f 25%, 
-              #b8f26f 50%, 
+              #006666 25%, 
+              #006666 50%, 
               transparent 50%
             )`,
             backgroundSize: "200% 200%",
@@ -145,16 +145,16 @@ const MarqueeTape = () => {
                   clipPath: "polygon(0% 0%, 100% 0%, 97% 100%, 3% 100%)",
                 }}
               >
-                <div className="absolute inset-0 bg-green-300 opacity-50 transform scale-95"></div>
+                <div className="absolute inset-0 bg-teal-300 opacity-50 transform scale-95"></div>
                 <div className="relative z-10">
-                  <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-green-600 line-clamp-1">
+                  <h3 className="text-lg md:text-xl font-bold mb-2 md:mb-3 text-teal-100 line-clamp-1">
                     {content.title}
                   </h3>
-                  <p className="text-xs md:text-sm text-green-800 line-clamp-3">
+                  <p className="text-xs md:text-sm text-teal-800 line-clamp-3">
                     {content.description}
                   </p>
                 </div>
-                <div className="absolute top-0 left-0 w-full h-full border-4 border-green-500 opacity-50 transform scale-105"></div>
+                <div className="absolute top-0 left-0 w-full h-full border-4 border-teal-500 opacity-50 transform scale-105"></div>
               </motion.div>
             ))}
           </motion.div>

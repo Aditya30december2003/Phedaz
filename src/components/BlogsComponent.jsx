@@ -49,7 +49,7 @@ const BlogsComponent = () => {
           {blogs[0]?.HomePageSubHeading}
         </h3>
         <Link to="/blogs">
-          <button className="px-4 sm:px-6 py-2 bg-green-600 text-white text-sm sm:text-base rounded hover:bg-green-800 transition-colors duration-300">
+          <button className="px-4 sm:px-6 py-2 bg-teal-600 text-white text-sm sm:text-base rounded hover:bg-teal-800 transition-colors duration-300">
             See all blogs
           </button>
         </Link>
@@ -85,7 +85,7 @@ const BlogsComponent = () => {
             <h2 className="text-xs sm:text-sm lg:text-base font-semibold mb-2 line-clamp-2">{blog.title}</h2>
             <p className="text-gray-600 text-xs sm:text-sm mb-1 sm:mb-2">By {blog.author}</p>
             <p className="text-xs text-gray-500 mb-2 sm:mb-4">{new Date(blog.Date).toDateString()}</p>
-            <Link to={`/blogs/${blog.$id}`} className="text-green-600 text-xs sm:text-sm lg:text-base hover:underline">
+            <Link to={`/blogs/${blog.$id}`} className="text-teal-600 text-xs sm:text-sm lg:text-base hover:underline">
               Read More
             </Link>
           </Link>

@@ -6,7 +6,7 @@ import BufferAnimation from "./BufferAnimation"
 
 const sentences = ["Streamline Your Operations", "Boost Your Sales", "Grow Your Business"]
 
-function Hero() {
+function Hero() { 
   const [currentSentence, setCurrentSentence] = useState(0)
   const [hero, setHero] = useState({ Heading: "", bgVideo: "" }) // Default structure
   const [loading, setLoading] = useState(true)
@@ -47,14 +47,14 @@ function Hero() {
   // Show loading state
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-green-50 to-green-100 text-gray-800">
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-teal-50 to-teal-100 text-gray-800">
         <BufferAnimation size={90} color="white" />
       </div>
     )
   }
 
   return (
-    <section className="relative min-h-screen pt-[3rem] lg:pt-[5rem] bg-gradient-to-br from-green-50 to-green-100 text-gray-800">
+    <section className="relative min-h-screen pt-[3rem] lg:pt-[5rem] bg-gradient-to-br from-teal-50 to-teal-100 text-gray-800">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         {hero.bgVideo && (
@@ -67,7 +67,7 @@ function Hero() {
             className="object-cover w-full h-full opacity-20"
           />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-green-100 opacity-90"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-teal-100 opacity-90"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-6 md:px-16 flex flex-col justify-center items-center min-h-screen text-center">
@@ -102,7 +102,7 @@ function Hero() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-gradient-to-r from-green-600 to-green-500 text-white rounded-full font-semibold text-lg shadow-lg hover:from-blue-700 hover:to-blue-600 transition duration-300"
+              className="px-8 py-4 bg-gradient-to-r from-teal-600 to-teal-500 text-white rounded-full font-semibold text-lg shadow-lg hover:from-blue-700 hover:to-blue-600 transition duration-300"
             >
               Join Our Waitlist
             </motion.button>
@@ -111,7 +111,7 @@ function Hero() {
             <motion.button
               whileHover={{ scale: 1.05 }}
               whileTap={{ scale: 0.95 }}
-              className="px-8 py-4 bg-white text rounded-full font-semibold text-lg shadow-lg hover:bg-green-50 transition duration-300 border-2 border-green-200"
+              className="px-8 py-4 bg-white text rounded-full font-semibold text-lg shadow-lg hover:bg-teal-50 transition duration-300 border-2 border-teal-200"
             >
               Learn More
             </motion.button>
