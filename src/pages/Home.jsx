@@ -11,7 +11,7 @@ import PageLoadAnimation from '../components/PageLoadAnimation'
 
 const Home = () => {
   return (
-    <PageLoadAnimation>
+    // <PageLoadAnimation>
     <div className='flex flex-col gap-10'>
       <Hero/>
       <About/>
@@ -23,7 +23,7 @@ const Home = () => {
       <Questions/>
       <WaitListForm/>
     </div> 
-    </PageLoadAnimation>
+    // </PageLoadAnimation>
   )
 }
 
