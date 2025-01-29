@@ -1,63 +1,75 @@
-"use client"
-
-import { Client, Databases } from "appwrite"
-import { useState, useEffect } from "react"
+import { Client, Databases } from "appwrite";
+import { useState, useEffect } from "react";
 import { RxCross1 } from "react-icons/rx";
 
 const Advantages = () => {
-  const [selectedTab, setSelectedTab] = useState(null)
-  const [advantages, setAdvantages] = useState([])
-  const [loading, setLoading] = useState(true)
+  const [selectedTab, setSelectedTab] = useState(null);
+  const [advantages, setAdvantages] = useState([]);
+  const [loading, setLoading] = useState(true);
   const [hoveredCard, setHoveredCard] = useState(null); // Track which card is hovered
 
   // Initialize Appwrite client
-  const client = new Client()
-  client.setEndpoint("https://centralapps.hivefinty.com/v1").setProject("67912e8e000459a70dab")
+  const client = new Client();
+  client.setEndpoint("https://centralapps.hivefinty.com/v1").setProject("67912e8e000459a70dab");
 
-  const databases = new Databases(client)
-  const databaseId = "67913805000e2b223d80"
-  const collectionId = "67921b41001390a43aad"
+  const databases = new Databases(client);
+  const databaseId = "67913805000e2b223d80";
+  const collectionId = "67921b41001390a43aad";
 
   useEffect(() => {
     const fetchAdvantages = async () => {
       try {
-        const response = await databases.listDocuments(databaseId, collectionId)
-        setAdvantages(response.documents)
+        const response = await databases.listDocuments(databaseId, collectionId);
+        setAdvantages(response.documents);
       } catch (error) {
-        console.error("Failed to fetch advantages:", error)
+        console.error("Failed to fetch advantages:", error);
       } finally {
-        setLoading(false)
+        setLoading(false);
       }
-    }
+    };
 
-    fetchAdvantages()
-  }, [])
+    fetchAdvantages();
+  }, []);
 
   if (loading) {
     return (
       <div className="flex justify-center items-center h-screen">
         <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
       </div>
-    )
+    );
   }
 
   const handleTabClick = (index) => {
-    setSelectedTab(selectedTab === index ? null : index)
-  }
- 
-  return ( 
-    <section className="py-16" id='advantages'> 
+    setSelectedTab(selectedTab === index ? null : index);
+  };
+
+  return (
+    <section className="py-16 bg-gradient-to-b from-[#E5F0F1] to-[#FFF5C3] bg-cover bg-no-repeat" id="advantages">
       <div className="container mx-auto px-4 sm:px-6 lg:px-8">
-        <h1 className="text-[3rem] lg:text-[5rem] font-extrabold  text-gray-800 mb-4 text-center">{advantages[0]?.Title}</h1>
-        <p className="text-gray-600 mb-12 text-[1.2rem] font-semibold text-center max-w-2xl mx-auto">{advantages[0]?.subTitle}</p>
+        <h1
+          data-aos="fade-up"
+          data-aos-delay="200"
+          className="text-[3rem] lg:text-[5rem] font-extrabold text-[#0A0A45] mb-4 text-center"
+        >
+          {advantages[0]?.Title}
+        </h1>
+        <p
+          data-aos="fade-up"
+          data-aos-delay="300"
+          className="text-gray-600 mb-12 text-[1.2rem] font-semibold text-center max-w-2xl mx-auto"
+        >
+          {advantages[0]?.subTitle}
+        </p>
 
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 w-[75%] h-full mx-auto">
           {advantages.map((advantage, index) => (
             <div
               key={index}
-              className={`rounded-lg overflow-hidden bg-color text-white transition-all duration-300 shadow-xl border-teal-200 border-[0.1rem]`}
+              className="rounded-lg overflow-hidden bg-white text-white transition-all duration-300 shadow-xl border-teal-200 border-[0.1rem]"
               onMouseEnter={() => setHoveredCard(index)} // Set hovered card index
               onMouseLeave={() => setHoveredCard(null)} // Reset hovered card index
+              data-aos="flip-down"
+              data-aos-delay={index * 200}
             >
               <div className="p-6 flex flex-col items-center cursor-pointer hover:scale-105 duration-300">
                 <div className="w-32 z-99 h-32 mb-6 overflow-hidden rounded-full border-4 border-gray-200">
@@ -67,31 +79,13 @@ const Advantages = () => {
                     className="w-full h-full object-cover z-99 mx-auto"
                   />
                 </div>
-                <h2 className="text-xl font-semibold text-white mb-4 text-center">{advantage.Advantage}</h2>
+                <h2 className="text-xl font-semibold text-[#0A0A45] mb-4 text-center">{advantage.Advantage}</h2>
                 <button
                   onClick={() => handleTabClick(index)}
-                  className={`bg-teal-400 text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-teal-700 focus:outline-none focus:ring-2 focus:ring-teal-500 focus:ring-opacity-50 outline-none transition-all duration-500 mix-blend-hard-light`}
+                  className="bg-[#0A0A45] text-white px-6 py-2 rounded-full text-sm font-medium hover:bg-[#0A0A45] focus:outline-none focus:ring-2 focus:ring-[#0A0A45] focus:ring-opacity-50 outline-none transition-all duration-500"
                 >
                   Learn More
                 </button>
-                <button
-                  className={`${
-                    index % 7 === 0
-                      ? "bg-purple-900"
-                      : index % 7 === 1
-                      ? "bg-yellow-700"
-                      : index % 7 === 2
-                      ? "bg-red-700"
-                      : index % 7 === 3
-                      ? "bg-zinc-700"
-                      : index % 7 === 4
-                      ? "bg-blue-700"
-                      : "bg-pink-700"
-                  } text-white animate px-6 py-6 mt-5 mr-[70%] rounded-full text-sm font-medium transition-all duration-500 ${
-                    hoveredCard === index ? "scale-[1.2]" : ""
-                  }`}
-                  onClick={() => handleTabClick(index)}
-                ></button>
               </div>
               {selectedTab === index && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 flex justify-center items-center z-50">
@@ -117,10 +111,10 @@ const Advantages = () => {
 
                     {/* Content Section */}
                     <div>
-                      <h3 className="text-3xl font-semibold text-teal-900 mb-4 text-center tracking-wide">
+                      <h3 className="text-3xl font-semibold text-[#0A0A45] mb-4 text-center tracking-wide">
                         {advantage.Advantage}
                       </h3>
-                      <p className="text-blue-700 mb-6 text-md leading-relaxed text-center mt-5">
+                      <p className="text-black mb-6 text-md leading-relaxed text-center mt-5">
                         {advantage.Content}
                       </p>
                     </div>
@@ -132,7 +126,8 @@ const Advantages = () => {
         </div>
       </div>
     </section>
-  )
-}
+  );
+};
 
-export default Advantages
+export default Advantages;
+

@@ -3,6 +3,9 @@ import { motion } from "framer-motion";
 import { databases} from "../Appwrite/appwrite";
 import { Client , Databases } from 'appwrite';
 import BufferAnimation from "./BufferAnimation";
+import AOS from "aos"
+import "aos/dist/aos.css"
+
 
 const fetchFormContent = async () => {
   try {
@@ -28,29 +31,33 @@ const WaitlistForm = () => {
     telephone: "",
     referralCode: "",
     vipAccess: false,
-    hasReferralCode: false,});
+    hasReferralCode: false,
+  });
   const [content , setContent] = useState(null)
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
-  
-    useEffect(() => {
-      const loadContent = async () => {
-        try {
-          const data = await fetchFormContent();
-          if (data) {
-            setContent(data);
-          } else {
-            setError("No footer content found");
-          }
-        } catch (err) {
-          setError(err.message);
-        }finally {
-          setLoading(false);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 1000,
+    })
+    const loadContent = async () => {
+      try {
+        const data = await fetchFormContent();
+        if (data) {
+          setContent(data);
+        } else {
+          setError("No footer content found");
         }
-      };
-  
-      loadContent();
-    }, []);
+      } catch (err) {
+        setError(err.message);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    loadContent();
+  }, []);
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;
@@ -89,77 +96,100 @@ const WaitlistForm = () => {
   }
 
   return (
-    <div className="bg-white py-12" id="form">
+    <div className="bg-gradient-to-b from-[#E5F0F1] to-[#FFF5C3] py-12" id="form">
       <div className="container mx-auto px-4 max-w-6xl">
         <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.5 }}
           className="flex flex-col lg:flex-row gap-12 items-center"
         >
           {/* Left Section */}
-          <div className="lg:w-1/2">
-            <h2 className="text-4xl font-extrabold mb-4 text-center lg:text-left text-teal-800">
+          <div className="lg:w-1/2" data-aos="flip-down" data-aos-delay={200}>
+            <h2
+              className="text-4xl font-extrabold mb-4 text-center lg:text-left text-[#0A0A45]"
+              aria-live="polite"
+            >
               {content.Heading}
             </h2>
 
-            <p className=" text-center lg:text-left text-xl mb-8 text-gray-600">
+            <p
+              className="text-center lg:text-left text-xl mb-8 text-gray-600"
+              aria-live="polite"
+            >
               {content.SubHeading}
             </p>
           </div>
 
           {/* Right Section */}
           <motion.div
-            initial={{ opacity: 0, x: 20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.5, delay: 0.2 }}
             className="w-full lg:w-1/2 bg-white shadow-lg rounded-lg p-8 border border-gray-100"
+            data-aos="flip-down"
+            data-aos-delay={200}
+            role="form"
+            aria-labelledby="form-heading"
           >
-            <form onSubmit={handleSubmit}>
+            <form onSubmit={handleSubmit} aria-describedby="form-description">
               <div className="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <label htmlFor="firstName" className="sr-only">First Name</label>
                 <input
                   type="text"
+                  id="firstName"
                   name="firstName"
                   placeholder="First Name*"
                   value={formData.firstName}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0A0A45] transition-all"
                   required
+                  aria-required="true"
                 />
+
+                <label htmlFor="lastName" className="sr-only">Last Name</label>
                 <input
                   type="text"
+                  id="lastName"
                   name="lastName"
                   placeholder="Last Name*"
                   value={formData.lastName}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0A0A45] transition-all"
                   required
+                  aria-required="true"
                 />
+
+                <label htmlFor="email" className="sr-only">Email Address</label>
                 <input
                   type="email"
+                  id="email"
                   name="email"
                   placeholder="Email Address*"
                   value={formData.email}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0A0A45] transition-all"
                   required
+                  aria-required="true"
                 />
+
+                <label htmlFor="businessName" className="sr-only">Business Name</label>
                 <input
                   type="text"
+                  id="businessName"
                   name="businessName"
                   placeholder="Business Name"
                   value={formData.businessName}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 focus:outline-none focus:ring-2 focus:ring-[#0A0A45] transition-all"
+                  aria-describedby="business-name-description"
                 />
               </div>
+
               <div className="mt-4">
+                <label htmlFor="country" className="sr-only">Country</label>
                 <select
+                  id="country"
                   name="country"
                   value={formData.country}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-[#0A0A45] transition-all"
                   required
+                  aria-required="true"
                 >
                   <option value="">Select Country*</option>
                   <option value="UK">United Kingdom</option>
@@ -167,56 +197,61 @@ const WaitlistForm = () => {
                   <option value="CA">Canada</option>
                 </select>
               </div>
+
               <div className="mt-4">
+                <label htmlFor="telephone" className="sr-only">Telephone</label>
                 <input
                   type="tel"
+                  id="telephone"
                   name="telephone"
                   placeholder="Telephone*"
                   value={formData.telephone}
                   onChange={handleChange}
-                  className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                  className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-[#0A0A45] transition-all"
                   required
+                  aria-required="true"
                 />
               </div>
+
               <div className="mt-6 flex items-center justify-between">
-                <span className="text-gray-700">
+                <label htmlFor="hasReferralCode" className="text-gray-700">
                   Do you have a referral code?
-                </span>
-                <label className="relative inline-flex items-center cursor-pointer">
+                </label>
+                <label className="relative inline-flex items-center cursor-pointer" htmlFor="hasReferralCode">
                   <input
                     type="checkbox"
+                    id="hasReferralCode"
                     name="hasReferralCode"
                     checked={formData.hasReferralCode}
                     onChange={handleChange}
                     className="sr-only peer"
+                    aria-describedby="referral-code-description"
                   />
-                  <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-green-300 peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-green-600"></div>
+                  <div className="w-11 h-6 bg-gray-200 rounded-full peer peer-focus:ring-4 peer-focus:ring-[#0A0A45] peer-checked:after:translate-x-full peer-checked:after:border-white after:content-[''] after:absolute after:top-0.5 after:left-[2px] after:bg-white after:border-gray-300 after:border after:rounded-full after:h-5 after:w-5 after:transition-all peer-checked:bg-[#0A0A45]"></div>
                 </label>
               </div>
+
               {formData.hasReferralCode && (
-                <motion.div
-                  initial={{ opacity: 0, height: 0 }}
-                  animate={{ opacity: 1, height: "auto" }}
-                  exit={{ opacity: 0, height: 0 }}
-                  className="mt-4"
-                >
+                <motion.div className="mt-4">
+                  <label htmlFor="referralCode" className="sr-only">Referral Code</label>
                   <input
                     type="text"
+                    id="referralCode"
                     name="referralCode"
                     placeholder="Referral Code"
                     value={formData.referralCode}
                     onChange={handleChange}
-                    className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-green-500 transition-all"
+                    className="border border-gray-300 rounded-md p-3 w-full focus:outline-none focus:ring-2 focus:ring-[#0A0A45] transition-all"
                   />
                 </motion.div>
               )}
+
               <motion.button
                 type="submit"
-                className="bg-color text-white rounded-md p-3 w-full mt-6 font-semibold text-lg hover:bg-green-700 transition-colors duration-300"
-                whileHover={{ scale: 1.02 }}
-                whileTap={{ scale: 0.98 }}
+                className="bg-[#0A0A45] text-white rounded-md p-3 w-full mt-6 font-semibold text-lg hover:bg-[#000000] transition-colors focus:outline-none focus:ring-4 focus:ring-[#0A0A45]"
+                data-aos="zoom-in"
               >
-                Join the Waitlist
+                JOIN THE WAITLIST
               </motion.button>
             </form>
           </motion.div>

@@ -1,7 +1,7 @@
 import React from "react"
 import { motion } from "framer-motion"
 
-const BufferAnimation = ({ size = 40, borderColor = "#006666", borderWidth = 2 }) => {
+const BufferAnimation = ({ size = 40, borderColor = "#0A0A45", borderWidth = 2, fullScreen = false }) => {
   const cubeVariants = {
     animate: {
       rotateX: [0, 360],
@@ -9,7 +9,7 @@ const BufferAnimation = ({ size = 40, borderColor = "#006666", borderWidth = 2 }
       transition: {
         duration: 3,
         ease: "linear",
-        repeat: Infinity,
+        repeat: Number.POSITIVE_INFINITY,
       },
     },
   }
@@ -22,8 +22,12 @@ const BufferAnimation = ({ size = 40, borderColor = "#006666", borderWidth = 2 }
     backgroundColor: "transparent",
   }
 
+  const containerStyle = fullScreen
+    ? "flex w-full h-screen items-center justify-center perspective-500"
+    : "flex items-center justify-center perspective-500"
+
   return (
-    <div className="flex w-full h-screen bg-white items-center justify-center perspective-500">
+    <div className={`${containerStyle} bg-gradient-to-b from-[#E5F0F1] to-[#FFF5C3]`}>
       <motion.div
         className="relative"
         style={{
@@ -52,3 +56,4 @@ const BufferAnimation = ({ size = 40, borderColor = "#006666", borderWidth = 2 }
 }
 
 export default BufferAnimation
+

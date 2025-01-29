@@ -100,7 +100,7 @@ const Version = ({ terms }) => {
                                             className={`px-4 py-2 text-sm font-medium rounded-md ${
                                                 requestedVersions.has(item.version)
                                                     ? "bg-gray-100 text-gray-500 cursor-not-allowed"
-                                                    : "bg-color text-green-700 hover:bg-green-200"
+                                                    : "bg-yellow-200 text-gray-700 hover:bg-yellow-100"
                                             }`}
                                             disabled={requestedVersions.has(item.version)}
                                         >

@@ -22,9 +22,7 @@ function About() {
   // Initialize AOS
   useEffect(() => {
     AOS.init({
-      duration: 1000,
-      once: true,
-      easing: "ease-out-cubic",
+      duration: 1000
     })
   }, [])
 
@@ -49,9 +47,9 @@ function About() {
     return (
       <div
         id="about"
-        className="flex justify-center items-center min-h-screen bg-gradient-to-br from-teal-50 to-teal-100 text-gray-800"
+        className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#E5F0F1] to-[#FFF5C3] text-gray-800"
       >
-        <BufferAnimation size={90} color="#008080" />
+        <BufferAnimation size={90} color="#0A0A45" />
       </div>
     )
   }
@@ -61,13 +59,13 @@ function About() {
   }
 
   return (
-    <div className="bg-gradient-to-b from-teal-50 to-white" id="about">
+    <div className="bg-gradient-to-b from-[#E5F0F1] to-white" id="about">
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16" data-aos="fade-up">
-            <h2  data-aos="fade-up"
-                  data-aos-delay='200' className="text-[1.5rem] font-extrabold text-teal-600 mb-4">{aboutData.subHeading}</h2>
-            <div className="bg-teal-600 w-[20rem] h-1 mx-auto mb-5"></div>
+            <h2 data-aos="fade-up"
+                data-aos-delay='200' className="text-[1.5rem] font-extrabold text-[#0A0A45] mb-4">{aboutData.subHeading}</h2>
+            <div className="bg-[#0A0A45] w-[20rem] h-1 mx-auto mb-5"></div>
             <h3 className="text-4xl text-gray-800 font-bold mb-8">{aboutData.Heading}</h3>
           </div>
 
@@ -77,12 +75,12 @@ function About() {
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="card max-w-4xl mx-auto space-y-6 text-gray-700 leading-relaxed px-6 py-10 bg-white rounded-lg shadow-2xl"
+              className="card max-w-4xl mx-auto space-y-6 text-gray-700 leading-relaxed px-6 py-10 bg-yellow-100 rounded-lg shadow-2xl"
             >
               {aboutData.Content.map((content, index) => (
                 <p
                   key={index}
-                  className="text-md md:text-xl font-medium italic border-l-4 border-teal-500 pl-4 py-2"
+                  className="text-sm md:text-xl font-medium italic border-l-4 border-[#0A0A45] pl-4 py-2"
                   data-aos="fade-up"
                   data-aos-delay={`${(index + 1) * 100}`}
                 >
@@ -100,8 +98,8 @@ function About() {
             data-aos="fade-up"
             data-aos-delay="600"
           >
-            <button  data-aos="fade-up"
-                  data-aos-delay='200' className="px-8 py-3 bg-teal-600 text-white rounded-full font-semibold text-lg shadow-lg hover:bg-teal-700 transition duration-300 transform hover:scale-105">
+            <button data-aos="fade-up"
+                  data-aos-delay='200' className="px-8 py-3 hover:bg-[#0A0A45] text-gray-900 font-extrabold rounded-full text-lg shadow-lg bg-yellow-200 transition duration-300 transform hover:scale-105">
               Join Waitlist
             </button>
           </motion.div>
@@ -123,9 +121,9 @@ function About() {
         .oscillating-card-container {
           position: relative;
           width: 100%;
-          max-width: 64rem; /* 4xl in rem */
+          max-width: 64rem;
           margin: 0 auto 2rem;
-          padding-top: 50px; /* Space for the wire */
+          padding-top: 50px;
         }
         .wire {
           position: absolute;
@@ -133,7 +131,7 @@ function About() {
           left: 50%;
           width: 2px;
           height: 50px;
-          background-color: #008080;
+          background-color: #0A0A45;
           transform-origin: top center;
         }
         .card {
@@ -141,8 +139,8 @@ function About() {
           animation: swing 3s ease-in-out infinite;
         }
         @keyframes swing {
-          0%, 100% { transform: rotate(2deg); }
-          50% { transform: rotate(-2deg); }
+          0%, 100% { transform: rotate(1deg); }
+          50% { transform: rotate(-1deg); }
         }
       `}</style>
     </div>
@@ -150,4 +148,3 @@ function About() {
 }
 
 export default About
-

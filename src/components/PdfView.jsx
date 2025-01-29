@@ -46,7 +46,7 @@ const PdfView = ({terms}) => {
           <p>{error}</p>
           <button 
             onClick={() => window.location.reload()}
-            className="mt-4 px-4 py-2 bg-green-100 text-green-700 rounded-md hover:bg-green-200"
+            className="mt-4 px-4 py-2 bg-gray-100 text-gray-700 rounded-md hover:bg-gray-200"
           >
             Try Again
           </button>
@@ -59,7 +59,7 @@ const PdfView = ({terms}) => {
     <div className="flex items-center justify-center  py-20 ">
       <button
         onClick={() => window.open(pdfUrl, '_blank')}
-         className="mt-0 text-center text-[1.7rem] w-[80%] md:w-[30%] p-2 mx-auto border-2 font-bold rounded-md shadow-[10px_10px_1px_1px_#b8f26f] lg:hover:shadow-[10px_10px_1px_1px_#D6B4FC#0373fc] hover:scale-95 cursor-pointer"
+         className="mt-0 text-center text-[1.7rem] w-[80%] md:w-[30%] p-2 mx-auto border-2 font-bold rounded-md shadow-[10px_10px_1px_1px_#0A0A45] lg:hover:shadow-[10px_10px_1px_1px_#FFF5C3] hover:scale-95 cursor-pointer"
         disabled={!pdfUrl} // Disable button if URL is not available
       >
         View as PDF

@@ -7,7 +7,7 @@ import Capabilities from '../components/Capabilities'
 import Questions from '../components/Questions'
 import BlogsComponent from '../components/BlogsComponent'
 import WaitListForm from '../components/Form'
-import PageLoadAnimation from '../components/PageLoadAnimation'
+// import PageLoadAnimation from '../components/PageLoadAnimation'
 
 const Home = () => {
   return (

@@ -23,8 +23,6 @@ function Hero() {
   useEffect(() => {
     AOS.init({
       duration: 1000,
-      once: true,
-      easing: "ease-out-cubic",
     })
   }, [])
 
@@ -47,32 +45,28 @@ function Hero() {
   // Show loading state
   if (loading) {
     return (
-      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-teal-50 to-teal-100 text-gray-800">
+      <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-light-blue-50 to-light-blue-100 text-gray-800">
         <BufferAnimation size={90} color="white" />
       </div>
     )
   }
 
   return (
-    <section className="relative min-h-screen pt-[3rem] lg:pt-[5rem] bg-gradient-to-br from-teal-50 to-teal-100 text-gray-800">
+    <section className="relative min-h-screen pt-[3rem] lg:pt-[5rem] bg-gradient-to-br from-light-blue-50 to-light-blue-100 text-gray-900">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         {hero.bgVideo && (
           <video src={hero.bgVideo} loop autoPlay muted playsInline className="object-cover w-full h-full opacity-20" />
         )}
-        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-teal-100 opacity-90"></div>
+        <div className="absolute inset-0 bg-gradient-to-t from-white via-transparent to-light-blue-100 opacity-90"></div>
       </div>
 
       <div className="relative z-10 container mx-auto px-6 md:px-16 flex flex-col justify-center items-center min-h-screen text-center">
         {/* Headline */}
         <motion.h1
-          initial={{ opacity: 0, y: -20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
           className="text-4xl md:text-7xl font-bold mb-6 leading-tight text-gray-900 mt-14"
-          data-aos="fade-down"
         >
-          {hero.Heading} <span className="text-teal-600">{hero.CompanyName}</span>
+          {hero.Heading} <span className="text-gray-900">{hero.CompanyName}</span>
         </motion.h1>
 
         {/* Animated Subtext */}
@@ -81,7 +75,7 @@ function Hero() {
           data-aos="fade-up"
           data-aos-delay="200"
         >
-          <div className="text-[1.2rem] md:text-[2.8rem] mt-10 text2 font-extrabold h-20">
+          <div className="text-[2rem] md:text-[2.8rem] mt-10 font-extrabold h-20 text-navy-blue">
             <TypeAnimation
               sequence={[...hero.subHeadings.flatMap((heading) => [heading, 1000]), () => {}]}
               wrapper="span"
@@ -93,7 +87,7 @@ function Hero() {
 
           {/* CTA Buttons */}
           <div
-            className="mt-8 flex flex-col md:flex-row gap-4 justify-center items-center py-5"
+            className="mt-8 flex flex-col md:flex-row gap-4 justify-center items-center py-5 p-5 lg:p-0"
             data-aos="fade-up"
             data-aos-delay="400"
           >
@@ -101,7 +95,7 @@ function Hero() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full md:w-auto px-8 py-4 bg-gradient-to-r from-teal-600 to-teal-500 text-white rounded-full font-semibold text-lg shadow-lg hover:from-teal-700 hover:to-teal-600 transition duration-300"
+                className="w-full md:w-auto px-8 py-4 bg-yellow-100 text-gray-900 font-extrabold rounded-full text-lg shadow-lg hover:bg-bright-blue transition duration-300"
               >
                 Join Our Waitlist
               </motion.button>
@@ -110,7 +104,7 @@ function Hero() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full md:w-auto px-8 py-4 bg-white text-teal-600 rounded-full font-semibold text-lg shadow-lg hover:bg-teal-50 transition duration-300 border-2 border-teal-200"
+                className="w-full md:w-auto px-8 py-4 bg-white text-gray-900 rounded-full font-semibold text-lg shadow-lg hover:bg-soft-yellow transition duration-300 border-2 border-bright-blue"
               >
                 Learn More
               </motion.button>
@@ -120,12 +114,12 @@ function Hero() {
           {/* Secondary CTA */}
           <div
             className="mt-10 text-lg md:text-xl font-semibold flex flex-col gap-2 max-w-xl text-center mx-auto"
-            data-aos="fade-up"
-            data-aos-delay="600"
           >
             {hero.subHeadings2 && hero.subHeadings2.length > 0 ? (
               hero.subHeadings2.map((subHeading, index) => (
-                <p key={index} className="text-xl md:text-[1.5rem] font-medium bg-teal-700 text-white p-2 ">
+                <p 
+                data-aos="fade-up"
+               data-aos-delay={index*200}  key={index} className="text-xl md:text-[1.5rem] font-medium bg-navy-blue text-gray-900 bg-yellow-100 p-2 rounded-lg">
                   {subHeading}
                 </p>
               ))
@@ -140,6 +134,5 @@ function Hero() {
 }
 
 export default Hero
-
 
 
