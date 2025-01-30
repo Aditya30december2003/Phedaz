@@ -13,7 +13,6 @@ const SetGoalsComponent = () => {
   useEffect(() => {
     AOS.init({
       duration: 500, // Reduced from 1000 to 500 for snappier animations
-      once: true // Prevents re-animation on scroll
     })
   }, [])
 

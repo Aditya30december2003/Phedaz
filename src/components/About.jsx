@@ -23,7 +23,7 @@ function About() {
   useEffect(() => {
     AOS.init({
       duration: 1000,
-      // once: false,
+      once: false,
       easing: "ease-out-cubic",
     })
   }, [])
