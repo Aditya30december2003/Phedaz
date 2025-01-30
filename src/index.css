@@ -56,8 +56,8 @@
 
 html {
   scroll-behavior: smooth;
-  /* font-family: "Libre Baskerville", serif; */
-  font-family: "Source Code Pro", serif;
+  font-family: "Libre Baskerville", serif;
+  /* font-family: "Source Code Pro", serif; */
 }
 
 .blog-card {

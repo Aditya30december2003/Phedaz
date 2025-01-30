@@ -93,10 +93,10 @@ const WaitlistForm = () => {
 
   return (
     <div className="bg-gradient-to-b from-[#E5F0F1] to-[#FFF5C3] py-12 overflow-hidden" id="form">
-      <div className="container mx-auto px-4 max-w-4xl">
-        <div className="flex flex-col lg:flex-row gap-8 items-center">
+      <div className="container mx-auto px-4">
+        <div className="flex flex-col lg:flex-row gap-8 items-center w-[95%] mx-auto">
           {/* Left Section */}
-          <div className="lg:w-1/2 mb-8 lg:mb-0" data-aos="fade-right">
+          <div className="lg:w-full mb-8 lg:mb-0" data-aos="fade-right">
             <h2
               className="text-3xl lg:text-4xl font-extrabold mb-4 text-center lg:text-left text-[#0A0A45]"
               aria-live="polite"
@@ -109,7 +109,7 @@ const WaitlistForm = () => {
           </div>
 
           {/* Right Section */}
-          <div className="w-full lg:w-1/2 overflow-hidden" data-aos="fade-left">
+          <div className="w-full lg:w-full overflow-hidden" data-aos="fade-left">
             <motion.div
               className="bg-white shadow-lg rounded-lg p-6 lg:p-8 border border-gray-100"
               initial={{ opacity: 0, y: 20 }}

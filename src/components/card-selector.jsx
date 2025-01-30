@@ -103,20 +103,7 @@ export default function CardSelector({ selectedCard, setSelectedCard }) {
               }}
             >
               <div
-                className={`w-full h-full 
-                ${
-                  index % 7 === 0
-                    ? "from-purple-700 to-purple-900"
-                    : index % 7 === 1
-                    ? "from-yellow-700 to-yellow-900"
-                    : index % 7 === 2
-                    ? "from-red-700 to-red-900"
-                    : index % 7 === 3
-                    ? "from-zinc-700 to-zinc-900"
-                    : index % 7 === 4
-                    ? "from-blue-700 to-blue-900"
-                    : "from-pink-700 to-pink-900"
-                } rounded-xl bg-gradient-to-br p-6 flex flex-col`}
+                className={`w-full h-full bg-gray-800 rounded-xl p-6 flex flex-col`}
               >
                 <div className="flex justify-between items-start">
                   <div className="w-12 h-12 rounded-full bg-white/10" />

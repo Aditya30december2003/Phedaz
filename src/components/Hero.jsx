@@ -97,7 +97,7 @@ function Hero() {
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
-                className="w-full md:w-auto px-8 py-4 bg-yellow-100 text-gray-900 font-extrabold rounded-full text-lg shadow-lg hover:bg-bright-blue transition duration-300"
+                className="w-full md:w-auto px-8 py-4  text-gray-900 font-extrabold rounded-full text-lg shadow-lg hover:bg-bright-blue transition duration-300"
               >
                 Join Our Waitlist
               </motion.button>
