@@ -1,7 +1,13 @@
+
 RewriteEngine On
+RewriteCond %{HTTPS} off
+RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Your existing routing rules
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME} !-d
 RewriteRule ^ index.html [L]
+
 
 <IfModule mod_headers.c>
     Header set Cache-Control "no-store, no-cache, must-revalidate, max-age=0"

@@ -169,6 +169,7 @@ const Footer = () => {
             <div className='flex flex-col lg:flex-row'>
               {footerContent.Address.map((addr, index) => (
                 <div key={index} className="text-[1rem] font-light flex flex-col">
+                  <span className='text-[0.9rem] font-extrabold'>{footerContent.AdressHeading[index]}</span>
                   <span className='text-[0.8rem]'>{addr}</span>
                 </div>
               ))}
