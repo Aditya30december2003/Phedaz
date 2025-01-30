@@ -1,16 +1,19 @@
 "use client"
-
+import { Client, Databases } from "appwrite";
 import { useState, useEffect } from "react" 
 import { Link } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, X, Menu } from "lucide-react"
 import Logo from '../assets/logo.png'
+import BufferAnimation from "./BufferAnimation";
  
 function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState(null)
   const [isScrolled, setIsScrolled] = useState(false)
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false)
   const [mobileActiveDropdown, setMobileActiveDropdown] = useState(null)
+  const [nav , setNav] = useState(null)
+  const [loading, setLoading] = useState(true);
 
   const Home = [
     { name: "About", path: "#about" },
@@ -19,11 +22,6 @@ function Navbar() {
     { name: "Capabilities", path: "#cap" },
     { name: "FAQS", path: "#faq" }, 
     { name: "Form", path: "#form" },
-  ]
-
-  const terms = [
-    { name: "Cookie Policy", path: "legals" },
-    { name: "Terms of Use", path: "/developer/sdks" },
   ]
 
   useEffect(() => {
@@ -44,24 +42,55 @@ function Navbar() {
     setMobileActiveDropdown(mobileActiveDropdown === dropdown ? null : dropdown)
   }
 
+  const client = new Client();
+  client
+    .setEndpoint("https://centralapps.hivefinty.com/v1")
+    .setProject("67912e8e000459a70dab");
+
+  const databases = new Databases(client);
+  const databaseId = "67913805000e2b223d80";
+  const collectionId = "679b98e700072462edaa";
+
+  useEffect(() => {
+    const fetchBlogs = async () => {
+      try {
+        const response = await databases.listDocuments(databaseId, collectionId);
+        setNav(response.documents[0]);
+      } catch (error) {
+        console.error("Failed to fetch recent blogs:", error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchBlogs();
+  }, [databases, databaseId, collectionId]);
+
+  if (loading) {
+    return <div>
+      <BufferAnimation/>
+    </div>;
+  }
+
   return (
     <nav
       className={`fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
         isScrolled ? "bg-white shadow-md" : "bg-transparent"
       }`}
     >
-      <div className="max-w-7xl mx-auto px-2 sm:px-2 lg:px-1">
+      <div className="mx-auto px-2 sm:px-2 lg:px-1">
         <div className="flex justify-between items-center h-20 w-full">
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <span
-                className={`text-4xl font-bold transition-colors duration-300 mt-5 ${
+                className={`text-4xl font-bold flex flex-col items-center transition-colors duration-300 mt-2 ${
                   isScrolled ? "text-gray-900" : "text-gray-900"
                 }`}
               >
                 {/* Phedaz */}
-                <img src={Logo} alt="" className="w-[9rem] h-[9rem] md:w-[12rem] md:h-[12rem]"/>
+                <img src={Logo} alt="" className="w-[8rem] h-[2rem] md:w-[10rem] lg:w-[12rem] md:h-[3rem]"/>
+                <span className="text-[0.6rem] md:text-[0.6rem] lg:text-[0.8rem]">{nav.tagline}</span>
               </span>
             </Link>
           </div>

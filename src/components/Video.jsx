@@ -6,6 +6,7 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin";
 import { motion } from "framer-motion";
 import { Share2, Play, Pause } from "lucide-react";
 import { Client, Databases } from "appwrite";
+import BufferAnimation from "./BufferAnimation";
 
 gsap.registerPlugin(MotionPathPlugin);
 
@@ -83,7 +84,9 @@ const Video = () => {
   }, [databases, databaseId, collectionId]);
 
   if (loading) {
-    return <div>Loading...</div>;
+    return <div>
+      <BufferAnimation/>
+    </div>;
   }
 
   return (
