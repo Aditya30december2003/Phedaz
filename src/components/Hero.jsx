@@ -65,6 +65,8 @@ function Hero() {
         {/* Headline */}
         <motion.h1
           className="text-4xl md:text-7xl font-bold mb-6 leading-tight text-gray-900 mt-14"
+          data-aos="fade-up"
+          data-aos-delay="200"
         >
           {hero.Heading} <span className="text-gray-900">{hero.CompanyName}</span>
         </motion.h1>

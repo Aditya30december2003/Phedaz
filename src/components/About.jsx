@@ -63,14 +63,24 @@ function About() {
       <section className="py-20 px-4 sm:px-6 lg:px-8">
         <div className="container mx-auto max-w-5xl">
           <div className="text-center mb-16" data-aos="fade-up">
-            <h2 data-aos="fade-up"
-                data-aos-delay='200' className="text-[1.5rem] font-extrabold text-[#0A0A45] mb-4">{aboutData.subHeading}</h2>
+            <h2 
+              data-aos="fade-up"
+              data-aos-delay='200' 
+              className="text-[1.5rem] font-extrabold text-[#0A0A45] mb-4"
+            >
+              {aboutData.subHeading}
+            </h2>
             <div className="bg-[#0A0A45] w-[20rem] h-1 mx-auto mb-5"></div>
             <h3 className="text-4xl text-gray-800 font-bold mb-8">{aboutData.Heading}</h3>
           </div>
 
-          <div className="oscillating-card-container" data-aos="fade-up" data-aos-delay="200">
-            <div className="wire"></div>
+          {/* Card container with conditional animation */}
+          <div 
+            className="card-container max-w-4xl mx-auto md:pt-12 pt-0" 
+            data-aos="fade-up" 
+            data-aos-delay="200"
+          >
+            <div className="hidden md:block wire absolute left-1/2 w-0.5 h-12 bg-[#0A0A45] -translate-x-1/2"></div>
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
@@ -98,8 +108,11 @@ function About() {
             data-aos="fade-up"
             data-aos-delay="600"
           >
-            <button data-aos="fade-up"
-                  data-aos-delay='200' className="px-8 py-3 hover:bg-[#0A0A45] text-gray-900 font-extrabold rounded-full text-lg shadow-lg bg-yellow-200 transition duration-300 transform hover:scale-105">
+            <button 
+              data-aos="fade-up"
+              data-aos-delay='200' 
+              className="px-8 py-3 hover:bg-[#0A0A45] hover:text-yellow-200 text-gray-900 font-extrabold rounded-full text-lg shadow-lg bg-yellow-200 transition duration-300 transform hover:scale-105"
+            >
               Join Waitlist
             </button>
           </motion.div>
@@ -118,29 +131,34 @@ function About() {
       </motion.div>
 
       <style jsx>{`
-        .oscillating-card-container {
+        .card-container {
           position: relative;
           width: 100%;
-          max-width: 64rem;
           margin: 0 auto 2rem;
-          padding-top: 50px;
         }
         .wire {
-          position: absolute;
-          top: 0;
-          left: 50%;
-          width: 2px;
-          height: 50px;
-          background-color: #0A0A45;
           transform-origin: top center;
         }
-        .card {
-          transform-origin: top center;
-          animation: swing 3s ease-in-out infinite;
+        /* Apply animation only on medium and larger screens */
+        @media (min-width: 768px) {
+          .card {
+            transform-origin: top center;
+            animation: swing 3s ease-in-out infinite;
+          }
+          @keyframes swing {
+            0%, 100% { transform: rotate(0.5deg); }
+            50% { transform: rotate(-0.5deg); }
+          }
         }
-        @keyframes swing {
-          0%, 100% { transform: rotate(1deg); }
-          50% { transform: rotate(-1deg); }
+        /* Disable animation and adjust spacing for mobile */
+        @media (max-width: 767px) {
+          .card {
+            transform: none;
+            animation: none;
+          }
+          .card-container {
+            padding-top: 0;
+          }
         }
       `}</style>
     </div>
