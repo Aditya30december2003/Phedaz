@@ -1,6 +1,8 @@
 @import "tailwindcss/base";
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
 .btn {
   @apply font-bold py-2 px-4 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-opacity-50;
 }
@@ -54,6 +56,8 @@
 
 html {
   scroll-behavior: smooth;
+  /* font-family: "Libre Baskerville", serif; */
+  font-family: "Source Code Pro", serif;
 }
 
 .blog-card {

@@ -22,9 +22,12 @@ function About() {
   // Initialize AOS
   useEffect(() => {
     AOS.init({
-      duration: 1000
+      duration: 1000,
+      once: false,
+      easing: "ease-out-cubic",
     })
   }, [])
+
 
   // Fetch data from Appwrite
   const fetchAboutData = useCallback(async () => {
