@@ -79,12 +79,12 @@ function Navbar() {
       }`}
     >
       <div className="mx-auto px-2 sm:px-2 lg:px-1">
-        <div className="flex justify-between items-center h-20 w-full">
+        <div className="flex justify-between items-center h-24 w-[97%] xl:w-[95%] mx-auto">
           {/* Logo Section */}
           <div className="flex items-center">
             <Link to="/" className="flex items-center space-x-2">
               <span
-                className={`text-4xl font-bold flex flex-col items-center transition-colors duration-300 mt-2 ${
+                className={`text-4xl pt-5  font-bold flex flex-col items-center transition-colors duration-300 mt-2 ${
                   isScrolled ? "text-gray-900" : "text-gray-900"
                 }`}
               >

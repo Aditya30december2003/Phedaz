@@ -92,7 +92,7 @@ const SetGoalsComponent = () => {
           </div>
 
           {/* Main Content */}
-          <div className="flex-grow bg-white lg:h-screen rounded-lg lg:rounded-r-3xl p-4 lg:p-8 lg:py-12 overflow-hidden">
+          <div className="flex-grow bg-white lg:h-screen xl:h-[40rem] rounded-lg lg:rounded-r-3xl p-4 lg:p-8 lg:py-12 overflow-hidden">
             <div className="flex flex-col items-center text-center space-y-4 lg:space-y-8">
               <h1
                 data-aos="fade-up"
