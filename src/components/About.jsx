@@ -116,7 +116,7 @@ function About() {
               data-aos-delay='200' 
               className="px-8 py-3 hover:bg-[#0A0A45] hover:text-yellow-200 text-gray-900 font-extrabold rounded-full text-lg shadow-lg  transition duration-300 transform hover:scale-105"
             >
-              Join Waitlist
+              <a href="#form">Join Waitlist</a>
             </button>
           </motion.div>
         </div>
