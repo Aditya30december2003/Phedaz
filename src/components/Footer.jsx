@@ -102,7 +102,7 @@ const Footer = () => {
           onSubmit={(e) => {
             e.preventDefault();
             const email = e.target.email.value;
-            const name = "TechistLab Inquiry";
+            const name = "Phedaz Inquiry";
             const message = "I am interested in hiring your services.";
             const mailtoLink = `mailto:${footerContent.email}?subject=Contact%20from%20${encodeURIComponent(
               name
@@ -166,7 +166,7 @@ const Footer = () => {
         <div className='flex gap-2 flex-col items-center w-[70%] mt-5 mx-auto'>
           <div className='flex flex-col items-center'>
             <h1 className="font-bold text-[1.2rem] text-[#0A0A45]">Where to find us?</h1>
-            <div className='flex flex-col gap-3 mt-3'>
+            <div className='flex flex-col gap-3 mt-7'>
               {footerContent.Address.map((addr, index) => (
                 <div key={index} className="text-[1rem] w-[85%] md:w-[60%] mx-auto font-light flex flex-col">
                   <span className='text-[0.9rem] font-extrabold'>{footerContent.AdressHeading[index]}</span>

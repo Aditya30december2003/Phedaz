@@ -16,12 +16,10 @@ function Navbar() {
   const [loading, setLoading] = useState(true);
 
   const Home = [
-    { name: "About", path: "#about" },
     { name: "Advantages", path: "#advantages" },
     { name: "Blogs", path: "#blog"},
-    { name: "Capabilities", path: "#cap" },
-    { name: "FAQS", path: "#faq" }, 
-    { name: "Form", path: "#form" },
+    {name :"Join Waitlist" , path:"#form"},
+    {name:"Beta Access" , path:"#form"}
   ]
 
   useEffect(() => {
@@ -97,19 +95,30 @@ function Navbar() {
 
           {/* Navigation Links */}
           <div className="hidden md:flex items-center space-x-8">
-            {/* Home Dropdown */}
+            {/* about Dropdown */}
+
+            <Link
+              to="/"
+              className={`transition-colors duration-300 ${
+                isScrolled ? "text-gray-600 hover:text-gray-900" : "text-black font-extrabold hover:text-gray-900"
+              }`}
+            >
+              Home
+            </Link>
+
+
             <div
               className="relative"
               onMouseEnter={() => setActiveDropdown("home")}
               onMouseLeave={() => setActiveDropdown(null)}
             >
               <Link
-                to="/"
+                to="#"
                 className={`inline-flex items-center px-1 py-2 transition-colors duration-300 ${
                   isScrolled ? "text-gray-600 hover:text-gray-900" : "text-black font-extrabold hover:text-gray-900"
                 }`}
               >
-                Home
+                About
                 <ChevronDown className="ml-1 h-4 w-4" />
               </Link>
               <AnimatePresence>
@@ -134,51 +143,32 @@ function Navbar() {
               </AnimatePresence>
             </div>
 
-            <Link
-              to="/blogs"
-              className={`transition-colors duration-300 ${
-                isScrolled ? "text-gray-600 hover:text-gray-900" : "text-black font-extrabold hover:text-gray-900"
-              }`}
-            >
-              Blogs
-            </Link>
-
             {/* Legals Dropdown */}
             <div
               className="relative"
               onMouseEnter={() => setActiveDropdown("legals")}
               onMouseLeave={() => setActiveDropdown(null)}
             >
-              <Link
-                to="/legals"
+              <a
+                href="#cap"
                 className={`inline-flex items-center px-1 py-2 transition-colors duration-300 ${
                   isScrolled ? "text-gray-600 hover:text-gray-900" : "text-black font-extrabold hover:text-gray-900"
                 }`}
               >
-                Legals
+                Capabilities
                 {/* <ChevronDown className="ml-1 h-4 w-4" /> */}
-              </Link>
-              {/* <AnimatePresence>
-                {activeDropdown === "legals" && (
-                  <motion.div
-                    initial={{ opacity: 0, y: 10 }}
-                    animate={{ opacity: 1, y: 0 }}
-                    exit={{ opacity: 0, y: 10 }}
-                    className="absolute left-0 w-48 mt-2 bg-white rounded-lg shadow-lg"
-                  >
-                    {terms.map((item) => (
-                      <Link
-                        key={item.path}
-                        to={item.path}
-                        className="block px-4 py-2 text-sm text-gray-700 hover:bg-gray-50"
-                      >
-                        {item.name}
-                      </Link>
-                    ))}
-                  </motion.div>
-                )}
-              </AnimatePresence> */}
+              </a>
+                 
             </div>
+            <a
+                href="#faq"
+                className={`inline-flex items-center px-1 py-2 transition-colors duration-300 ${
+                  isScrolled ? "text-gray-600 hover:text-gray-900" : "text-black font-extrabold hover:text-gray-900"
+                }`}
+              >
+                FaQ
+                {/* <ChevronDown className="ml-1 h-4 w-4" /> */}
+              </a>
           </div>
 
           {/* Right Section */}
@@ -228,12 +218,19 @@ function Navbar() {
             >
               <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
                 {/* Home Section with Dropdown */}
+                <Link
+                  to="/"
+                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                  onClick={() => setIsMobileMenuOpen(false)}
+                >
+                  Home
+                </Link>
                 <div>
-                  <Link to='/'
+                  <Link to='#about'
                     onClick={() => toggleMobileDropdown("home")}
                     className="flex w-full items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   >
-                    Home
+                    About
                     <ChevronDown
                       className={`ml-1 h-4 w-4 transition-transform duration-200 ${mobileActiveDropdown === "home" ? "transform rotate-180" : ""}`}
                     />
@@ -262,26 +259,27 @@ function Navbar() {
                   </AnimatePresence>
                 </div>
 
-                {/* Blogs */}
-                <Link
-                  to="/blogs"
-                  className="block px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
-                  onClick={() => setIsMobileMenuOpen(false)}
-                >
-                  Blogs
-                </Link>
-
-                {/* Legals Section with Dropdown */}
-                <div>
-                  <Link to='/legals'
+                <a href='#cap'
                     onClick={() => toggleMobileDropdown("legals")}
                     className="flex w-full items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   >
-                    Legals
+                    Capabilities
                     {/* <ChevronDown
                       className={`ml-1 h-4 w-4 transition-transform duration-200 ${mobileActiveDropdown === "legals" ? "transform rotate-180" : ""}`}
                     /> */}
-                  </Link>
+                  </a>
+
+                {/* Legals Section with Dropdown */}
+                <div>
+                  <a href='#faq'
+                    onClick={() => toggleMobileDropdown("legals")}
+                    className="flex w-full items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
+                  >
+                    FAQ
+                    {/* <ChevronDown
+                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${mobileActiveDropdown === "legals" ? "transform rotate-180" : ""}`}
+                    /> */}
+                  </a>
                   {/* <AnimatePresence>
                     {mobileActiveDropdown === "legals" && (
                       <motion.div

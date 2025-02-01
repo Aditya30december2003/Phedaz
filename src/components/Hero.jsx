@@ -121,7 +121,7 @@ function Hero() {
               hero.subHeadings2.map((subHeading, index) => (
                 <p 
                 data-aos="fade-up"
-               data-aos-delay={index*200}  key={index} className="text-xl md:text-[1.5rem] font-medium bg-navy-blue text-gray-900 bg-yellow-100 p-2 rounded-lg">
+               data-aos-delay={index*200}  key={index} className="text-xl md:text-[1.5rem] font-medium bg-navy-blue text-gray-900  p-2 rounded-lg">
                   {subHeading}
                 </p>
               ))

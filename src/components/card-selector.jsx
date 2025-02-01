@@ -57,7 +57,7 @@ export default function CardSelector({ selectedCard, setSelectedCard }) {
       </button>
 
       {/* Card Container */}
-      <div className="relative w-full max-w-[100%] sm:max-w-[800px] md:max-w-[800px] lg:max-w-[900px] h-[550px] md:h-[600px]">
+      <div className="relative w-full max-w-[100%] sm:max-w-[800px] md:max-w-[800px] lg:max-w-[900px] h-[350px] md:h-[380px]">
         <AnimatePresence initial={false}>
           {cards.map((card, index) => (
             <motion.div
@@ -117,10 +117,10 @@ export default function CardSelector({ selectedCard, setSelectedCard }) {
                       className="h-full mx-auto object-contain"
                     />
                   </div>
-                  <div className="text-center mt-5 text-lg md:text-xl font-bold">
+                  <div className="text-center mt-5 text-md md:text-xl font-bold">
                     {card.Capability}
                   </div>
-                  <div className="text-center mt-4 text-[0.8rem] md:text-base">
+                  <div className="text-center mt-4 text-[0.5rem] md:text-[0.8rem]">
                     {card.CapabilityContent}
                   </div>
                 </div>

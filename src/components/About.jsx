@@ -83,12 +83,12 @@ function About() {
             data-aos="fade-up" 
             data-aos-delay="200"
           >
-            <div className="hidden md:block wire absolute left-1/2 w-0.5 h-12 bg-[#0A0A45] -translate-x-1/2"></div>
+            {/* <div className="hidden md:block wire absolute left-1/2 w-0.5 h-12 bg-[#0A0A45] -translate-x-1/2"></div> */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               animate={{ opacity: 1, y: 0 }}
               transition={{ duration: 0.8, delay: 0.2 }}
-              className="card max-w-4xl mx-auto space-y-6 text-gray-700 leading-relaxed px-6 py-10 bg-yellow-100 rounded-lg shadow-2xl"
+              className="card max-w-4xl mx-auto space-y-6 text-gray-700 leading-relaxed px-6 py-10  rounded-lg shadow-2xl"
             >
               {aboutData.Content.map((content, index) => (
                 <p
@@ -114,7 +114,7 @@ function About() {
             <button 
               data-aos="fade-up"
               data-aos-delay='200' 
-              className="px-8 py-3 hover:bg-[#0A0A45] hover:text-yellow-200 text-gray-900 font-extrabold rounded-full text-lg shadow-lg bg-yellow-200 transition duration-300 transform hover:scale-105"
+              className="px-8 py-3 hover:bg-[#0A0A45] hover:text-yellow-200 text-gray-900 font-extrabold rounded-full text-lg shadow-lg  transition duration-300 transform hover:scale-105"
             >
               Join Waitlist
             </button>
