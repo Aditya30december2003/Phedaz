@@ -163,10 +163,10 @@ const Footer = () => {
         </div>
 
         {/* Address Section */}
-        <div className='flex gap-2 flex-col items-center w-[70%] mt-5'>
+        <div className='flex gap-2 flex-col items-center w-[70%] mt-5 mx-auto'>
           <div className='flex flex-col items-center'>
-            <h1 className="font-bold text-[1.3rem] text-[#0A0A45]">Where to find us?</h1>
-            <div className='flex flex-col gap-3'>
+            <h1 className="font-bold text-[1.3rem] mt-[-0.5rem] text-[#0A0A45]">Where to find us?</h1>
+            <div className='flex flex-col gap-3 mt-3'>
               {footerContent.Address.map((addr, index) => (
                 <div key={index} className="text-[1rem] font-light flex flex-col">
                   <span className='text-[0.9rem] font-extrabold'>{footerContent.AdressHeading[index]}</span>
