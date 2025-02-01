@@ -139,7 +139,7 @@ const SetGoalsComponent = () => {
                             className="mt-6 px-8 py-3 bg-[#0A0A45] text-white rounded-full font-semibold 
                                      shadow-lg hover:bg-[#0A0A45]/90 transition-all duration-200"
                           >
-                            Learn More
+                            <a href="#faq">Learn More</a>
                           </button>
                         </div>
                       </div>

@@ -1,21 +1,22 @@
-"use client";
+"use client"
 
-import { useEffect, useRef, useState } from "react";
-import { gsap } from "gsap";
-import { MotionPathPlugin } from "gsap/MotionPathPlugin";
-import { motion } from "framer-motion";
-import { Share2, Play, Pause } from "lucide-react";
-import { Client, Databases } from "appwrite";
-import BufferAnimation from "./BufferAnimation";
+import { useEffect, useRef, useState } from "react"
+import { gsap } from "gsap"
+import { MotionPathPlugin } from "gsap/MotionPathPlugin"
+import { motion } from "framer-motion"
+import { Share2, Play, Pause, Check } from "lucide-react"
+import { Client, Databases } from "appwrite"
+import BufferAnimation from "./BufferAnimation"
 
-gsap.registerPlugin(MotionPathPlugin);
+gsap.registerPlugin(MotionPathPlugin)
 
 const Video = () => {
-  const backgroundRef = useRef(null);
-  const videoRef = useRef(null);
-  const [isPlaying, setIsPlaying] = useState(true);
-  const [video, setVideo] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const backgroundRef = useRef(null)
+  const videoRef = useRef(null)
+  const [isPlaying, setIsPlaying] = useState(true)
+  const [video, setVideo] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const [shareButtonText, setShareButtonText] = useState("Share Video")
 
   useEffect(() => {
     const backgroundAnimation = gsap.to(backgroundRef.current, {
@@ -24,69 +25,59 @@ const Video = () => {
       duration: 30,
       repeat: -1,
       yoyo: true,
-    });
+    })
 
     return () => {
-      backgroundAnimation.kill();
-    };
-  }, []);
+      backgroundAnimation.kill()
+    }
+  }, [])
 
   const togglePlay = () => {
     if (videoRef.current) {
       if (isPlaying) {
-        videoRef.current.pause();
+        videoRef.current.pause()
       } else {
-        videoRef.current.play();
+        videoRef.current.play()
       }
-      setIsPlaying(!isPlaying);
+      setIsPlaying(!isPlaying)
     }
-  };
+  }
 
   const shareVideo = () => {
-    if (navigator.share) {
-      navigator
-        .share({
-          title: "Check out this awesome video!",
-          url: "https://storekwil.com/herobg.mp4",
-        })
-        .then(() => {
-          console.log("Thanks for sharing!");
-        })
-        .catch(console.error);
-    } else {
-      alert("Share link copied to clipboard!");
-      navigator.clipboard.writeText("https://storekwil.com/herobg.mp4");
-    }
-  };
+    navigator.clipboard.writeText("https://storekwil.com/herobg.mp4").then(() => {
+      setShareButtonText("Copied to clipboard!")
+      setTimeout(() => setShareButtonText("Share Video"), 2000)
+    })
+  }
 
-  const client = new Client();
-  client
-    .setEndpoint("https://centralapps.hivefinty.com/v1")
-    .setProject("67912e8e000459a70dab");
+  const client = new Client()
+  client.setEndpoint("https://centralapps.hivefinty.com/v1").setProject("67912e8e000459a70dab")
 
-  const databases = new Databases(client);
-  const databaseId = "67913805000e2b223d80";
-  const collectionId = "6794f08c0027230ffdca";
+  const databases = new Databases(client)
+  const databaseId = "67913805000e2b223d80"
+  const collectionId = "6794f08c0027230ffdca"
 
   useEffect(() => {
     const fetchBlogs = async () => {
       try {
-        const response = await databases.listDocuments(databaseId, collectionId);
-        setVideo(response.documents[0]);
+        const response = await databases.listDocuments(databaseId, collectionId)
+        setVideo(response.documents[0])
       } catch (error) {
-        console.error("Failed to fetch recent blogs:", error);
+        console.error("Failed to fetch recent blogs:", error)
       } finally {
-        setLoading(false);
+        setLoading(false)
       }
-    };
+    }
 
-    fetchBlogs();
-  }, [databases, databaseId, collectionId]);
+    fetchBlogs()
+  }, [databases])
 
   if (loading) {
-    return <div>
-      <BufferAnimation/>
-    </div>;
+    return (
+      <div>
+        <BufferAnimation />
+      </div>
+    )
   }
 
   return (
@@ -126,12 +117,12 @@ const Video = () => {
             whileHover={{ scale: 1.05 }}
             whileTap={{ scale: 0.95 }}
             onClick={shareVideo}
-            className="px-8 py-3 bg-[#0A0A45] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all hover:bg-[#0A0A45]/90 flex items-center space-x-2"
+            className={shareButtonText ?"px-8 py-3 bg-[#0A0A45] text-white rounded-full font-bold text-lg shadow-lg hover:shadow-2xl transition-all hover:bg-[#0A0A45]/90 flex items-center space-x-2" : "bg-green-500"}
             data-aos="zoom-in"
             data-aos-delay="300"
           >
-            <Share2 size={20} />
-            <span>Share Video</span>
+            {shareButtonText === "Share Video" ? <Share2 size={20} /> : <Check size={20} />}
+            <span>{shareButtonText}</span>
           </motion.button>
         </div>
       </motion.div>
@@ -146,10 +137,7 @@ const Video = () => {
           xmlns="http://www.w3.org/2000/svg"
           className="opacity-20"
         >
-          <path
-            d="M0,200 C400,400 800,0 1440,200 L1440,320 L0,320 Z"
-            fill="url(#gradient)"
-          ></path>
+          <path d="M0,200 C400,400 800,0 1440,200 L1440,320 L0,320 Z" fill="url(#gradient)"></path>
           <defs>
             <linearGradient id="gradient" x1="0%" y1="0%" x2="100%" y2="100%">
               <stop offset="0%" style={{ stopColor: "#0A0A45", stopOpacity: 0.2 }} />
@@ -183,7 +171,8 @@ const Video = () => {
         />
       ))}
     </div>
-  );
-};
+  )
+}
 
-export default Video;
+export default Video
+

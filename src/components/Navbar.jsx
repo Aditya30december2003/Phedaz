@@ -166,7 +166,7 @@ function Navbar() {
                   isScrolled ? "text-gray-600 hover:text-gray-900" : "text-black font-extrabold hover:text-gray-900"
                 }`}
               >
-                FaQ
+                Learn More
                 {/* <ChevronDown className="ml-1 h-4 w-4" /> */}
               </a>
           </div>
