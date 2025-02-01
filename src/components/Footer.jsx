@@ -123,7 +123,7 @@ const Footer = () => {
           />
           <button
             type="submit"
-            className="text-center mx-auto text-[#FFF5C3] text-white p-3 w-[30%] rounded-[5rem] text-[1rem] font-bold bg-[#0A0A45]"
+            className="text-center mx-auto text-[#FFF5C3] p-3 w-[30%] rounded-[5rem] text-[1rem] font-bold bg-[#0A0A45]"
           >
             Let's talk tech
           </button>
@@ -131,7 +131,7 @@ const Footer = () => {
       </div>
 
       {/* Footer Content */}
-      <div className="flex flex-col lg:flex-row gap-[0.5rem] lg:gap-[2rem] lg:items-center text-center">
+      <div className="flex flex-col lg:flex-row gap-[0.5rem] lg:gap-[1rem] lg:items-center text-center">
         {/* Logo Section */}
         <div className="md:flex hidden justify-center items-center p-14">
           <div className="hidden lg:block shadow-[inset_-12px_-8px_40px_#46464620] rounded-full w-[10rem] h-[10rem] lg:w-[12rem] lg:h-[12rem]">
@@ -163,10 +163,10 @@ const Footer = () => {
         </div>
 
         {/* Address Section */}
-        <div className='flex gap-2 flex-col items-center w-[100%] mt-5'>
+        <div className='flex gap-2 flex-col items-center w-[70%] mt-5'>
           <div className='flex flex-col items-center'>
             <h1 className="font-bold text-[1.3rem] text-[#0A0A45]">Where to find us?</h1>
-            <div className='flex flex-col lg:flex-row'>
+            <div className='flex flex-col gap-3'>
               {footerContent.Address.map((addr, index) => (
                 <div key={index} className="text-[1rem] font-light flex flex-col">
                   <span className='text-[0.9rem] font-extrabold'>{footerContent.AdressHeading[index]}</span>
@@ -177,23 +177,23 @@ const Footer = () => {
           </div>
 
           {/* Phone and Email */}
+        </div>
+
+        {/* Social Links */}
+        <div className='flex flex-col gap-3'>
+          <h1 className="font-bold text-[1.3rem] text-[#0A0A45]">Get in touch</h1>
+          <div className="flex flex-row items-center mx-auto gap-2">
+            <Link to={footerContent.website}><FaGlobe size={20} /></Link>
+            <Link to={footerContent.facebook}><FaFacebookSquare size={20} /></Link>
+            <Link to={footerContent.insta}><FaInstagramSquare size={20} /></Link>
+          </div>
           <div>
             <h1 className="font-bold text-[1rem] text-[#0A0A45]">Phone no.</h1>
-            <Link className="text-[0.8rem] font-light">{footerContent.phoneNum}</Link>
+            <Link className="text-[0.7rem] w-full font-light">{footerContent.phoneNum}</Link>
           </div>
           <div>
             <h1 className="font-bold text-[1rem] text-[#0A0A45]">Email</h1>
             <Link className="text-[0.8rem] font-light">{footerContent.email}</Link>
-          </div>
-        </div>
-
-        {/* Social Links */}
-        <div className='flex flex-col gap-10'>
-          <h1 className="font-bold text-[1.3rem] text-[#0A0A45]">Get in touch</h1>
-          <div className="flex flex-row items-center gap-3 mx-auto">
-            <Link to={footerContent.website}><FaGlobe size={40} /></Link>
-            <Link to={footerContent.facebook}><FaFacebookSquare size={40} /></Link>
-            <Link to={footerContent.insta}><FaInstagramSquare size={40} /></Link>
           </div>
         </div>
       </div>
