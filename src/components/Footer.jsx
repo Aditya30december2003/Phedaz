@@ -159,16 +159,16 @@ const Footer = () => {
         {/* Careers Section */}
         <div className="flex flex-col gap-1 text-[2rem] mt-10 lg:mt-[-7.5rem]">
           <h1 className="font-bold text-[1rem]">Careers</h1>
-          <Link className="text-[0.8rem] font-light text-[#0A0A45]">Job Search</Link>
+          <Link className="text-[0.8rem] font-light text-center mx-auto w-[5rem] text-[#0A0A45]">Job Search</Link>
         </div>
 
         {/* Address Section */}
         <div className='flex gap-2 flex-col items-center w-[70%] mt-5 mx-auto'>
           <div className='flex flex-col items-center'>
-            <h1 className="font-bold text-[1.3rem] mt-[-0.5rem] text-[#0A0A45]">Where to find us?</h1>
+            <h1 className="font-bold text-[1.2rem] text-[#0A0A45]">Where to find us?</h1>
             <div className='flex flex-col gap-3 mt-3'>
               {footerContent.Address.map((addr, index) => (
-                <div key={index} className="text-[1rem] font-light flex flex-col">
+                <div key={index} className="text-[1rem] w-[85%] md:w-[60%] mx-auto font-light flex flex-col">
                   <span className='text-[0.9rem] font-extrabold'>{footerContent.AdressHeading[index]}</span>
                   <span className='text-[0.8rem]'>{addr}</span>
                 </div>
@@ -180,8 +180,8 @@ const Footer = () => {
         </div>
 
         {/* Social Links */}
-        <div className='flex flex-col gap-3'>
-          <h1 className="font-bold text-[1.3rem] text-[#0A0A45]">Get in touch</h1>
+        <div className='flex flex-col gap-3 mt-10 md:mt-[-1rem]'>
+          <h1 className="font-bold text-[1rem] w-full text-[#0A0A45]">Get in touch</h1>
           <div className="flex flex-row items-center mx-auto gap-2">
             <Link to={footerContent.website}><FaGlobe size={20} /></Link>
             <Link to={footerContent.facebook}><FaFacebookSquare size={20} /></Link>
