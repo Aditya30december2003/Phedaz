@@ -69,16 +69,16 @@ const Video = () => {
       </div>
 
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-800 shadow-xl">
-        <video
-          ref={videoRef}
-          className="h-full w-full object-cover"
-          src={video?.Video}
-          poster="/placeholder.svg?height=720&width=1280"
-          loop
-          muted
-          autoPlay
-          playsInline
-        />
+      <video
+      src={video?.Video}
+      className="w-full h-full object-cover"
+      loop
+      muted
+      autoPlay
+      playsInline
+      controls
+      />
+
 
         {/* <div className="absolute inset-0 flex items-center justify-center">
           <button
