@@ -52,7 +52,7 @@ function Hero() {
   }
 
   return (
-    <section className="relative min-h-screen pt-[3rem] lg:pt-[5rem] bg-gradient-to-br from-light-blue-50 to-light-blue-100 text-gray-900">
+    <section id="home" className="relative min-h-screen pt-[3rem] lg:pt-[5rem] bg-gradient-to-br from-light-blue-50 to-light-blue-100 text-gray-900">
       {/* Background Video */}
       <div className="absolute inset-0 z-0">
         {hero.bgVideo && (

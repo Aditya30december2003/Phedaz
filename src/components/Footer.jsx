@@ -197,7 +197,7 @@ const Footer = () => {
 
       {/* Footer Bottom */}
       <div className="flex flex-col lg:flex-row items-center gap-7 text-[0.85rem] mt-5 justify-between">
-        <p className='text-center w-full text-[#0A0A45]'>{footerContent.footer_bottom}</p>
+        <Link to='https://techistlab.co.uk/' className='text-center w-full text-[#0A0A45]'>{footerContent.footer_bottom}</Link>
       </div>
     </div>
   );
