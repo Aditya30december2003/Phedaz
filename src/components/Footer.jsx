@@ -44,14 +44,8 @@ const Footer = () => {
 
   // Default values in case of missing content
   const defaultContent = {
-    legalTerms: ['Privacy Policy', 'Terms of Service'],
-    phoneNum: '+1 (123) 456-7890',
-    email: 'contact@example.com',
-    website: '/',
-    facebook: '/',
-    twitter: '/',
-    insta: '/',
-    footer_bottom: '© 2024 Your Company. All rights reserved.'
+    
+    
   };
 
   // Merge fetched content with default content

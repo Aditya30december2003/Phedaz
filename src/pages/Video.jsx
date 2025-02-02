@@ -61,10 +61,10 @@ const Video = () => {
     <div className="w-full max-w-7xl pt-32 mx-auto px-4 py-16 sm:px-6 lg:px-8">
       <div className="text-center mb-12">
         <h1 className="text-4xl sm:text-5xl md:text-6xl font-extrabold text-gray-900 mb-4">
-          Our Featured Video
+          {video?.Heading}
         </h1>
         <p className="text-xl text-gray-600">
-          Learn more about our services in this short video.
+          {video?.subHeading}
         </p>
       </div>
 
