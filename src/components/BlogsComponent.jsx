@@ -62,9 +62,9 @@ const BlogsComponent = () => {
           <button
             data-aos="fade-up"
             data-aos-duration={600}
-            className="px-4 sm:px-6 py-2 bg-gray-600 text-white text-sm sm:text-base rounded hover:bg-teal-800 transition-colors duration-300"
+            className="px-4 sm:px-6 py-2 bg-gray-600 text-white text-sm sm:text-base rounded hover:bg-yellow-100 transition-colors duration-300"
           >
-            See all blogs
+            {blogs[0].button}
           </button>
         </Link>
       </div>
