@@ -114,7 +114,7 @@ function About() {
             <button 
               data-aos="fade-up"
               data-aos-delay='200' 
-              className="px-8 py-3 hover:bg-[#0A0A45] hover:text-yellow-200 text-gray-900 font-extrabold rounded-full text-lg shadow-lg  transition duration-300 transform hover:scale-105"
+              className="px-8 py-3 bg-[#0A0A45] text-yellow-200  font-extrabold rounded-full text-lg shadow-lg  transition duration-300 transform hover:scale-105"
             >
               <a href="#form">Join Waitlist</a>
             </button>

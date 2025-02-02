@@ -44,7 +44,7 @@ const Video = () => {
   }
 
   const shareVideo = () => {
-    navigator.clipboard.writeText("https://storekwil.com/herobg.mp4").then(() => {
+    navigator.clipboard.writeText("https://phedaz.com/video").then(() => {
       setShareButtonText("Copied to clipboard!")
       setTimeout(() => setShareButtonText("Share Video"), 2000)
     })

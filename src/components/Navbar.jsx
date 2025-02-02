@@ -162,8 +162,8 @@ function Navbar() {
             </div>
             <a
                 href="#faq"
-                className={`inline-flex items-center px-1 py-2 transition-colors duration-300 ${
-                  isScrolled ? "text-gray-600 hover:text-gray-900" : "text-black font-extrabold hover:text-gray-900"
+                className={`inline-flex items-center px-3  py-2 text-white rounded-[3rem] transition-colors duration-300 bg-gray-900 ${
+                  isScrolled ? "text-gray-600 hover:text-yellow=100" : "text-black font-extrabold hover:text-yellow-100"
                 }`}
               >
                 Learn More

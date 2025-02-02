@@ -14,7 +14,7 @@ const Blogs = lazy(() => import('../src/pages/Blogs'));
 const BlogDetails = lazy(() => import('../src/pages/BlogDetails'));
 const Terms = lazy(() => import('../src/pages/Terms'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
-
+const Video = lazy(() => import('./pages/Video'));
 // Simple loading component
 const LoadingSpinner = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -34,6 +34,7 @@ function App() {
           <Route path="/blogs/:blogId" element={<BlogDetails />} />
           <Route path="/legals" element={<Terms />} />
           <Route path="/legals/:legalId" element={<TermsPage />} />
+          <Route path='/video' element={<Video/>} />
         </Routes>
       </Suspense>
       <Footer />
