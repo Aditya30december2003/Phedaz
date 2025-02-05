@@ -1,0 +1,87 @@
+@import "tailwindcss/base";
+@import "tailwindcss/components";
+@import "tailwindcss/utilities";
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Source+Code+Pro:ital,wght@0,200..900;1,200..900&display=swap');
+.btn {
+  @apply font-bold py-2 px-4 rounded transition duration-300 focus:outline-none focus:ring-2 focus:ring-opacity-50;
+}
+
+.btn-primary {
+  @apply bg-primary hover:bg-primary-dark text-white focus:ring-primary;
+}
+
+.btn-circle {
+  @apply rounded-full p-3;
+}
+
+.btn-outline {
+  @apply border border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary;
+}
+
+@layer base {
+  :root {
+    --background: 180 40% 95%;
+    --foreground: 222.2 84% 4.9%;
+
+    --card: 0 0% 100%;
+    --card-foreground: 222.2 84% 4.9%;
+
+    --popover: 0 0% 100%;
+    --popover-foreground: 222.2 84% 4.9%;
+
+    --primary: 222.2 47.4% 11.2%;
+    --primary-foreground: 210 40% 98%;
+
+    --secondary: 210 40% 96.1%;
+    --secondary-foreground: 222.2 47.4% 11.2%;
+
+    --muted: 210 40% 96.1%;
+    --muted-foreground: 215.4 16.3% 46.9%;
+
+    --accent: 47 100% 81%;
+    --accent-foreground: 222.2 47.4% 11.2%;
+
+    --destructive: 0 84.2% 60.2%;
+    --destructive-foreground: 210 40% 98%;
+
+    --border: 214.3 31.8% 91.4%;
+    --input: 214.3 31.8% 91.4%;
+    --ring: 222.2 84% 4.9%;
+
+    --radius: 0.5rem;
+  }
+}
+
+
+html {
+  scroll-behavior: smooth;
+  font-family: "Libre Baskerville", serif;
+  /* font-family: "Source Code Pro", serif; */
+}
+
+.blog-card {
+    perspective: 1000px;
+    transition: transform 0.3s ease, z-index 0.3s ease;
+  }
+  
+  .blog-card:hover {
+    transform: scale(1.1);
+    z-index: 20;
+  }
+  .writing-vertical-lr {
+    writing-mode: vertical-lr;
+  }
+
+  .bg-color{
+    background: teal;
+  }
+  .text{
+    color: teal;
+  }
+  .text2{
+    color: teal;
+  }
+  
+
+  
