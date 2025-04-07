@@ -7,6 +7,7 @@ import { motion } from "framer-motion"
 import { Share2, Play, Pause, Check } from "lucide-react"
 import { Client, Databases } from "appwrite"
 import BufferAnimation from "./BufferAnimation"
+import Videos from '../assets/Phedaz_Video.mp4'
 
 gsap.registerPlugin(MotionPathPlugin)
 
@@ -95,7 +96,7 @@ const Video = () => {
         <div className="relative">
           <video
             ref={videoRef}
-            src={video?.Video}
+            src={Videos}
             loop
             autoPlay
             muted

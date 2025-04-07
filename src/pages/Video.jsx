@@ -2,6 +2,7 @@ import { useState, useRef, useEffect } from "react";
 import { Play, Pause } from "lucide-react";
 import { Client, Databases } from "appwrite"
 import BufferAnimation from "../components/BufferAnimation"
+import Videos from '../assets/Phedaz_Video.mp4'
 
 const Video = () => {
   const [isPlaying, setIsPlaying] = useState(false);
@@ -70,7 +71,7 @@ const Video = () => {
 
       <div className="relative aspect-video w-full overflow-hidden rounded-2xl bg-gray-800 shadow-xl">
       <video
-      src={video?.Video}
+      src={Videos}
       className="w-full h-full object-cover"
       loop
       muted

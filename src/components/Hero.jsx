@@ -99,7 +99,7 @@ function Hero() {
                 whileTap={{ scale: 0.95 }}
                 className="w-full md:w-auto px-8 py-4  text-gray-900 font-extrabold rounded-full text-lg shadow-lg hover:bg-bright-blue transition duration-300"
               >
-                Join Our Waitlist
+                {hero.button1}
               </motion.button>
             </a>
             <a href="#about" className="w-full md:w-auto">
@@ -108,7 +108,7 @@ function Hero() {
                 whileTap={{ scale: 0.95 }}
                 className="w-full md:w-auto px-8 py-4 bg-white text-gray-900 rounded-full font-semibold text-lg shadow-lg hover:bg-soft-yellow transition duration-300 border-2 border-bright-blue"
               >
-                Learn More
+                {hero.button2}
               </motion.button>
             </a>
           </div>
@@ -130,6 +130,15 @@ function Hero() {
             )}
           </div>
         </div>
+        <a href="#about" className="w-full md:w-auto mt-10">
+              <motion.button
+                whileHover={{ scale: 1.05 }}
+                whileTap={{ scale: 0.95 }}
+                className="w-full md:w-auto px-8 py-4 bg-white text-gray-900 rounded-full font-semibold text-lg shadow-lg hover:bg-soft-yellow transition duration-300 border-2 border-bright-blue"
+              >
+                {hero.button3}
+             </motion.button>
+        </a>
       </div>
     </section>
   )
