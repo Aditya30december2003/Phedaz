@@ -19,7 +19,7 @@
   @apply border border-primary text-primary hover:bg-primary hover:text-white focus:ring-primary;
 }
 
-@layer base {
+@layer base { 
   :root {
     --background: 180 40% 95%;
     --foreground: 222.2 84% 4.9%;
@@ -83,5 +83,29 @@ html {
     color: teal;
   }
   
-
+  input[type='range'].slider-thumb::-webkit-slider-thumb {
+    appearance: none;
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #111827; /* Tailwind gray-900 */
+    cursor: pointer;
+    transition: background 0.3s ease;
+    margin-top: -6px; /* Align with track */
+  }
+  
+  input[type='range'].slider-thumb::-moz-range-thumb {
+    height: 14px;
+    width: 14px;
+    border-radius: 50%;
+    background: #111827;
+    cursor: pointer;
+    transition: background 0.3s ease;
+  }
+  
+  input[type='range'].slider-thumb::-webkit-slider-runnable-track {
+    height: 4px;
+    border-radius: 2px;
+  }
+  
   

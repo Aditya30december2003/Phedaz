@@ -7,6 +7,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import ScrollTop from './components/ScrollTop';
 import BufferAnimation from './components/BufferAnimation';
+import Questions from '../src/pages/Questions'
 
 // Lazy load route components
 const Home = lazy(() => import('../src/pages/Home'));
@@ -25,7 +26,7 @@ const LoadingSpinner = () => (
 function App() {
   return (
     <>
-      <Navbar />
+      {/* <Navbar /> */}
       <ScrollTop />
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
@@ -35,6 +36,7 @@ function App() {
           <Route path="/legals" element={<Terms />} />
           <Route path="/legals/:legalId" element={<TermsPage />} />
           <Route path='/video' element={<Video/>} />
+          <Route path='/questionnaire' element={<Questions/>} />
         </Routes>
       </Suspense>
       <Footer />

@@ -197,7 +197,7 @@ function Navbar() {
              {nav.nav5}
             </a>
             <a
-              href="#cap"
+              href="/questionnaire"
               className={`inline-flex items-center px-4 py-2 border border-transparent text-sm font-medium rounded-md transition-colors duration-300 ${
                 isScrolled ? "text-white font-extrabold bg-gray-900 hover:bg-gray-800" : "text-gray-900 font-semibold bg-white hover:bg-gray-100"
               }`}
