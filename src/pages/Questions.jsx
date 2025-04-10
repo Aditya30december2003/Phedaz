@@ -8,6 +8,8 @@ import Section4 from '../components/QuestionnaireSections/Section4'
 import Section5 from '../components/QuestionnaireSections/Section5'
 
 const Questions = () => {
+  const [currentStep, setCurrentStep] = useState(1)
+
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -46,12 +48,9 @@ const Questions = () => {
     setFormData((prev) => {
       const currentValues = [...prev[name]]
       const index = currentValues.indexOf(value)
-
       if (index === -1) {
-        // Add value if not present
         return { ...prev, [name]: [...currentValues, value] }
       } else {
-        // Remove value if already present
         currentValues.splice(index, 1)
         return { ...prev, [name]: currentValues }
       }
@@ -64,93 +63,95 @@ const Questions = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault();
-  
-    console.log("Submitting form with data:", formData);
-  
+    e.preventDefault()
     try {
       const response = await fetch("https://phedaz.com/sendEmail.php", {
         method: "POST",
-        headers: {
-          "Content-Type": "application/json",
-        },
+        headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      });
-  
-      console.log("Raw response object:", response);
-  
-      const text = await response.text();
-      console.log("Raw response text:", text);
-  
-      let result;
-      try {
-        result = JSON.parse(text);
-        console.log("Parsed JSON:", result);
-      } catch (parseError) {
-        console.error("Failed to parse JSON:", parseError);
-        alert("Server returned invalid JSON.");
-        return;
-      }
-  
+      })
+
+      const text = await response.text()
+      const result = JSON.parse(text)
+
       if (result.success) {
-        localStorage.setItem("submittedFormData", JSON.stringify(formData));
-        window.location.href = "/thankyou";
+        localStorage.setItem("submittedFormData", JSON.stringify(formData))
+        window.location.href = "/thankyou"
       } else {
-        alert("Something went wrong: " + result.message);
+        alert("Something went wrong: " + result.message)
       }
     } catch (error) {
-      console.error("Error submitting form:", error);
-      alert("There was an error submitting the form.");
+      console.error("Error submitting form:", error)
+      alert("There was an error submitting the form.")
     }
-  };
-  
-  
+  }
+
+  const renderSection = () => {
+    switch (currentStep) {
+      case 1:
+        return <Section1 formData={formData} handleChange={handleChange} handleCheckboxChange={handleCheckboxChange} />
+      case 2:
+        return <Section2 formData={formData} handleChange={handleChange} handleCheckboxChange={handleCheckboxChange} />
+      case 3:
+        return <Section3 formData={formData} handleChange={handleChange} handleSliderChange={handleSliderChange} />
+      case 4:
+        return <Section4 formData={formData} handleChange={handleChange} handleSliderChange={handleSliderChange}/>
+      case 5:
+        return <Section5 formData={formData} handleChange={handleChange} />
+      default:
+        return null
+    }
+  }
+
+  const totalSteps = 5
+  const progressPercent = (currentStep / totalSteps) * 100
 
   return (
-    <div className="bg-gray-100 min-h-screen pt-20 pb-16">
-      <div className="max-w-6xl mx-auto px-4 sm:px-6">
+    <div className="bg-gray-100 min-h-screen pt-28 pb-16">
+      <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-10">
-          <h1 className="text-4xl font-bold text-gray-900 mb-2">Phedaz Early Access</h1>
-          <div className="h-1 w-14 bg-gray-900 mx-auto mb-8"></div>
+          <h1 className="text-3xl font-bold text-gray-900">Phedaz Early Access</h1>
           <p className="text-lg text-gray-600 mt-2">Complete this questionnaire to join our early access program</p>
         </div>
 
-        <form onSubmit={handleSubmit}>
-          <Section1 
-            formData={formData} 
-            handleChange={handleChange} 
-            handleCheckboxChange={handleCheckboxChange} 
-          />
-          
-          <Section2 
-            formData={formData} 
-            handleChange={handleChange} 
-            handleCheckboxChange={handleCheckboxChange} 
-          />
-          
-          <Section3 
-            formData={formData} 
-            handleChange={handleChange} 
-            handleSliderChange={handleSliderChange} 
-          />
-          
-          <Section4 
-            formData={formData} 
-            handleChange={handleChange} 
-          />
-          
-          <Section5 
-            formData={formData} 
-            handleChange={handleChange} 
-          />
+        {/* Progress Bar */}
+        <div className="w-full bg-gray-300 h-3 rounded-full mb-10">
+          <div
+            className="bg-gray-900 h-3 rounded-full transition-all duration-300"
+            style={{ width: `${progressPercent}%` }}
+          ></div>
+        </div>
 
-          <div className="flex justify-center mt-8">
-            <button 
-              type="submit" 
-              className="bg-gray-900 text-white border-none rounded-md py-3.5 px-8 text-base font-medium cursor-pointer transition-colors hover:bg-gray-800"
-            >
-              Submit Application
-            </button>
+        <form onSubmit={handleSubmit}>
+          {renderSection()}
+
+          <div className="flex justify-between mt-8">
+            {currentStep > 1 && (
+              <button
+                type="button"
+                onClick={() => setCurrentStep((prev) => prev - 1)}
+                className="bg-gray-300 text-gray-800 py-2 px-6 rounded-md hover:bg-gray-400"
+              >
+                Back
+              </button>
+            )}
+
+            {currentStep < totalSteps ? (
+              <button
+                type="button"
+                onClick={() => setCurrentStep((prev) => prev + 1)}
+                className="bg-gray-900 text-white py-2 px-6 rounded-md hover:bg-gray-800 ml-auto"
+              >
+                Next
+              </button>
+            ) : (
+              <button
+                type="submit"
+                className="bg-green-600 text-white py-2 px-6 rounded-md hover:bg-green-500 ml-auto"
+              >
+                Submit Application
+              </button>
+            )}
           </div>
         </form>
       </div>
@@ -159,6 +160,7 @@ const Questions = () => {
 }
 
 export default Questions
+
 
 
 
