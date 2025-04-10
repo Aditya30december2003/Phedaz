@@ -26,7 +26,7 @@ const LoadingSpinner = () => (
 function App() {
   return (
     <>
-      {/* <Navbar /> */}
+      <Navbar />
       <ScrollTop />
       <Suspense fallback={<LoadingSpinner />}>
         <Routes>
