@@ -203,8 +203,8 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
       backgroundImage:
         "url(\"data:image/svg+xml;utf8,<svg fill='none' stroke='%231A1A2E' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M6 9l6 6 6-6'></path></svg>\")",
     }}
-    id="country"
-    name="country"
+    id="businessStage"
+  name="businessStage"
     value={formData.country}
     onChange={handleChange}
     required

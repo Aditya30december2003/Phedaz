@@ -63,11 +63,33 @@ const Questions = () => {
     setFormData((prev) => ({ ...prev, annualPlanLikelihood: value }))
   }
 
-  const handleSubmit = (e) => {
-    e.preventDefault()
-    console.log("Submitted data:", formData)
-    alert("Form submitted successfully!")
-  }
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+  
+    try {
+      const response = await fetch("https://phedaz.com/sendEmaill.php", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/json",
+        },
+        body: JSON.stringify(formData),
+      });
+  
+      const result = await response.json();
+  
+      if (result.status === "success") {
+        // Redirect or show success page
+        localStorage.setItem("submittedFormData", JSON.stringify(formData));
+        window.location.href = "/thankyou"; // or use navigate("/thank-you") if using React Router
+      } else {
+        alert("Something went wrong: " + result.message);
+      }
+    } catch (error) {
+      console.error("Error submitting form:", error);
+      alert("There was an error submitting the form.");
+    }
+  };
+  
 
   return (
     <div className="bg-gray-100 min-h-screen pt-20 pb-16">

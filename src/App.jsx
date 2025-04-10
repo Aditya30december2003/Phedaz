@@ -8,14 +8,14 @@ import Footer from './components/Footer';
 import ScrollTop from './components/ScrollTop';
 import BufferAnimation from './components/BufferAnimation';
 import Questions from '../src/pages/Questions'
-
+import ThankYou  from './pages/FormSuccess';
 // Lazy load route components
 const Home = lazy(() => import('../src/pages/Home'));
 const Blogs = lazy(() => import('../src/pages/Blogs'));
 const BlogDetails = lazy(() => import('../src/pages/BlogDetails'));
 const Terms = lazy(() => import('../src/pages/Terms'));
 const TermsPage = lazy(() => import('./pages/TermsPage'));
-const Video = lazy(() => import('./pages/Video'));
+const Video = lazy(() => import('./pages/Video'))
 // Simple loading component
 const LoadingSpinner = () => (
   <div className="min-h-screen flex items-center justify-center">
@@ -37,6 +37,7 @@ function App() {
           <Route path="/legals/:legalId" element={<TermsPage />} />
           <Route path='/video' element={<Video/>} />
           <Route path='/questionnaire' element={<Questions/>} />
+          <Route path='/thankyou' element={<ThankYou/>} />
         </Routes>
       </Suspense>
       <Footer />
