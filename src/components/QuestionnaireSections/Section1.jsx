@@ -194,21 +194,18 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
         </div>
 
         <div className="mb-6">
-          <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="businessStage">
-            Business Stage
-          </label>
-          <select
-    className="w-full cursor-pointer px-3 py-3 pr-10 rounded-md border border-gray-200 text-sm bg-white appearance-none bg-no-repeat bg-[length:20px_18px] bg-[center_right_0.75rem] focus:outline-none focus:ring-2 focus:ring-gray-900"
-    style={{
-      backgroundImage:
-        "url(\"data:image/svg+xml;utf8,<svg fill='none' stroke='%231A1A2E' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M6 9l6 6 6-6'></path></svg>\")",
-    }}
-    id="businessStage"
+        <select
+  className="w-full cursor-pointer px-3 py-3 pr-10 rounded-md border border-gray-200 text-sm bg-white appearance-none bg-no-repeat bg-[length:20px_18px] bg-[center_right_0.75rem] focus:outline-none focus:ring-2 focus:ring-gray-900"
+  style={{
+    backgroundImage:
+      "url(\"data:image/svg+xml;utf8,<svg fill='none' stroke='%231A1A2E' stroke-linecap='round' stroke-linejoin='round' stroke-width='1.5' viewBox='0 0 24 24' xmlns='http://www.w3.org/2000/svg'><path d='M6 9l6 6 6-6'></path></svg>\")",
+  }}
+  id="businessStage"
   name="businessStage"
-    value={formData.country}
-    onChange={handleChange}
-    required
-  >
+  value={formData.businessStage}
+  onChange={handleChange}
+  required
+>
             <option value="">Select your business stage</option>
             {businessStages.map((stage) => (
               <option key={stage} value={stage}>
