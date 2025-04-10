@@ -66,8 +66,10 @@ const Questions = () => {
   const handleSubmit = async (e) => {
     e.preventDefault();
   
+    console.log("Submitting form with data:", formData);
+  
     try {
-      const response = await fetch("https://phedaz.com/sendEmaill.php", {
+      const response = await fetch("https://phedaz.com/sendEmail.php", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -75,12 +77,24 @@ const Questions = () => {
         body: JSON.stringify(formData),
       });
   
-      const result = await response.json();
+      console.log("Raw response object:", response);
   
-      if (result.status === "success") {
-        // Redirect or show success page
+      const text = await response.text();
+      console.log("Raw response text:", text);
+  
+      let result;
+      try {
+        result = JSON.parse(text);
+        console.log("Parsed JSON:", result);
+      } catch (parseError) {
+        console.error("Failed to parse JSON:", parseError);
+        alert("Server returned invalid JSON.");
+        return;
+      }
+  
+      if (result.success) {
         localStorage.setItem("submittedFormData", JSON.stringify(formData));
-        window.location.href = "/thankyou"; // or use navigate("/thank-you") if using React Router
+        window.location.href = "/thankyou";
       } else {
         alert("Something went wrong: " + result.message);
       }
@@ -89,6 +103,7 @@ const Questions = () => {
       alert("There was an error submitting the form.");
     }
   };
+  
   
 
   return (
