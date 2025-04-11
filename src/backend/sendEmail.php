@@ -46,16 +46,13 @@ file_put_contents("form_submissions.txt", $fileData, FILE_APPEND);
 
 // Prepare email
 // Replace with your company email address
-$to = "your-company-email@phedaz.com"; 
+ini_set('sendmail_from', 'no-reply@phedaz.com');
 
-// You can also set this to test-3k3j2hfo4@srv1.mail-tester.com for testing
-// $to = "test-3k3j2hfo4@srv1.mail-tester.com";
-
+// Use -f parameter with mail() to set the return path
+$to = "test-3k3j2hfo4@srv1.mail-tester.com";
 $subject = "New Contact Form Submission";
-
-// Important: Set a consistent From address that uses your domain
-$headers = "From: Phedaz <noreply@phedaz.com>\r\n";
-$headers .= "Return-Path: bounce@phedaz.com\r\n";
+$headers = "From: Website Contact Form <no-reply@phedaz.com>\r\n";
+$headers .= "Reply-To: $name <$email>\r\n";
 $headers .= "MIME-Version: 1.0\r\n";
 $headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
 $headers .= "Content-Transfer-Encoding: 8bit\r\n";
