@@ -1,5 +1,4 @@
 import { useEffect, useState } from "react"
-import { IoIosArrowDropdown } from "react-icons/io";
 
 // Section 1: Contact & Basic Details component
 const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
