@@ -65,7 +65,7 @@ const FeaturePreferences = ({ formData, handleChange, handleCheckboxChange }) =>
             />
           </div>
   
-          <div className="mb-6">
+  <div className="mb-7">
   <label className="block mb-2 font-extrabold text-gray-900 text-sm">
     Technical Proficiency
   </label>
