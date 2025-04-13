@@ -73,7 +73,7 @@ function Hero() {
 
         {/* Animated Subtext */}
         <div
-          className="bg-white w-[96%] lg:w-[70%] h-[27rem] rounded-lg mt-5 shadow-xl"
+          className="bg-white w-[96%] lg:w-[70%] h-[32rem] lg:h-[27rem] rounded-lg mt-5 shadow-xl"
           data-aos="fade-up"
           data-aos-delay="200"
         >
@@ -102,7 +102,7 @@ function Hero() {
                 {hero.button1}
               </motion.button>
             </a>
-            <a href="#about" className="w-full md:w-auto">
+            <a href="/questionnaire" className="w-full md:w-auto">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}
@@ -130,7 +130,7 @@ function Hero() {
             )}
           </div>
         </div>
-        <a href="#about" className="w-full md:w-auto mt-10">
+        <a href="#about" className="w-full md:w-auto mt-16">
               <motion.button
                 whileHover={{ scale: 1.05 }}
                 whileTap={{ scale: 0.95 }}

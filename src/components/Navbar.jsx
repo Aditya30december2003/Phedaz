@@ -329,7 +329,7 @@ function Navbar() {
                     {nav.nav5}
                   </a>
                   <a
-                    href="#cap"
+                    href="/questionnaire"
                     className="block px-3 py-2 mt-1 rounded-md text-base font-medium text-white bg-yellow-400 hover:bg-gray-800"
                     onClick={() => setIsMobileMenuOpen(false)}
                   >

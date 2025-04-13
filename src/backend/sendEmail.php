@@ -1,86 +1,115 @@
 <?php
-// Enable error logging
+// Enhanced error reporting
 ini_set('log_errors', 1);
-ini_set('error_log', 'php_error.log');
-error_log("===== Form submission started =====");
+ini_set('error_log', __DIR__ . '/php_errors.log');
+ini_set('display_errors', 0); // Set to 1 during dev if needed
+error_reporting(E_ALL);
 
-// Enable CORS
+// CORS headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type");
-header("Access-Control-Allow-Methods: POST");
-header("Content-Type: application/json");
+header("Access-Control-Allow-Headers: Content-Type, Authorization");
+header("Access-Control-Allow-Methods: POST, OPTIONS");
+header("Content-Type: application/json; charset=UTF-8");
 
-if ($_SERVER["REQUEST_METHOD"] !== "POST") {
-    error_log("Request method not POST: " . $_SERVER["REQUEST_METHOD"]);
+// Handle preflight OPTIONS request
+if ($_SERVER['REQUEST_METHOD'] === 'OPTIONS') {
+    http_response_code(204);
+    exit;
+}
+
+// Only allow POST
+if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(["success" => false, "message" => "Only POST requests are allowed."]);
+    echo json_encode(['success' => false, 'message' => 'Only POST requests allowed']);
     exit;
 }
 
-// Read raw input
-$rawData = file_get_contents("php://input");
-error_log("Raw input: $rawData");
+try {
+    $rawData = file_get_contents("php://input");
+    file_put_contents(__DIR__ . '/input_debug.log', $rawData); // Optional logging
 
-$data = json_decode($rawData, true);
+    if ($rawData === false) {
+        throw new Exception("Failed to read input data");
+    }
 
-if (!$data) {
-    error_log("Failed to decode JSON.");
-    echo json_encode(["success" => false, "message" => "Invalid JSON received."]);
-    exit;
+    $data = json_decode($rawData, true);
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception("Invalid JSON: " . json_last_error_msg());
+    }
+
+    // Required fields
+    $required = ['name', 'email'];
+    foreach ($required as $field) {
+        if (empty($data[$field])) {
+            throw new Exception("Missing required field: $field");
+        }
+    }
+
+    if (!filter_var($data['email'], FILTER_VALIDATE_EMAIL)) {
+        throw new Exception("Invalid email format");
+    }
+
+    // Load PHPMailer
+    require 'vendor/autoload.php';
+    $mail = new PHPMailer\PHPMailer\PHPMailer(true);
+
+    // SMTP config
+    $mail->isSMTP();
+    $mail->Host = 'smtp.forwardemail.net';
+    $mail->SMTPAuth = true;
+    $mail->Username = 'webform@office.phedaz.com'; // Use correct SMTP username
+    $mail->Password = 'ryhwuw-dyGkyr7>9?mapku8';
+    $mail->SMTPSecure = PHPMailer\PHPMailer\PHPMailer::ENCRYPTION_STARTTLS;
+    $mail->Port = 587;
+    $mail->Timeout = 10;
+
+    // Email setup
+    $mail->setFrom('webform@office.phedaz.com', 'Phedaz Website');
+    $mail->addAddress('test-ton1eycfy@srv1.mail-tester.com');
+    $mail->addReplyTo($data['email'], $data['name']);
+    $mail->Subject = 'New Inquiry: ' . ($data['businessName'] ?? $data['name']);
+
+    // Body formatting with better array handling
+    $body = "New submission details:\n\n";
+    foreach ($data as $key => $value) {
+        $prettyKey = ucfirst(str_replace('_', ' ', $key));
+        if (is_array($value)) {
+            // Convert array to readable format
+            $valueString = implode(', ', array_map(function ($v) {
+                return is_array($v) ? json_encode($v) : $v;
+            }, $value));
+            $body .= "$prettyKey: $valueString\n";
+        } else {
+            $body .= "$prettyKey: $value\n";
+        }
+    }
+    $body .= "\nIP: " . $_SERVER['REMOTE_ADDR'] . "\n";
+    $body .= "Time: " . date('Y-m-d H:i:s');
+
+    $mail->Body = $body;
+    $mail->isHTML(false);
+
+    // Send it
+    $mail->send();
+
+    // Log success
+    file_put_contents(
+        __DIR__ . '/submissions.log',
+        date('c') . " | " . $data['email'] . " | " . $_SERVER['REMOTE_ADDR'] . "\n",
+        FILE_APPEND
+    );
+
+    echo json_encode([
+        'success' => true,
+        'message' => 'Thank you! Your submission has been received.'
+    ]);
+
+} catch (Exception $e) {
+    error_log("ERROR: " . $e->getMessage());
+    http_response_code(500);
+    echo json_encode([
+        'success' => false,
+        'message' => 'Submission failed',
+        'error' => $e->getMessage() // Optional: remove in production
+    ]);
 }
-
-// Extract fields
-$name = $data["name"] ?? "";
-$email = $data["email"] ?? "";
-$message = $data["message"] ?? "";
-$phone = $data["phone"] ?? "";
-$goals = $data["goals"] ?? [];
-$price = $data["priceRange"] ?? "";
-$country = $data["country"] ?? "";
-
-error_log("Decoded data: " . print_r($data, true));
-
-// Save to file
-$fileData = "Name: $name\nEmail: $email\nPhone: $phone\nCountry: $country\nGoals: " . implode(", ", $goals) . "\nPrice Range: $price\nMessage: $message\n\n";
-file_put_contents("form_submissions.txt", $fileData, FILE_APPEND);
-
-// Prepare email
-// Replace with your company email address
-ini_set('sendmail_from', 'no-reply@phedaz.com');
-
-// Use -f parameter with mail() to set the return path
-$to = "test-3k3j2hfo4@srv1.mail-tester.com";
-$subject = "New Contact Form Submission";
-$headers = "From: Website Contact Form <no-reply@phedaz.com>\r\n";
-$headers .= "Reply-To: $name <$email>\r\n";
-$headers .= "MIME-Version: 1.0\r\n";
-$headers .= "Content-Type: text/plain; charset=UTF-8\r\n";
-$headers .= "Content-Transfer-Encoding: 8bit\r\n";
-
-// Format goals properly
-$goalsStr = implode(", ", $goals);
-$body = <<<EOD
-You received a new contact form submission:
-
-Name: $name
-Email: $email
-Phone: $phone
-Country: $country
-Goals: $goalsStr
-Price Range: $price
-
-Message:
-$message
-EOD;
-
-error_log("Sending email to $to...");
-$sent = mail($to, $subject, $body, $headers);
-
-if ($sent) {
-    error_log("Email sent successfully.");
-    echo json_encode(["success" => true, "message" => "Your message has been sent successfully. We'll get back to you soon!"]);
-} else {
-    error_log("Failed to send email.");
-    echo json_encode(["success" => false, "message" => "Failed to send your message. Please try again later or contact us directly."]);
-}
-?>

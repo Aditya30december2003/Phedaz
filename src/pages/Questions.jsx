@@ -63,29 +63,69 @@ const Questions = () => {
   }
 
   const handleSubmit = async (e) => {
-    e.preventDefault()
+    e.preventDefault();
+    
     try {
-      const response = await fetch("https://phedaz.com/sendEmail.php", {
+      console.log("Submitting form data:", formData);
+      
+      // Show loading state
+      const submitButton = e.target.querySelector('button[type="submit"]');
+      // const originalButtonText = submitButton.innerText;
+      submitButton.innerText = "Submitting...";
+      submitButton.disabled = true;
+      
+      // Send the form data with corrected URL
+      const response = await fetch("/sendEmail.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify(formData),
-      })
-
-      const text = await response.text()
-      const result = JSON.parse(text)
-
-      if (result.success) {
-        localStorage.setItem("submittedFormData", JSON.stringify(formData))
-        window.location.href = "/thankyou"
-      } else {
-        alert("Something went wrong: " + result.message)
+      });
+      
+      console.log("Response status:", response.status);
+      
+      // Handle HTTP error codes
+      if (!response.ok) {
+        throw new Error(`Server returned ${response.status}: ${response.statusText}`);
+      }
+      
+      const text = await response.text();
+      console.log("Raw response:", text);
+      
+      // Check for empty response
+      if (!text.trim()) {
+        throw new Error("Server returned an empty response");
+      }
+      
+      // Parse JSON
+      try {
+        const result = JSON.parse(text);
+        console.log("Parsed result:", result);
+        
+        if (result.success) {
+          // Store form data and redirect
+          localStorage.setItem("submittedFormData", JSON.stringify(formData));
+          window.location.href = "/thankyou";
+        } else {
+          throw new Error(result.message || "Form submission failed");
+        }
+      } catch (parseError) {
+        console.error("Failed to parse JSON response:", parseError);
+        throw new Error(`Invalid response format: ${text.substring(0, 100)}...`);
       }
     } catch (error) {
-      console.error("Error submitting form:", error)
-      alert("There was an error submitting the form.")
+      console.error("Submission error:", error);
+      
+      // Display error to user
+      alert(`Error submitting form: ${error.message}\nPlease try again or contact support.`);
+      
+      // Reset button state
+      const submitButton = e.target.querySelector('button[type="submit"]');
+      if (submitButton) {
+        submitButton.innerText = "Submit Application";
+        submitButton.disabled = false;
+      }
     }
-  }
-
+  };
   const renderSection = () => {
     switch (currentStep) {
       case 1:
