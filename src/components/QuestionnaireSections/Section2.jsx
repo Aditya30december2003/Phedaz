@@ -31,7 +31,7 @@ const FeaturePreferences = ({ formData, handleChange, handleCheckboxChange }) =>
         
         <div className="p-6">
           <div className="mb-6">
-            <label className="block mb-2 font-medium text-gray-900 text-sm">Which features are you most excited about?</label>
+            <label className="block mb-2 font-extrabold text-gray-900 text-sm">Which features are you most excited about?</label>
             <div className="grid md:grid-cols-2 gap-4">
               {featuresOptions.map((feature) => (
                 <div key={feature} className="flex items-start mb-2">
@@ -51,7 +51,7 @@ const FeaturePreferences = ({ formData, handleChange, handleCheckboxChange }) =>
           </div>
   
           <div className="mb-6">
-            <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="currentManagement">
+            <label className="block mb-2 font-extrabold text-gray-900 text-sm" htmlFor="currentManagement">
               How do you currently manage these tasks?(e.g. website building, inventory, payments)?
             </label>
             <textarea
@@ -66,27 +66,25 @@ const FeaturePreferences = ({ formData, handleChange, handleCheckboxChange }) =>
           </div>
   
           <div className="mb-6">
-            <label className="block mb-2 font-medium text-gray-900 text-sm">Technical Proficiency</label>
-            {["Beginner (no coding or tech background)", "Intermediate (comfortable with some tools)", "Advanced (coding or tech-savvy)"].map((level) => (
-              <div key={level} className="flex items-start mb-2">
-                <input
-                  className="mr-2 mt-1"
-                  type="radio"
-                  id={`proficiency-${level}`}
-                  name="proficiency"
-                  value={level}
-                  checked={formData.proficiency === level}
-                  onChange={handleChange}
-                />
-                <label className="text-sm text-gray-900" htmlFor={`proficiency-${level}`}>
-                  {level}
-                </label>
-              </div>
-            ))}
-          </div>
+  <label className="block mb-2 font-extrabold text-gray-900 text-sm">
+    Technical Proficiency
+  </label>
+  <select
+    name="proficiency"
+    value={formData.proficiency}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    <option value="">Select your level</option>
+    <option value="Beginner (no coding or tech background)">Beginner (no coding or tech background)</option>
+    <option value="Intermediate (comfortable with some tools)">Intermediate (comfortable with some tools)</option>
+    <option value="Advanced (coding or tech-savvy)">Advanced (coding or tech-savvy)</option>
+  </select>
+</div>
+
   
           <div className="mb-6">
-  <label className="block mb-2 font-medium text-gray-900 text-sm">Your Goals</label>
+  <label className="block mb-2 font-extrabold text-gray-900 text-sm">Your Goals</label>
   <div className="grid grid-cols-1 gap-4">
     {goalsOptions.map((goal) => (
       <div key={goal} className="flex items-start mb-2">

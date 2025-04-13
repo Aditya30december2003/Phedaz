@@ -216,7 +216,7 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
         </div>
 
         <div className="mb-6">
-  <label className="block mb-2 font-medium text-gray-900 text-sm">Primary Business Focus</label>
+  <label className="block mb-2 text-gray-900 text-sm font-extrabold">Primary Business Focus</label>
   <div className="grid md:grid-cols-2 gap-4">
     {businessFocusOptions.map((option) => (
       <div key={option} className="flex items-start mb-2">
@@ -257,7 +257,7 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
 
 
         <div className="mb-6">
-          <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="productDescription">
+          <label className="block mb-2 font-extrabold text-gray-900 text-sm" htmlFor="productDescription">
             Describe your product/service briefly
           </label>
           <textarea

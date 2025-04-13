@@ -70,11 +70,9 @@ const Questions = () => {
       
       // Show loading state
       const submitButton = e.target.querySelector('button[type="submit"]');
-      // const originalButtonText = submitButton.innerText;
       submitButton.innerText = "Submitting...";
       submitButton.disabled = true;
       
-      // Send the form data with corrected URL
       const response = await fetch("/sendEmail.php", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
@@ -83,7 +81,6 @@ const Questions = () => {
       
       console.log("Response status:", response.status);
       
-      // Handle HTTP error codes
       if (!response.ok) {
         throw new Error(`Server returned ${response.status}: ${response.statusText}`);
       }
@@ -91,18 +88,15 @@ const Questions = () => {
       const text = await response.text();
       console.log("Raw response:", text);
       
-      // Check for empty response
       if (!text.trim()) {
         throw new Error("Server returned an empty response");
       }
       
-      // Parse JSON
       try {
         const result = JSON.parse(text);
         console.log("Parsed result:", result);
         
         if (result.success) {
-          // Store form data and redirect
           localStorage.setItem("submittedFormData", JSON.stringify(formData));
           window.location.href = "/thankyou";
         } else {
@@ -114,11 +108,8 @@ const Questions = () => {
       }
     } catch (error) {
       console.error("Submission error:", error);
-      
-      // Display error to user
       alert(`Error submitting form: ${error.message}\nPlease try again or contact support.`);
       
-      // Reset button state
       const submitButton = e.target.querySelector('button[type="submit"]');
       if (submitButton) {
         submitButton.innerText = "Submit Application";
@@ -126,6 +117,17 @@ const Questions = () => {
       }
     }
   };
+
+  const goToNextStep = (e) => {
+    e.preventDefault(); // Prevent form submission
+    setCurrentStep((prev) => prev + 1);
+  };
+
+  const goToPrevStep = (e) => {
+    e.preventDefault(); // Prevent form submission
+    setCurrentStep((prev) => prev - 1);
+  };
+
   const renderSection = () => {
     switch (currentStep) {
       case 1:
@@ -169,7 +171,7 @@ const Questions = () => {
             {currentStep > 1 && (
               <button
                 type="button"
-                onClick={() => setCurrentStep((prev) => prev - 1)}
+                onClick={goToPrevStep}
                 className="bg-gray-300 text-gray-800 py-2 px-6 rounded-md hover:bg-gray-400"
               >
                 Back
@@ -179,7 +181,7 @@ const Questions = () => {
             {currentStep < totalSteps ? (
               <button
                 type="button"
-                onClick={() => setCurrentStep((prev) => prev + 1)}
+                onClick={goToNextStep}
                 className="bg-gray-900 text-white py-2 px-6 rounded-md hover:bg-gray-800 ml-auto"
               >
                 Next

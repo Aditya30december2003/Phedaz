@@ -27,49 +27,45 @@ const PricingPreferences = ({ formData, handleChange, handleSliderChange }) => {
         </div>
         
         <div className="p-6">
-          <div className="mb-6">
-            <label className="block mb-2 font-medium text-gray-900 text-sm">Preferred Pricing Model</label>
-            {pricingModels.map((model) => (
-              <div key={model} className="flex items-start mb-2">
-                <input
-                  className="mr-2 mt-1"
-                  type="radio"
-                  id={`pricing-${model}`}
-                  name="pricingModel"
-                  value={model}
-                  checked={formData.pricingModel === model}
-                  onChange={handleChange}
-                />
-                <label className="text-sm text-gray-900" htmlFor={`pricing-${model}`}>
-                  {model}
-                </label>
-              </div>
-            ))}
-          </div>
+        <div className="mb-6">
+  <label className="block mb-2 font-extrabold text-gray-900 text-sm">
+    Preferred Pricing Model
+  </label>
+  <select
+    name="pricingModel"
+    value={formData.pricingModel}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    <option value="">Select a pricing model</option>
+    {pricingModels.map((model) => (
+      <option key={model} value={model}>
+        {model}
+      </option>
+    ))}
+  </select>
+</div>
+
   
-          <div className="mb-6">
-  <label className="block mb-2 font-medium text-gray-900 text-sm">
+<div className="mb-6">
+  <label className="block mb-2 font-extrabold text-gray-900 text-sm">
     Acceptable Monthly Price Range
   </label>
 
-  {priceRanges.map((range) => (
-    <div key={range} className="flex items-start mb-2">
-      <input
-        className="mr-2 mt-1"
-        type="radio"
-        id={`range-${range}`}
-        name="priceRange"
-        value={range}
-        checked={formData.priceRange === range}
-        onChange={handleChange}
-      />
-      <label className="text-sm text-gray-900" htmlFor={`range-${range}`}>
+  <select
+    name="priceRange"
+    value={formData.priceRange}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    <option value="">Select a price range</option>
+    {priceRanges.map((range) => (
+      <option key={range} value={range}>
         {range}
-      </label>
-    </div>
-  ))}
+      </option>
+    ))}
+  </select>
 
-  {/* If "Other" is selected, show text input */}
   {formData.priceRange === "Other" && (
     <input
       type="text"
@@ -82,10 +78,11 @@ const PricingPreferences = ({ formData, handleChange, handleSliderChange }) => {
   )}
 </div>
 
+
   
 <div className="mb-6">
   <div className="flex justify-between">
-    <label className="block mb-2 font-medium text-gray-900 text-sm">Annual Plan Preference</label>
+    <label className="block mb-2 font-extrabold text-gray-900 text-sm">Annual Plan Preference</label>
     <span className="text-sm font-medium">{formData.annualPlanLikelihood}/5</span>
   </div>
 
@@ -108,7 +105,7 @@ const PricingPreferences = ({ formData, handleChange, handleSliderChange }) => {
 </div>
 
           <div className="mb-6">
-            <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="maxPrice">
+            <label className="block mb-2 font-extrabold text-gray-900 text-sm pl-2 " htmlFor="maxPrice">
               Maximum Price (£)
             </label>
             <input
@@ -124,24 +121,25 @@ const PricingPreferences = ({ formData, handleChange, handleSliderChange }) => {
           </div>
   
           <div className="mb-6">
-            <label className="block mb-2 font-medium text-gray-900 text-sm">Interest in Premium Tier</label>
-            {premiumInterestOptions.map((option) => (
-              <div key={option} className="flex items-start mb-2">
-                <input
-                  className="mr-2 mt-1"
-                  type="radio"
-                  id={`premium-${option}`}
-                  name="premiumInterest"
-                  value={option}
-                  checked={formData.premiumInterest === option}
-                  onChange={handleChange}
-                />
-                <label className="text-sm text-gray-900" htmlFor={`premium-${option}`}>
-                  {option}
-                </label>
-              </div>
-            ))}
-          </div>
+  <label className="block mb-2 font-extrabold text-gray-900 text-sm">
+    Interest in Premium Tier
+  </label>
+
+  <select
+    name="premiumInterest"
+    value={formData.premiumInterest}
+    onChange={handleChange}
+    className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
+  >
+    <option value="">Select an option</option>
+    {premiumInterestOptions.map((option) => (
+      <option key={option} value={option}>
+        {option}
+      </option>
+    ))}
+  </select>
+</div>
+
         </div>
       </div>
     )
