@@ -1,6 +1,6 @@
 "use client"
 
-import React, { useState } from 'react'
+import { useState } from 'react'
 import Section1 from '../components/QuestionnaireSections/Section1'
 import Section2 from '../components/QuestionnaireSections/Section2'
 import Section3 from '../components/QuestionnaireSections/Section3'
