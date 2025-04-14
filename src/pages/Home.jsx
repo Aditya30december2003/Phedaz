@@ -17,7 +17,7 @@ const Home = () => {
       <About/>
       <Tab/>
       <Video/> 
-      <Advantages/>
+      <Advantages/> 
       <BlogsComponent/>
       <Capabilities/>
       <Questions/>

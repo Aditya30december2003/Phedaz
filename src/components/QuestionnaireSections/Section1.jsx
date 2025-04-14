@@ -1,15 +1,16 @@
-import { useEffect, useState } from "react"
-
+import { useEffect, useState, useCallback } from "react"
+import { Client, Databases } from "appwrite"
+import BufferAnimation from "../BufferAnimation"
 // Section 1: Contact & Basic Details component
 const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
-    const [socialLinks, setSocialLinks] = useState(formData.socialLinks || [""])
+    const [socialLinks, setSocialLinks] = useState(formData.socialLinks || [""]) 
 
   const handleLinkChange = (index, value) => {
     const updatedLinks = [...socialLinks]
     updatedLinks[index] = value
     setSocialLinks(updatedLinks)
     handleChange({ target: { name: "socialLinks", value: updatedLinks } })
-  }
+  } 
 
   const addLink = () => {
     if (socialLinks.length < 2) {
@@ -42,29 +43,62 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
   }, []);
   
 
-  const businessStages = ["Pre-launch", "Newly Launched", "Established"]
-  const businessFocusOptions = [
-    "E-commerce (physical products)",
-    "Digital Products or Services",
-    "Consulting / Professional Services",
-    "Others",
-  ]
 
+  const [data, setData] = useState(null)
+  const [loading, setLoading] = useState(true)
+  const client = new Client().setEndpoint("https://centralapps.hivefinty.com/v1").setProject("67912e8e000459a70dab")
+
+  const databases = new Databases(client)
+  const databaseId = "67913805000e2b223d80"
+  const collectionId = "67fd1b92001363fa6f0e"
+    const fetchAboutData = useCallback(async () => {
+      try {
+        const response = await databases.listDocuments(databaseId, collectionId)
+        setData(response.documents[0])
+      } catch (error) {
+        console.error("Failed to fetch data:", error)
+      } finally {
+        setLoading(false)
+      }
+    }, [databases])
+  
+    useEffect(() => {
+      fetchAboutData()
+    }, [fetchAboutData])
+
+    const businessStages = data
+  ? [data.StageOption1, data.StageOption2, data.StageOption3]
+  : [];
+
+  const businessFocusOptions = data
+  ? [data.FocusOption1, data.FocusOption2, data.FocusOption3 , data.FocusOption4]
+  : [];
+
+    if (loading) {
+      return (
+        <div
+          id="about"
+          className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#E5F0F1] to-[#FFF5C3] text-gray-800"
+        >
+          <BufferAnimation size={90} color="#0A0A45" />
+        </div>
+      )
+    }
   return (
     <div className="bg-white rounded-xl shadow-md mb-8 border border-gray-200 overflow-hidden">
       <div className="p-6 pb-3 border-b border-gray-100">
         <div className="flex items-center gap-3 text-xl font-semibold text-gray-900">
           <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-900 text-white font-semibold">1</div>
-          <span>Contact & Basic Details</span>
+          <span>{data.Heading}</span>
         </div>
-        <div className="text-sm text-gray-600 mt-2">Tell us about yourself and your business</div>
+        <div className="text-sm text-gray-600 mt-2">{data.setHeading}</div>
       </div>
       
       <div className="p-6">
         <div className="grid md:grid-cols-2 gap-4">
           <div className="mb-6">
             <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="name">
-              Full Name
+              {data.Name}
             </label>
             <input
               className="w-full px-3 py-3 rounded-md border border-gray-200 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-gray-900"
@@ -78,7 +112,7 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
           </div>
           <div className="mb-6">
             <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="email">
-              Email Address
+            {data.email}
             </label>
             <input
               className="w-full px-3 py-3 rounded-md border border-gray-200 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-gray-900"
@@ -95,8 +129,8 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
 
         <div className="grid md:grid-cols-2 gap-4">
           <div className="mb-6">
-            <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="businessName">
-              Business Name
+            <label className="block mb-2 font-extrabold text-gray-900 text-sm" htmlFor="businessName">
+            {data.businessName}
             </label>
             <input
               className="w-full px-3 py-3 rounded-md border border-gray-200 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-gray-900"
@@ -110,7 +144,7 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
           </div>
           <div className="mb-6">
             <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="phone">
-              Phone Number
+            {data.Phone}
             </label>
             <input
               className="w-full px-3 py-3 rounded-md border border-gray-200 text-sm transition-colors focus:outline-none focus:ring-2 focus:ring-gray-900"
@@ -131,7 +165,7 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
     className="block mb-2 font-medium text-gray-900 text-sm"
     htmlFor="country"
   >
-    Country
+    {data.Country}
   </label>
   <select
     className="w-full cursor-pointer px-3 py-3 pr-10 rounded-md border border-gray-200 text-sm bg-white appearance-none bg-no-repeat bg-[length:20px_18px] bg-[center_right_0.75rem] focus:outline-none focus:ring-2 focus:ring-gray-900"
@@ -156,7 +190,7 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
 
 <div className="mb-6">
         <label className="block mb-2 font-medium text-gray-900 text-sm">
-          Social Media Links
+        {data.Links}
         </label>
         {socialLinks.map((link, index) => (
           <div key={index} className="relative mb-3">
@@ -205,7 +239,7 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
   onChange={handleChange}
   required
 >
-            <option value="">Select your business stage</option>
+            <option value="">{data.Stage}</option>
             {businessStages.map((stage) => (
               <option key={stage} value={stage}>
                 {stage}
@@ -257,7 +291,7 @@ const ContactDetails = ({ formData, handleChange, handleCheckboxChange }) => {
 
         <div className="mb-6">
           <label className="block mb-2 font-extrabold text-gray-900 text-sm" htmlFor="productDescription">
-            Describe your product/service briefly
+            {data.Describe}
           </label>
           <textarea
             className="w-full px-3 py-3 rounded-md border border-gray-200 text-sm min-h-24 resize-y transition-colors focus:outline-none focus:ring-2 focus:ring-gray-900"

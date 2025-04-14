@@ -1,37 +1,76 @@
 // Section 2: Usage & Feature Preferences component
+import { Client, Databases } from "appwrite"
+import { useEffect, useState, useCallback } from "react"
+import BufferAnimation from "../BufferAnimation"
 const FeaturePreferences = ({ formData, handleChange, handleCheckboxChange }) => {
-    const featuresOptions = [
-      "Setting up a legal structure (incorporation)",
-      "No-code / Low-code website building",
-      "Managing inventory or stock levels",
-      "Integrating multiple sales channels",
-      "Payment processing",
-      "Global Banking and Currency Support",
-      "Analytics and reporting",
-      "Other",
-    ]
+  const [data, setData] = useState(null)
+    const [loading, setLoading] = useState(true)
+    const client = new Client().setEndpoint("https://centralapps.hivefinty.com/v1").setProject("67912e8e000459a70dab")
+  
+    const databases = new Databases(client)
+    const databaseId = "67913805000e2b223d80"
+    const collectionId = "67fd27590001da234927"
+      const fetchAboutData = useCallback(async () => {
+        try {
+          const response = await databases.listDocuments(databaseId, collectionId)
+          setData(response.documents[0])
+        } catch (error) {
+          console.error("Failed to fetch data:", error)
+        } finally {
+          setLoading(false)
+        }
+      }, [databases])
     
-    const goalsOptions = [
-      "Launch a new online store quickly",
-      "Simplify existing operations and reduce costs",
-      "Expand sales channels or go global",
-      "Streamline payment and banking processes",
-      "Other",
-    ]
+      useEffect(() => {
+        fetchAboutData()
+      }, [fetchAboutData])
+      const featuresOptions = data
+      ? [
+          data.featureOption1,
+          data.featureOption2,
+          data.featureOption3,
+          data.featureOption4,
+          data.featureOption5,
+          data.featureOption6,
+          data.featureOption9,
+          data.featureOption10,
+        ]
+      : [];
+    
+    
+      const goalsOptions = data
+      ? [
+          data.ProficiencyOption1,
+          data.ProficiencyOption2,
+          data.ProficiencyOption3,
+        ].filter(Boolean)
+      : [];
+    
+
+    if (loading) {
+      return (
+        <div
+          id="about"
+          className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#E5F0F1] to-[#FFF5C3] text-gray-800"
+        >
+          <BufferAnimation size={90} color="#0A0A45" />
+        </div>
+      )
+    }
   
     return (
       <div className="bg-white rounded-xl shadow-md mb-8 border border-gray-200 overflow-hidden">
         <div className="p-6 pb-3 border-b border-gray-100">
           <div className="flex items-center gap-3 text-xl font-semibold text-gray-900">
             <div className="flex items-center justify-center w-8 h-8 rounded-full bg-gray-900 text-white font-semibold">2</div>
-            <span>Usage & Feature Preferences</span>
+            <span>{data.Heading}</span>
           </div>
-          <div className="text-sm text-gray-600 mt-2">Help us understand your needs and preferences</div>
+          <div className="text-sm text-gray-600 mt-2">{data.subHeading}</div>
         </div>
         
         <div className="p-6">
           <div className="mb-6">
-            <label className="block mb-2 font-extrabold text-gray-900 text-sm">Which features are you most excited about?</label>
+            <label className="block mb-2 font-extrabold text-gray-900 text-sm">{data.feature}</label>
             <div className="grid md:grid-cols-2 gap-4">
               {featuresOptions.map((feature) => (
                 <div key={feature} className="flex items-start mb-2">
@@ -52,13 +91,13 @@ const FeaturePreferences = ({ formData, handleChange, handleCheckboxChange }) =>
   
           <div className="mb-6">
             <label className="block mb-2 font-extrabold text-gray-900 text-sm" htmlFor="currentManagement">
-              How do you currently manage these tasks?(e.g. website building, inventory, payments)?
+              {data.CurrentManage}
             </label>
             <textarea
               className="w-full px-3 py-3 rounded-md border border-gray-200 text-sm min-h-24 resize-y transition-colors focus:outline-none focus:ring-2 focus:ring-gray-900"
               id="currentManagement"
               name="currentManagement"
-              placeholder="Using separate tools,  Hiring contractors, Doing it manually...."
+              // placeholder="Using separate tools,  Hiring contractors, Doing it manually...."
               value={formData.currentManagement}
               onChange={handleChange}
               required
@@ -67,7 +106,7 @@ const FeaturePreferences = ({ formData, handleChange, handleCheckboxChange }) =>
   
   <div className="mb-7">
   <label className="block mb-2 font-extrabold text-gray-900 text-sm">
-    Technical Proficiency
+    {data.Proficiency	}
   </label>
   <select
     name="proficiency"
@@ -76,15 +115,15 @@ const FeaturePreferences = ({ formData, handleChange, handleCheckboxChange }) =>
     className="w-full px-3 py-2 border border-gray-300 rounded-lg text-sm text-gray-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
   >
     <option value="">Select your level</option>
-    <option value="Beginner (no coding or tech background)">Beginner (no coding or tech background)</option>
-    <option value="Intermediate (comfortable with some tools)">Intermediate (comfortable with some tools)</option>
-    <option value="Advanced (coding or tech-savvy)">Advanced (coding or tech-savvy)</option>
+    <option value="Beginner (no coding or tech background)">{data.ProficiencyOption1}</option>
+    <option value="Intermediate (comfortable with some tools)">{data.ProficiencyOption2}</option>
+    <option value="Advanced (coding or tech-savvy)">{data.ProficiencyOption3}</option>
   </select>
 </div>
 
   
           <div className="mb-6">
-  <label className="block mb-2 font-extrabold text-gray-900 text-sm">Your Goals</label>
+  <label className="block mb-2 font-extrabold text-gray-900 text-sm">{data.Goals}</label>
   <div className="grid grid-cols-1 gap-4">
     {goalsOptions.map((goal) => (
       <div key={goal} className="flex items-start mb-2">

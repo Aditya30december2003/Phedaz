@@ -6,7 +6,7 @@ import { Client, Databases } from "appwrite"
 import NewTestComponent from "./NewTestComponent"
 import BufferAnimation from "./BufferAnimation"
 import AOS from "aos"
-import "aos/dist/aos.css"
+import "aos/dist/aos.css" 
 
 function About() {
   const [aboutData, setAboutData] = useState(null)
