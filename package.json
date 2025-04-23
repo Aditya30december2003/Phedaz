@@ -24,6 +24,8 @@
     "framer-motion": "^10.18.0",
     "framer-motion-3d": "^12.0.6",
     "gsap": "^3.12.7",
+    "jspdf": "^3.0.1",
+    "jspdf-autotable": "^5.0.2",
     "lucide-react": "^0.473.0",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",

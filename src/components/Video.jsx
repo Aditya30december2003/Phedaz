@@ -7,14 +7,13 @@ import { motion } from "framer-motion"
 import { Share2, Play, Pause, Check } from "lucide-react"
 import { Client, Databases } from "appwrite"
 import BufferAnimation from "./BufferAnimation"
-// import Videos from '../assets/Phedaz_Video.mp4'
 
 gsap.registerPlugin(MotionPathPlugin)
 
 const Video = () => {
   const backgroundRef = useRef(null)
   const videoRef = useRef(null)
-  const [isPlaying, setIsPlaying] = useState(true)
+  const [isPlaying, setIsPlaying] = useState(false)
   const [video, setVideo] = useState(null)
   const [loading, setLoading] = useState(true)
   const [shareButtonText, setShareButtonText] = useState("Share Video")
@@ -96,10 +95,8 @@ const Video = () => {
         <div className="relative">
           <video
             ref={videoRef}
-            src="https://phedaz.com/assets/Phedaz_Video-Yqx1w6OC.mp4"
+            src="https://phedaz.com/assets/Video_1-DY-XCcuc.mp4"
             loop
-            autoPlay
-            muted
             playsInline
             className="rounded-2xl shadow-lg p-4 w-full max-w-4xl border-4 border-[#0A0A45]/20"
             data-aos="flip-up"

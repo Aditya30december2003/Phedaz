@@ -284,6 +284,7 @@ const Questions = () => {
     otherPrimaryFocus: "",
     productDescription: "",
     features: [],
+    otherFeature: "",
     currentManagement: "",
     proficiency: "",
     goals: [],
@@ -386,34 +387,35 @@ const Questions = () => {
   }
 
   const validateForm = () => {
-    const newErrors = {}
+    const newErrors = {};
     const requiredFields = [
       "name", "email", "businessName", "phone", "country", "businessStage",
       "primaryFocus", "productDescription", "features", "currentManagement",
       "proficiency", "goals", "pricingModel", "priceRange", "maxPrice", 
-      "premiumInterest", "challenges", "questions", "ready"
+      "premiumInterest", "challenges", "ready"
     ];
-
+  
     requiredFields.forEach((field) => {
       if (!formData[field] || (Array.isArray(formData[field]) && formData[field].length === 0)) {
         newErrors[field] = "This field is required.";
       }
     });
-
+  
+    // Special validation for otherGoal
+    if (formData.goals.includes("Other") && !formData.otherGoal) {
+      newErrors.otherGoal = "Please specify your goal";
+    }
+  
     setErrors(newErrors);
     return Object.keys(newErrors).length === 0;
-  }
+  };
 
   const validateCurrentSection = () => {
     const sectionRequirements = {
       1: ['name', 'email', 'businessName', 'phone', 'country','businessStage', 'primaryFocus', 'productDescription'],
-      2: ['features', 'currentManagement', 'proficiency','goals'],
-      3: ['pricingModel',
-        'priceRange',
-        'annualPlanLikelihood',
-         'maxPrice',
-        'premiumInterest'],
-      4: [ 'challenges','questions'],
+      2: ['features','currentManagement', 'proficiency','goals'],
+      3: ['pricingModel', 'priceRange', 'annualPlanLikelihood', 'maxPrice', 'premiumInterest'],
+      4: ['challenges'],
       5: ['ready']
     };
   
@@ -422,7 +424,13 @@ const Questions = () => {
     const missingFields = [];
   
     currentRequirements.forEach(field => {
-      if (!formData[field] || (Array.isArray(formData[field]) && formData[field].length === 0)) {
+      // Special handling for goals when "Other" is selected
+      if (field === 'goals' && formData.goals.includes('Other') && !formData.otherGoal) {
+        sectionErrors['otherGoal'] = "Please specify your goal";
+        missingFields.push("Other Goal (please specify)");
+      }
+      // Standard validation for other fields
+      else if (!formData[field] || (Array.isArray(formData[field]) && formData[field].length === 0)) {
         sectionErrors[field] = "This field is required.";
         missingFields.push(field.replace(/([A-Z])/g, ' $1').replace(/^./, str => str.toUpperCase()));
       }
@@ -466,6 +474,8 @@ const Questions = () => {
       return;
     }
 
+    
+
     try {
       if (!window.grecaptcha) {
         throw new Error("reCAPTCHA not loaded. Please refresh the page.");
@@ -481,6 +491,7 @@ const Questions = () => {
 
       const dataToSend = {
         ...formData,
+        emailSubject: `New Form Submission from ${formData.name}`, // Add dynamic subject
         // "g-recaptcha-response": recaptchaToken,
       };
 
@@ -589,8 +600,8 @@ const Questions = () => {
     <div className="min-h-screen pt-36 pb-16">
       <div className="max-w-4xl mx-auto px-4">
         <div className="text-center mb-10">
-          <h1 className="text-3xl font-bold text-gray-900">Phedaz Early Access</h1>
-          <p className="text-lg text-gray-600 mt-2">Complete this questionnaire to join our early access program</p>
+          <h1 className="text-3xl font-bold text-gray-900">{data.Heading}</h1>
+          <p className="text-lg text-gray-600 mt-2">{data.subHeading}</p>
         </div>
 
         {/* Progress Bar */}
@@ -600,6 +611,11 @@ const Questions = () => {
             style={{ width: `${progressPercent}%` }}
           ></div>
         </div>
+
+        
+        <p className="text-sm text-gray-500 mb-6 -mt-8">
+      <span className="text-red-500">*</span> indicates required fields
+    </p>
 
         <form onSubmit={handleSubmit}>
           {renderSection()}
@@ -636,7 +652,9 @@ const Questions = () => {
             )}
           </div>
         </form>
+        {/* Required fields notice */}
       </div>
+
     </div>
   )
 }

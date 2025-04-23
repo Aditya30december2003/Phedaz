@@ -5,6 +5,7 @@ import AOS from "aos"
 import "aos/dist/aos.css"
 
 const WaitlistForm = () => {
+
   const [formData, setFormData] = useState({
     firstName: "",
     lastName: "",
@@ -127,6 +128,38 @@ const WaitlistForm = () => {
     }
   };
 
+  const [countries, setCountries] = useState([]);
+
+useEffect(() => {
+  const fetchCountries = async () => {
+    try {
+      const response = await fetch('https://restcountries.com/v3.1/all');
+      const data = await response.json();
+
+      // Extract country names
+      const countryNames = data.map((country) => country.name.common);
+
+      // Define priority countries
+      const priority = ["United Kingdom", "United States", "Canada"];
+
+      // Filter out priority countries and sort the rest
+      const others = countryNames
+        .filter((name) => !priority.includes(name))
+        .sort();
+
+      // Combine priority countries and the sorted others
+      const sortedCountries = [...priority, ...others];
+
+      setCountries(sortedCountries);
+    } catch (error) {
+      console.error("Error fetching countries:", error);
+    }
+  };
+
+  fetchCountries();
+}, []);
+
+
   return (
     <div className="bg-gradient-to-b from-[#E5F0F1] to-[#FFF5C3] py-12 overflow-hidden" id="form">
       <div className="container mx-auto px-4">
@@ -242,11 +275,12 @@ const WaitlistForm = () => {
                     }`}
                     required
                   >
-                    <option value="">Select Country*</option>
-                    <option value="US">United States</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="CA">Canada</option>
-                    <option value="NG">Nigeria</option>
+                    <option value="">Select your country</option>
+                    {countries.map((country) => (
+      <option key={country} value={country} className="cursor-pointer">
+        {country}
+      </option>
+    ))}
                   </select>
                   {errors.country && (
                     <p className="mt-1 text-sm text-red-600">{errors.country}</p>

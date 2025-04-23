@@ -23,13 +23,13 @@ try {
     $rawData = file_get_contents("php://input");
     $data = json_decode($rawData, true);
     
-    // if (json_last_error() !== JSON_ERROR_NONE) {
-    //     throw new Exception("Invalid JSON data received: " . json_last_error_msg());
-    // }
+    if (json_last_error() !== JSON_ERROR_NONE) {
+        throw new Exception("Invalid JSON data received: " . json_last_error_msg());
+    }
     
-    // if (empty($data)) {
-    //     throw new Exception("No form data received");
-    // }
+    if (empty($data)) {
+        throw new Exception("No form data received");
+    }
     
     // Load PHPMailer
     require __DIR__ . '/vendor/autoload.php';
@@ -60,14 +60,27 @@ try {
     // Email content
     $mail->setFrom('webform@phedaz.ng', 'Phedaz Webform');
     $mail->addAddress('websupport@mailing.phedaz.com');
-    $mail->Subject = 'New Form Submission ' . date('Y-m-d H:i:s');
+    
+    // Use dynamic subject if provided, fallback to default
+    $mail->Subject = $data['emailSubject'] ?? 'New Form Submission ' . date('Y-m-d H:i:s');
 
     // Format email body
     $body = "<h1>New Form Submission</h1>";
     foreach ($data as $key => $value) {
+        // Skip internal fields
+        if (in_array($key, ['emailSubject', 'g-recaptcha-response'])) continue;
+        
         $prettyKey = ucwords(str_replace('_', ' ', $key));
-        $body .= "<p><strong>{$prettyKey}:</strong> " . 
-                (is_array($value) ? implode(', ', $value) : htmlspecialchars($value)) . "</p>";
+        $formattedValue = is_array($value) ? implode(', ', $value) : htmlspecialchars($value);
+        
+        // Special formatting for specific fields
+        if ($key === 'maxPrice' && is_numeric($value)) {
+            $formattedValue = '£' . $value;
+        } elseif ($key === 'annualPlanLikelihood' && is_numeric($value)) {
+            $formattedValue = $value . '/5';
+        }
+        
+        $body .= "<p><strong>{$prettyKey}:</strong> {$formattedValue}</p>";
     }
 
     $mail->isHTML(true);

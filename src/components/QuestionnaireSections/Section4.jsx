@@ -48,7 +48,7 @@ const AdditionalFeedback = ({ formData, handleChange }) => {
         <div className="p-6">
           <div className="mb-6">
             <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="challenges">
-              {data.Challenges}
+              {data.Challenges} <span className="text-red-500">*</span>
             </label>
             <textarea
               className="w-full px-3 py-3 rounded-md border border-gray-200 text-sm min-h-24 resize-y transition-colors focus:outline-none focus:ring-2 focus:ring-gray-900"
@@ -58,13 +58,14 @@ const AdditionalFeedback = ({ formData, handleChange }) => {
               value={formData.challenges} 
               onChange={handleChange}
               maxLength={200}
+              required
             />
-            {/* <p className="text-xs text-gray-600 mt-1">Maximum 200 characters</p> */}
+            <p className="text-xs text-gray-600 mt-1">Maximum 200 characters</p>
           </div>
   
           <div className="mb-6">
             <label className="block mb-2 font-medium text-gray-900 text-sm" htmlFor="questions">
-             {data.Questions}
+              {data.Questions} (Optional)
             </label>
             <textarea
               className="w-full px-3 py-3 rounded-md border border-gray-200 text-sm min-h-24 resize-y transition-colors focus:outline-none focus:ring-2 focus:ring-gray-900"
