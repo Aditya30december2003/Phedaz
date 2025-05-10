@@ -4,21 +4,25 @@ RewriteCond %{REQUEST_METHOD} POST
 RewriteCond %{REQUEST_URI} ^/sendEmail\.php$
 RewriteRule .* - [L]
 
-
 RewriteEngine On
 
 # First, let the sendEmail.php script be processed directly
 RewriteRule ^backend/sendEmail\.php$ - [L]
 
 # Then all your other rules
-# Redirect www to non-www (production only)
-RewriteCond %{HTTP_HOST} ^www\.phedaz\.com [NC]
-RewriteRule ^(.*)$ https://phedaz.com/$1 [L,R=301]
+# Redirect www to non-www for all domains (production only)
+RewriteCond %{HTTP_HOST} ^www\.phedaz\.(com|co\.uk|ng)$ [NC]
+RewriteRule ^(.*)$ https://phedaz.%1/$1 [L,R=301]
 
-# Redirect HTTP to HTTPS only for your domain (not localhost)
+# Redirect HTTP to HTTPS for all domains (not localhost)
 RewriteCond %{HTTP_HOST} !^localhost [NC]
 RewriteCond %{HTTPS} off
 RewriteRule ^(.*)$ https://%{HTTP_HOST}%{REQUEST_URI} [L,R=301]
+
+# Canonical domain redirect (optional - choose one primary domain)
+# Uncomment and adjust if you want to redirect all domains to one primary domain
+# RewriteCond %{HTTP_HOST} ^phedaz\.(co\.uk|nz)$ [NC]
+# RewriteRule ^(.*)$ https://phedaz.com/$1 [L,R=301]
 
 # Your existing routing rules for the SPA
 RewriteCond %{REQUEST_FILENAME} !-f

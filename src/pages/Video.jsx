@@ -75,7 +75,7 @@ import { MotionPathPlugin } from "gsap/MotionPathPlugin"
 import { motion } from "framer-motion"
 import { Share2, Play, Pause, Check } from "lucide-react"
 import { Client, Databases } from "appwrite"
-import BufferAnimation from "../components/BufferAnimation"
+import BufferAnimation from "../components/BufferAnimation" 
 
 gsap.registerPlugin(MotionPathPlugin)
 

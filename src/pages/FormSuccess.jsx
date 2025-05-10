@@ -1,21 +1,19 @@
-// pages/ThankYou.jsx
-import { Client, Databases } from "appwrite"
-import { useEffect, useState, useCallback } from "react"
-import BufferAnimation from "../components/BufferAnimation"
+"use client";
+import { Client, Databases } from "appwrite";
+import { useEffect, useState, useCallback } from "react";
+import BufferAnimation from "../components/BufferAnimation";
 import jsPDF from 'jspdf';
 import autoTable from 'jspdf-autotable';
 
-const dummyLogo = 'https://fiverr-res.cloudinary.com/image/upload/f_auto,q_auto/v1/secured-attachments/messaging_message/attachment/8b691afb2ec94042ce1e8474d972b40e-1745170227091/Phedaz%20Logo%20-%20WNB-3.png?__cld_token__=exp=1745314058~hmac=3905c2e76cc79e0902b46c5b908d3142e33a8d9f76b3c1d411b16952a0329d8d';
+// Import your local logo image
+import logoImage from '../assets/phedaz_logo.png'; // Adjust path to your logo location
 
 const ThankYou = () => {
   const userResponse = localStorage.getItem("submittedFormData");
 
   const formatKey = (key) => {
-    // Special cases first
     if (key === 'maxPrice') return 'Maximum Price (£)';
     if (key === 'annualPlanLikelihood') return 'Annual Plan Likelihood';
-    
-    // Then general cases
     return key
       .replace(/([A-Z])/g, ' $1')
       .replace(/^./, str => str.toUpperCase())
@@ -23,30 +21,31 @@ const ThankYou = () => {
   };
 
   const downloadPDF = async () => {
-    const data = JSON.parse(userResponse);
-    const doc = new jsPDF();
-    
-    // Set document properties
-    doc.setProperties({
-      title: 'Phedaz Early Access Application',
-      subject: 'User application response',
-      author: 'Phedaz',
-    });
+    try {
+      if (!userResponse) {
+        alert('No application data found. Please submit the form again.');
+        return;
+      }
 
-    // Add logo
-    const logo = new Image();
-    logo.crossOrigin = "anonymous";
-    logo.src = dummyLogo;
-    
-    logo.onload = () => {
-      // Add logo and title
-      doc.addImage(logo, 'PNG', 15, 10, 25, 25); // (x, y, width, height)
+      const data = JSON.parse(userResponse);
+      const doc = new jsPDF();
+      
+      // Set document properties
+      doc.setProperties({
+        title: 'Phedaz Early Access Application',
+        subject: 'User application response',
+        author: 'Phedaz',
+      });
+
+      // Add logo from local file
+      doc.addImage(logoImage, 'PNG', 15, 10, 25, 25);
+      
+      // Add title and subtitle
       doc.setFontSize(22);
       doc.setTextColor(40, 40, 40);
       doc.setFont('helvetica', 'bold');
       doc.text("Early Access Program", 105, 55, { align: "center" });
       
-      // Add subtitle
       doc.setFontSize(12);
       doc.setTextColor(100, 100, 100);
       doc.setFont('helvetica', 'normal');
@@ -62,23 +61,23 @@ const ThankYou = () => {
       
       // Prepare table data
       const rows = Object.entries(data)
-  .filter(([key]) => key !== 'g-recaptcha-response')
-  .map(([key, value]) => {
-    const formattedKey = formatKey(key);
-    let formattedValue;
-    
-    if (key === 'maxPrice' && value) {
-      formattedValue = `£${value}`;
-    } 
-    else if (key === 'annualPlanLikelihood' && value) {
-      formattedValue = `${value}/5`;  // Add "/5" suffix
-    }
-    else {
-      formattedValue = Array.isArray(value) ? value.join(', ') : value || 'N/A';
-    }
-    
-    return [formattedKey, formattedValue];
-  });
+        .filter(([key]) => key !== 'g-recaptcha-response')
+        .map(([key, value]) => {
+          const formattedKey = formatKey(key);
+          let formattedValue;
+          
+          if (key === 'maxPrice' && value) {
+            formattedValue = `£${value}`;
+          } 
+          else if (key === 'annualPlanLikelihood' && value) {
+            formattedValue = `${value}/5`;
+          }
+          else {
+            formattedValue = Array.isArray(value) ? value.join(', ') : value || 'N/A';
+          }
+          
+          return [formattedKey, formattedValue];
+        });
       
       // Create the table
       autoTable(doc, {
@@ -105,11 +104,21 @@ const ThankYou = () => {
           overflow: 'linebreak',
         },
         didDrawPage: function (data) {
-          // Footer
+          // Footer with two lines
           doc.setFontSize(8);
           doc.setTextColor(150, 150, 150);
+          
+          // First line - Confidential notice
           doc.text(
             'Phedaz Early Access Program - Confidential',
+            doc.internal.pageSize.width / 2,
+            doc.internal.pageSize.height - 15,
+            { align: 'center' }
+          );
+          
+          // Second line - Website URL
+          doc.text(
+            'https://phedaz.com/',
             doc.internal.pageSize.width / 2,
             doc.internal.pageSize.height - 10,
             { align: 'center' }
@@ -118,32 +127,37 @@ const ThankYou = () => {
       });
 
       doc.save("Phedaz_EarlyAccess_Application.pdf");
-    };
+    } catch (error) {
+      console.error('Error generating PDF:', error);
+      alert('Failed to generate PDF. Please try again.');
+    }
   };
 
-  const [data, setData] = useState(null)
-  const [loading, setLoading] = useState(true)
+  const [data, setData] = useState(null);
+  const [loading, setLoading] = useState(true);
 
-  const client = new Client().setEndpoint("https://centralapps.hivefinty.com/v1").setProject("67912e8e000459a70dab")
+  const client = new Client()
+    .setEndpoint("https://centralapps.hivefinty.com/v1")
+    .setProject("67912e8e000459a70dab");
 
-  const databases = new Databases(client)
-  const databaseId = "67913805000e2b223d80"
-  const collectionId = "68053d70001339ade026"
+  const databases = new Databases(client);
+  const databaseId = "67913805000e2b223d80";
+  const collectionId = "68053d70001339ade026";
 
   const fetchAboutData = useCallback(async () => {
     try {
-      const response = await databases.listDocuments(databaseId, collectionId)
-      setData(response.documents[0])
+      const response = await databases.listDocuments(databaseId, collectionId);
+      setData(response.documents[0]);
     } catch (error) {
-      console.error("Failed to fetch data:", error)
+      console.error("Failed to fetch data:", error);
     } finally {
-      setLoading(false)
+      setLoading(false);
     }
-  }, [databases])
+  }, [databases]);
 
   useEffect(() => {
-    fetchAboutData()
-  }, [fetchAboutData])
+    fetchAboutData();
+  }, [fetchAboutData]);
 
   if (loading) {
     return (
@@ -153,7 +167,7 @@ const ThankYou = () => {
       >
         <BufferAnimation size={90} color="#0A0A45" />
       </div>
-    )
+    );
   }
 
   return (

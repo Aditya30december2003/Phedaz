@@ -6,6 +6,7 @@ import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, X, Menu } from "lucide-react"
 import Logo from '../assets/logo.png'
 import BufferAnimation from "./BufferAnimation";
+import CountrySelector from "./CountrySelector"; // Import the new component
 
 function Navbar() {
   const [activeDropdown, setActiveDropdown] = useState(null)
@@ -204,10 +205,16 @@ function Navbar() {
             >
              {nav.nav6}
             </a>
+            
+            {/* Add Country Selector */}
+            <CountrySelector />
           </div>
 
           {/* Mobile menu button */}
-          <div className="md:hidden">
+          <div className="md:hidden flex items-center space-x-2">
+            {/* Add Country Selector for mobile */}
+            <CountrySelector />
+            
             <button
               onClick={toggleMobileMenu}
               className={`inline-flex items-center justify-center p-2 rounded-md transition-colors duration-300 ${
@@ -279,9 +286,6 @@ function Navbar() {
                     className="flex w-full items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   >
                     {nav.nav3}
-                    {/* <ChevronDown
-                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${mobileActiveDropdown === "legals" ? "transform rotate-180" : ""}`}
-                    /> */}
                   </a>
 
                 {/* Legals Section with Dropdown */}
@@ -291,32 +295,7 @@ function Navbar() {
                     className="flex w-full items-center justify-between px-3 py-2 rounded-md text-base font-medium text-gray-700 hover:text-gray-900 hover:bg-gray-50"
                   >
                     {nav.nav4}
-                    {/* <ChevronDown
-                      className={`ml-1 h-4 w-4 transition-transform duration-200 ${mobileActiveDropdown === "legals" ? "transform rotate-180" : ""}`}
-                    /> */}
                   </a>
-                  {/* <AnimatePresence>
-                    {mobileActiveDropdown === "legals" && (
-                      <motion.div
-                        initial={{ opacity: 0, height: 0 }}
-                        animate={{ opacity: 1, height: "auto" }}
-                        exit={{ opacity: 0, height: 0 }}
-                        transition={{ duration: 0.2 }}
-                        className="pl-4 space-y-1"
-                      >
-                        {terms.map((item) => (
-                          <Link
-                            key={item.path}
-                            to={item.path}
-                            className="block px-3 py-2 text-sm font-medium text-gray-600 hover:text-gray-800 hover:bg-gray-100"
-                            onClick={() => setIsMobileMenuOpen(false)}
-                          >
-                            {item.name}
-                          </Link>
-                        ))}
-                      </motion.div>
-                    )}
-                  </AnimatePresence> */}
                 </div>
 
                 {/* Join Now & Get Started */}
@@ -346,4 +325,3 @@ function Navbar() {
 }
 
 export default Navbar
-
