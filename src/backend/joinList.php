@@ -89,7 +89,7 @@ try {
 
     // 6. Build waitlist notification email
     $mail->setFrom('webform@phedaz.ng', 'Phedaz Waitlist');
-    $mail->addAddress('websupport@mailing.phedaz.com');
+    $mail->addAddress('leo10demigod@gmail.com');
     $mail->addReplyTo($data['email'], $data['firstName'] . ' ' . $data['lastName']);
     
     $mail->Subject = 'New Waitlist Signup: ' . substr($data['firstName'] . ' ' . $data['lastName'], 0, 50);
