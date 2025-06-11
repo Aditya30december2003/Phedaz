@@ -89,7 +89,7 @@ const Footer = () => {
   }
 
   return (
-    <div className="w-full bg-[#E5F0F1] text-[#0A0A45] p-4 lg:p-5">
+    <div className="w-full bg-[#0aebff] text-[#0A0A45] p-4 lg:p-5">
       {/* Subscription Form */}
       <div className='mb-0'>
         <form
