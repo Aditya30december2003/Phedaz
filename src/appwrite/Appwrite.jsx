@@ -3,8 +3,8 @@ import { Client, Databases, Storage } from 'appwrite';
 const client = new Client();
 
 client
-    .setEndpoint('https://centralapps.hivefinty.com/v1')
-    .setProject('67912e8e000459a70dab');
+    .setEndpoint('https://appwrite.hivefinty.com/v1')
+    .setProject('68472e8400352e6aa1e2');
 
     // Initialize the Databases service
 const databases = new Databases(client);

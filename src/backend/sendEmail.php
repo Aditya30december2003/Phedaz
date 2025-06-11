@@ -165,10 +165,11 @@ try {
         $mail->addAddress('websupport@mailing.phedaz.com');
         $mail->Subject = $data['emailSubject'] ?? 'New Form Submission ' . date('Y-m-d H:i:s');
 
-        // Format email body with security info
+        // Format email body - EXCLUDING timestamp and turnstile fields
         $body = "<h1>New Form Submission</h1>";
         foreach ($data as $key => $value) {
-            if ($key === '_security' || $key === 'emailSubject' || $key === 'cfTurnstileResponse') continue;
+            // Skip these specific fields from appearing in the email
+            if (in_array($key, ['timestamp', 'cf_turnstile_response', 'cfTurnstileResponse', 'emailSubject'])) continue;
             
             $prettyKey = ucwords(str_replace('_', ' ', $key));
             

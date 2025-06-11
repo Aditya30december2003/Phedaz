@@ -1,7 +1,7 @@
 <?php
 // joinList.php - Enhanced with comprehensive bot protection
 require __DIR__ . '/vendor/autoload.php';
-
+ 
 header("Access-Control-Allow-Origin: *");
 header("Content-Type: application/json");
 

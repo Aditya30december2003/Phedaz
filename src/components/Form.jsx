@@ -1,5 +1,5 @@
 "use client"
-import { useState, useEffect, useCallback } from "react"
+import { useState, useEffect, useCallback } from "react" 
 import { motion } from "framer-motion"
 import AOS from "aos"
 import "aos/dist/aos.css"
@@ -8,19 +8,6 @@ import BufferAnimation from "../components/BufferAnimation"
 
 const WaitlistForm = () => {
   // Fixed field names - no longer randomly generated
-  const fieldNames = {
-    firstName: 'firstName',
-    lastName: 'lastName',
-    email: 'email',
-    businessName: 'businessName',
-    country: 'country',
-    telephone: 'telephone',
-    referralCode: 'referralCode',
-    vipAccess: 'vipAccess',
-    hasReferralCode: 'hasReferralCode',
-    website: 'website', // Honeypot
-    timestamp: 'timestamp'
-  };
 
   const [formData, setFormData] = useState({
     firstName: "",
@@ -41,7 +28,7 @@ const WaitlistForm = () => {
   const [errors, setErrors] = useState({});
   const [countries, setCountries] = useState([]);
   const [data, setData] = useState(null);
-  const [submitTime, setSubmitTime] = useState(0);
+  const [, setSubmitTime] = useState(0);
 
   // Debug: Log initial state
   useEffect(() => {
@@ -484,7 +471,7 @@ const WaitlistForm = () => {
                     className="mr-2 h-5 w-5 rounded border-gray-300 text-[#0A0A45] focus:ring-[#0A0A45]"
                   />
                   <label htmlFor="vipAccess" className="text-gray-700">
-                    I'm interested in VIP early access
+                    I am interested in VIP early access
                   </label>
                 </div>
                 
