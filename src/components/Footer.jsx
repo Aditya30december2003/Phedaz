@@ -1,5 +1,5 @@
 import { Link } from 'react-router-dom';
-import { databases } from "../Appwrite/appwrite";
+import { databases } from "../appwrite/Appwrite";
 import { Client, Databases } from 'appwrite';
 import { useState, useEffect } from "react";
 import { FaGlobe, FaFacebookSquare, FaInstagramSquare } from "react-icons/fa";

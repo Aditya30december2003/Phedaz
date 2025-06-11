@@ -1,6 +1,6 @@
-import React from "react"
 import { motion } from "framer-motion"
 
+// eslint-disable-next-line react/prop-types
 const BufferAnimation = ({ size = 40, borderColor = "#0A0A45", borderWidth = 2, fullScreen = false }) => {
   const cubeVariants = {
     animate: {

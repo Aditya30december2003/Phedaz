@@ -6,6 +6,7 @@ import { FaMinus } from "react-icons/fa";
 import { IoSquareOutline } from "react-icons/io5";
 
 
+// eslint-disable-next-line react/jsx-key
 const options = [<FaMinus/>, <IoSquareOutline/> , <ImCross/> ];
 
 export default function BorderOptions() {

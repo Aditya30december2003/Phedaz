@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { storage } from "../Appwrite/appwrite"; // Adjust this import path based on your setup
+import { storage } from "../appwrite/Appwrite"; // Adjust this import path based on your setup
 import PageLoadAnimation from './PageLoadAnimation';
 
 
