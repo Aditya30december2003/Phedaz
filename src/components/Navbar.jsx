@@ -4,7 +4,6 @@ import { useState, useEffect } from "react"
 import { Link , useLocation } from "react-router-dom"
 import { motion, AnimatePresence } from "framer-motion"
 import { ChevronDown, X, Menu } from "lucide-react"
-import Logo from '../assets/logo.png'
 import BufferAnimation from "./BufferAnimation";
 import CountrySelector from "./CountrySelector"; // Import the new component
 

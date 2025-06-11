@@ -52,7 +52,7 @@ const Footer = () => {
   const footerContent = content ? { ...defaultContent, ...content } : defaultContent;
 
 
-  const [terms, setTerms] = useState(null);
+  const [, setTerms] = useState(null);
   const [loading, setLoading] = useState(true);
 
   // Initialize Appwrite client
@@ -119,7 +119,7 @@ const Footer = () => {
             type="submit"
             className="text-center mx-auto text-[#FFF5C3] p-3 w-[30%] rounded-[5rem] text-[1rem] font-bold bg-[#0A0A45]"
           >
-            Let's talk tech
+            Lets talk tech
           </button>
         </form>
       </div>

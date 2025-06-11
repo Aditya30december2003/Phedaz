@@ -2,7 +2,7 @@
 
 import { motion } from "framer-motion"
 import { useEffect, useState } from "react"
-import { Client, Databases, Query } from "appwrite"
+import { Client, Databases } from "appwrite"
 
 const MarqueeTape = () => {
   const [shouldAnimate, setShouldAnimate] = useState(false)

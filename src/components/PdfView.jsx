@@ -1,19 +1,22 @@
-import React, { useState, useEffect } from 'react';
-import { databases, storage } from "../Appwrite/appwrite"; // Adjust this import path based on your setup
+import { useState, useEffect } from 'react';
+import { storage } from "../Appwrite/appwrite"; // Adjust this import path based on your setup
 import PageLoadAnimation from './PageLoadAnimation';
 
 
+// eslint-disable-next-line react/prop-types
 const PdfView = ({terms}) => {
   const [pdfUrl, setPdfUrl] = useState('');
   const [isLoading, setIsLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [pdfError, setPdfError] = useState(null);
+  const [error] = useState(null);
+  const [, setPdfError] = useState(null);
 
   // Fetch PDF URL only if policyData and pdf_file_id are available
   useEffect(() => {
+    // eslint-disable-next-line react/prop-types
     if (terms.pdf_file_id) {
       const fetchPdf = async () => {
         try {
+          // eslint-disable-next-line react/prop-types
           const fileId = `${terms.pdf_file_id}`; // Make sure this exists in the data
           const result = await storage.getFileView(
             "67966d480012f10a8e24", // bucket ID

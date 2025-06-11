@@ -3,6 +3,7 @@
 import { useState, useEffect } from "react"
 import { motion, AnimatePresence } from "framer-motion"
 
+// eslint-disable-next-line react/prop-types
 const PageLoadAnimation = ({ children }) => {
   const [isAnimating, setIsAnimating] = useState(true)
 

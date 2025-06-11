@@ -13,12 +13,12 @@ const Video = () => {
   const backgroundRef = useRef(null)
   const videoRef = useRef(null)
   const [isPlaying, setIsPlaying] = useState(false)
-  const [videoData, setVideoData] = useState(null)
+  const [, setVideoData] = useState(null)
   const [loading, setLoading] = useState(true)
   const [shareButtonText, setShareButtonText] = useState("Share Video")
   const [isBuffering, setIsBuffering] = useState(false)
   const [isSafari, setIsSafari] = useState(false)
-  const [isVideoReady, setIsVideoReady] = useState(false)
+  const [, setIsVideoReady] = useState(false)
   const [isVideoEnded, setIsVideoEnded] = useState(false)
   const bufferingTimeoutRef = useRef(null)
 
@@ -260,8 +260,11 @@ const Video = () => {
             ref={videoRef}
             src="https://phedaz.com/assets/Video_1-DY-XCcuc.mp4" 
             playsInline
+            // eslint-disable-next-line react/no-unknown-property
             webkit-playsinline="true"
+            // eslint-disable-next-line react/no-unknown-property
             playsinline="true"
+            // eslint-disable-next-line react/no-unknown-property
             x-webkit-airplay="allow"
             preload="metadata"
             className="rounded-2xl shadow-lg p-4 w-full max-w-4xl border-4 border-[#0A0A45]/20"

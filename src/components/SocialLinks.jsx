@@ -1,4 +1,3 @@
-import React from "react"
 import { FaFacebook, FaLinkedin, FaTwitter, FaInstagram } from "react-icons/fa"
 
 const SocialLinks = () => {

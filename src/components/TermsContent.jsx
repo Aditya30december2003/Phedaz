@@ -1,4 +1,5 @@
 import { useEffect, useState } from "react";
+import PropTypes from "prop-types";
 
 const TermsLayout = ({ terms }) => {
   const [activeTerm, setActiveTerm] = useState(null);
@@ -97,6 +98,13 @@ const TermsLayout = ({ terms }) => {
       </div>
     </div>
   );
+};
+
+TermsLayout.propTypes = {
+  terms: PropTypes.shape({
+    ContentTitle: PropTypes.arrayOf(PropTypes.string).isRequired,
+    Content: PropTypes.arrayOf(PropTypes.node).isRequired,
+  }).isRequired,
 };
 
 export default TermsLayout;

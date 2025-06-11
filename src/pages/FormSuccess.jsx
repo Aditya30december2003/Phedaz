@@ -103,7 +103,7 @@ const ThankYou = () => {
           cellPadding: 5,
           overflow: 'linebreak',
         },
-        didDrawPage: function (data) {
+        didDrawPage: function () {
           // Footer with two lines
           doc.setFontSize(8);
           doc.setTextColor(150, 150, 150);

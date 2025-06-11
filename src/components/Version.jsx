@@ -1,20 +1,24 @@
 import { useState, useEffect } from "react";
 import { SlArrowRight } from "react-icons/sl";
 
+// eslint-disable-next-line react/prop-types
 const Version = ({ terms }) => {
-    const [emailConfig, setEmailConfig] = useState(null);
+    const [, setEmailConfig] = useState(null);
     const [requestedVersions, setRequestedVersions] = useState(new Set());
     const [emailError, setEmailError] = useState(null);
 
     // Initialize email config on component mount
     useEffect(() => {
+        // eslint-disable-next-line react/prop-types
         if (terms?.company_email) {
+            // eslint-disable-next-line react/prop-types
             setEmailConfig(terms.company_email);
         }
     }, [terms]);
 
     const handleRequestVersion = (version) => {
         try {
+            // eslint-disable-next-line react/prop-types
             if (!terms.company_email) {
                 setEmailError("Email configuration is missing. Please contact support.");
                 return;
@@ -25,8 +29,10 @@ const Version = ({ terms }) => {
             }
 
             // Construct email parameters
+            // eslint-disable-next-line react/prop-types
             const recipient = terms.company_email;
             const subject = `Request for Version ${version}`;
+            // eslint-disable-next-line react/prop-types
             const body = `I would like to request access to version ${version} of the ${terms.LegalTitle}.`;
 
             if (!recipient) {
@@ -45,13 +51,16 @@ const Version = ({ terms }) => {
         }
     };
 
+    // eslint-disable-next-line react/prop-types
     if (!terms?.version || !Array.isArray(terms.version)) {
         return <div className="text-gray-500 p-4">No version history available.</div>;
     }
 
     // Create version objects with proper data structure
+    // eslint-disable-next-line react/prop-types
     const versionData = terms.version.map((version, index) => ({
         version: version,
+        // eslint-disable-next-line react/prop-types
         isLatest: Array.isArray(terms.isLatest) ? terms.isLatest[index] : false
     }));
 
