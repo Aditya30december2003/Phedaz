@@ -9,9 +9,9 @@ const BlogsComponent = () => {
 
   // Initialize Appwrite client
   const client = new Client()
-  client
-    .setEndpoint("https://centralapps.hivefinty.com/v1") // Replace with your Appwrite endpoint
-    .setProject("67912e8e000459a70dab") // Replace with your Project ID
+  .setEndpoint("https://appwrite.hivefinty.com/v1") // ✅ New Appwrite instance
+  .setProject("68472e8400352e6aa1e2");              // ✅ New Project ID (phedaz)
+
 
   const databases = new Databases(client)
   const databaseId = "67913805000e2b223d80" // Replace with your Database ID

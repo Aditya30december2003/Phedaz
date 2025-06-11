@@ -8,7 +8,10 @@ const PricingPreferences = ({ formData, handleChange, handleSliderChange }) => {
   const [sliderValue, setSliderValue] = useState(formData.annualPlanLikelihood || 3)
   const [sliderTouched, setSliderTouched] = useState(false)
   
-  const client = new Client().setEndpoint("https://centralapps.hivefinty.com/v1").setProject("67912e8e000459a70dab")
+  const client = new Client()
+  .setEndpoint("https://appwrite.hivefinty.com/v1") // ✅ New Appwrite instance
+  .setProject("68472e8400352e6aa1e2");              // ✅ New Project ID (phedaz)
+
 
   const databases = new Databases(client)
   const databaseId = "67913805000e2b223d80"

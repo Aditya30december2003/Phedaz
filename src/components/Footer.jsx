@@ -56,9 +56,10 @@ const Footer = () => {
   const [loading, setLoading] = useState(true);
 
   // Initialize Appwrite client
-  const client = new Client();
-  client.setEndpoint('https://centralapps.hivefinty.com/v1') // Replace with your Appwrite endpoint
-        .setProject('67912e8e000459a70dab'); // Replace with your Project ID
+const client = new Client()
+  .setEndpoint("https://appwrite.hivefinty.com/v1") // ✅ New Appwrite instance
+  .setProject("68472e8400352e6aa1e2");              // ✅ New Project ID (phedaz)
+
 
   const databases = new Databases(client);
   const databaseId = '67913805000e2b223d80'; // Replace with your Database ID
@@ -89,7 +90,7 @@ const Footer = () => {
   }
 
   return (
-    <div className="w-full bg-[#0aebff] text-[#0A0A45] p-4 lg:p-5">
+    <div className="w-full bg-[#ff0a0a] text-[#0A0A45] p-4 lg:p-5">
       {/* Subscription Form */}
       <div className='mb-0'>
         <form

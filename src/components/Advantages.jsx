@@ -21,7 +21,7 @@ const AdvantagesComponent = () => {
 
   useEffect(() => {
     const client = new Client()
-    client.setEndpoint("https://centralapps.hivefinty.com/v1").setProject("67912e8e000459a70dab")
+    client.setEndpoint("https://appwrite.hivefinty.com/v1").setProject("68472e8400352e6aa1e2")
 
     const databases = new Databases(client)
     const databaseId = "67913805000e2b223d80"
