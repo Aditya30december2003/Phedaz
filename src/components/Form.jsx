@@ -399,7 +399,7 @@ const response = await fetch('https://cloud.appwrite.io/v1/functions/684b3707100
                     onChange={handleChange}
                     className={`border rounded-md p-3 w-full focus:outline-none focus:ring-2 transition-all ${
                       errors.country 
-                        ? 'border-red-500 focus:ring-red-200' 
+                        ? 'border-red-600 focus:ring-red-200' 
                         : 'border-gray-300 focus:ring-[#0A0A45]'
                     }`}
                     required
