@@ -192,15 +192,15 @@ useEffect(() => {
 
       console.log("Submitting data:", submissionData);
 
-      const response = await fetch('/joinList.php', {
-        method: 'POST',
-        headers: { 
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
-        },
-        credentials: 'include', // Important for cross-domain cookies
-        body: JSON.stringify(submissionData)
-      });
+const response = await fetch('https://cloud.appwrite.io/v1/functions/684b3707100069cd819d/executions', {
+  method: 'POST',
+  headers: {
+    'Content-Type': 'application/json',
+    'X-Requested-With': 'XMLHttpRequest'
+  },
+  body: JSON.stringify(submissionData)
+});
+
   
       const rawText = await response.text();
       console.log("Server response:", rawText);

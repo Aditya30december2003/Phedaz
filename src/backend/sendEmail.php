@@ -6,7 +6,7 @@ ini_set('display_errors', 0);
 
 // Security headers
 header("Access-Control-Allow-Origin: *");
-header("Access-Control-Allow-Headers: Content-Type, X-Requested-With");
+header("Access-Control-Allow-Headers: Content-Type, X-Requested-With"); 
 header("Content-Type: application/json");
 
 // Debug mode - change to false in production
