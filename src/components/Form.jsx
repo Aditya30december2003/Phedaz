@@ -7,7 +7,6 @@ import { Client, Databases } from "appwrite"
 import BufferAnimation from "../components/BufferAnimation"
 
 const WaitlistForm = () => {
-  // Fixed field names - no longer randomly generated
 
   const [formData, setFormData] = useState({
     firstName: "",
