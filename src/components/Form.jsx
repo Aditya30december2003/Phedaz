@@ -732,7 +732,7 @@ const WaitlistForm = () => {
 
       // Use Appwrite Functions SDK instead of direct fetch
       const response = await functions.createExecution(
-        '684b3707100069cd819d', // Your function ID
+        '684b1ac5003a8bf45334', // Your function ID
         JSON.stringify(submissionData),
         false, // async
         '/', // path
