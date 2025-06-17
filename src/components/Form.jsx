@@ -689,112 +689,166 @@ const WaitlistForm = () => {
     return Object.keys(newErrors).length === 0;
   };
 
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-    setSubmitTime(Date.now());
-    console.log("Form submission started with data:", formData);
-    
-    if (!validateForm()) {
-      // If honeypot is filled or form submitted too quickly
-      if (formData.website || (Date.now() - formData.timestamp < 3000)) {
-        console.log("Bot detected - showing fake success");
-        // Fake success for bots
-        setSubmitStatus({
-          success: true,
-          message: "Thank you for joining our waitlist!"
-        });
-        return;
-      }
-      
-      alert("Please fill out all required fields correctly before submitting.");
+const handleSubmit = async (e) => {
+  e.preventDefault();
+  setSubmitTime(Date.now());
+  console.log("Form submission started with data:", formData);
+  
+  if (!validateForm()) {
+    // If honeypot is filled or form submitted too quickly
+    if (formData.website || (Date.now() - formData.timestamp < 3000)) {
+      console.log("Bot detected - showing fake success");
+      // Fake success for bots
+      setSubmitStatus({
+        success: true,
+        message: "Thank you for joining our waitlist!"
+      });
       return;
     }
-  
-    const submitButton = e.target.querySelector('button[type="submit"]');
-    if (submitButton) {
-      submitButton.innerText = "Processing...";
-      submitButton.disabled = true;
-    }
-  
-    try {
-      const submissionData = {
-        ...formData,
-        // Include additional security headers
-        _security: {
-          userAgent: navigator.userAgent,
-          screenResolution: `${window.screen.width}x${window.screen.height}`,
-          timeOnPage: Date.now() - formData.timestamp,
-          referrer: document.referrer,
-        }
-      };
+    
+    alert("Please fill out all required fields correctly before submitting.");
+    return;
+  }
 
-      console.log("Submitting data:", submissionData);
+  const submitButton = e.target.querySelector('button[type="submit"]');
+  if (submitButton) {
+    submitButton.innerText = "Processing...";
+    submitButton.disabled = true;
+  }
 
-      // Use Appwrite Functions SDK instead of direct fetch
-      const response = await functions.createExecution(
-        '684b1ac5003a8bf45334', // Your function ID
-        JSON.stringify(submissionData),
-        false, // async
-        '/', // path
-        'POST', // method
-        {
-          'Content-Type': 'application/json',
-          'X-Requested-With': 'XMLHttpRequest'
-        }
-      );
+  try {
+    const submissionData = {
+      ...formData,
+      // Include additional security headers
+      _security: {
+        userAgent: navigator.userAgent,
+        screenResolution: `${window.screen.width}x${window.screen.height}`,
+        timeOnPage: Date.now() - formData.timestamp,
+        referrer: document.referrer,
+      }
+    };
 
-      console.log("Server response:", response);
+    console.log("Submitting data:", submissionData);
+
+    // Use Appwrite Functions SDK
+    const response = await functions.createExecution(
+      '684b1ac5003a8bf45334', // Your function ID
+      JSON.stringify(submissionData),
+      false, // async
+      '/', // path
+      'POST', // method
+      {
+        'Content-Type': 'application/json',
+        'X-Requested-With': 'XMLHttpRequest'
+      }
+    );
+
+    console.log("Raw server response:", response);
+    
+    // Handle the response more carefully
+    let result = null;
+    let isSuccess = false;
+    
+    // Check if we have a valid response object
+    if (response && typeof response === 'object') {
+      // Check various success indicators
+      isSuccess = response.statusCode === 200 || 
+                 response.statusCode === 201 || 
+                 response.status === 'completed' ||
+                 (response.responseStatusCode >= 200 && response.responseStatusCode < 300);
       
-      // Parse the response
-      let result;
-      try {
-        result = JSON.parse(response.responseBody);
-      } catch (parseError) {
-        console.error("Failed to parse response:", parseError);
-        // If parsing fails, check if it's a success based on status
-        if (response.statusCode === 200 || response.statusCode === 201) {
-          result = { success: true, message: "Thank you for joining our waitlist!" };
-        } else {
-          throw new Error(`Server returned status ${response.statusCode}`);
+      // Try to parse the response body if it exists
+      if (response.responseBody) {
+        try {
+          // Handle case where responseBody might already be an object
+          if (typeof response.responseBody === 'string') {
+            result = JSON.parse(response.responseBody);
+          } else {
+            result = response.responseBody;
+          }
+        } catch (parseError) {
+          console.warn("Failed to parse response body as JSON:", parseError);
+          console.log("Raw response body:", response.responseBody);
+          
+          // If parsing fails but we have a success status, treat as success
+          if (isSuccess) {
+            result = { success: true, message: "Thank you for joining our waitlist!" };
+          } else {
+            // Check if response body contains success indicators
+            const bodyStr = String(response.responseBody).toLowerCase();
+            if (bodyStr.includes('success') || bodyStr.includes('thank you')) {
+              result = { success: true, message: "Thank you for joining our waitlist!" };
+              isSuccess = true;
+            } else {
+              throw new Error(`Server response could not be parsed: ${response.responseBody}`);
+            }
+          }
         }
-      }
-
-      if (result.success || response.statusCode === 200) {
-        console.log("Submission successful");
-        setSubmitStatus({
-          success: true,
-          message: result.message || "Thank you for joining our waitlist!"
-        });
-        setFormData({
-          firstName: "",
-          lastName: "",
-          email: "",
-          businessName: "",
-          country: "",
-          telephone: "",
-          referralCode: "",
-          vipAccess: false,
-          hasReferralCode: false,
-          website: "",
-          timestamp: Date.now(),
-        });
+      } else if (isSuccess) {
+        // No response body but successful status
+        result = { success: true, message: "Thank you for joining our waitlist!" };
       } else {
-        throw new Error(result.message || "Form submission failed");
+        throw new Error(`Server returned status ${response.statusCode || response.responseStatusCode || 'unknown'}`);
       }
-    } catch (error) {
-      console.error("Form submission error:", error);
-      setSubmitStatus({
-        success: false,
-        message: error.message || "An error occurred. Please try again."
-      });
-    } finally {
-      if (submitButton) {
-        submitButton.innerText = 'JOIN THE WAITLIST';
-        submitButton.disabled = false;
-      }
+    } else {
+      throw new Error("Invalid response from server");
     }
-  };
 
+    // Final success check
+    const finalSuccess = isSuccess || (result && result.success);
+    
+    if (finalSuccess) {
+      console.log("Submission successful");
+      setSubmitStatus({
+        success: true,
+        message: (result && result.message) || "Thank you for joining our waitlist!"
+      });
+      
+      // Reset form on success
+      setFormData({
+        firstName: "",
+        lastName: "",
+        email: "",
+        businessName: "",
+        country: "",
+        telephone: "",
+        referralCode: "",
+        vipAccess: false,
+        hasReferralCode: false,
+        website: "",
+        timestamp: Date.now(),
+      });
+    } else {
+      throw new Error((result && result.message) || "Form submission failed");
+    }
+    
+  } catch (error) {
+    console.error("Form submission error:", error);
+    
+    // Provide more specific error messages
+    let errorMessage = "An error occurred. Please try again.";
+    
+    if (error.message.includes('Network')) {
+      errorMessage = "Network error. Please check your connection and try again.";
+    } else if (error.message.includes('timeout')) {
+      errorMessage = "Request timed out. Please try again.";
+    } else if (error.message.includes('parse')) {
+      errorMessage = "Server response error. Please try again.";
+    } else if (error.message) {
+      errorMessage = error.message;
+    }
+    
+    setSubmitStatus({
+      success: false,
+      message: errorMessage
+    });
+  } finally {
+    if (submitButton) {
+      submitButton.innerText = 'JOIN THE WAITLIST';
+      submitButton.disabled = false;
+    }
+  }
+};
   if (loading) {
     return (
       <div className="flex justify-center items-center min-h-screen bg-gradient-to-br from-[#E5F0F1] to-[#FFF5C3] text-gray-800">
