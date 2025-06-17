@@ -18,7 +18,7 @@ const WaitlistForm = () => {
     referralCode: "",
     vipAccess: false,
     hasReferralCode: false,
-    website: "", // Honeypot field
+    website: "", 
     timestamp: Date.now(), // Form load time
   });
 
