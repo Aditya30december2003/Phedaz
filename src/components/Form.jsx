@@ -19,7 +19,7 @@ const WaitlistForm = () => {
     vipAccess: false,
     hasReferralCode: false,
     website: "", 
-    timestamp: Date.now(), // Form load time
+    timestamp: Date.now(), 
   });
 
   const [loading, setLoading] = useState(true);
